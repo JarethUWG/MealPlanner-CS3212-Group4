@@ -1,0 +1,107 @@
+Login 
+
+Context: User has an account. 
+
+Primary flow 
+
+(1) User inputs valid credentials into appropriate spaces. 
+
+(2) User clicks the login button. 
+
+(3) The server verifies that the credentials correspond to an account. 
+
+(4) The server passes appropriate user data back to the client. 
+
+(5) The user is logged in. 
+
+Alternative flows 
+
+Invalid credentials 
+
+(3a) The server verifies that the credentials don’t correspond to an account. 
+
+(4a) The server passes appropriate error information back. 
+
+(5a) Return to primary (1). 
+
+ 
+
+Meal Input 
+
+Context: User is logged in. 
+
+Primary flow 
+
+(1) User selects one or more Ingredient items. 
+
+(2) The user provides a name for the Meal. 
+
+(3) The user presses the “Add Meal” button. 
+
+(4) The server saves the Meal item. 
+
+ 
+
+Add To Planner 
+
+Context: User is logged in. 
+
+Primary flow 
+
+(1) User selects one or more Ingredient items and or Meals. 
+
+(2) The user selects a date past or on the current date. 
+
+(3) The user presses the Add Food button. 
+
+(4) The server saves the food information on that day. 
+
+ 
+
+View Planner 
+
+Context: User is logged in. 
+
+Primary flow 
+
+(1) The user clicks the “View Planner” button. 
+
+(2) The server verifies that there is food information within the next 30 days. 
+
+(3) The server retrieves all food information within the next 30 days. 
+
+(4) The food information is displayed in chronological order. 
+
+Alternative flows 
+
+No food information 
+
+(2a) The server verifies that there isn’t food information within the next 30 days. 
+
+(3a) The user is informed that there is no food planned within the next 30 days and suggests that the user schedule food information. 
+
+ 
+
+Generate Grocery List 
+
+Context: User is logged in. 
+
+Primary flow 
+
+(1) The user clicks the “Generate Grocery List” button. 
+
+(2) The user is prompted to give a time frame for the list. 
+
+(3) The server verifies that there is food information for the given time frame. 
+
+(4) The server retrieves all ingredients in the given time frame including those in meals. 
+
+(5) The ingredients and quantities are listed to the user. 
+
+Alternative flows 
+
+No food information in time frame 
+
+(3a) The server verifies that there is no food information for the given time frame. 
+
+(4a) The user is informed that there is no food planned within the given time frame and suggests that the user schedule food information. 
