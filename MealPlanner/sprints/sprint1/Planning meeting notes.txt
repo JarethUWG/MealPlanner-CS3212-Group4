@@ -1,1 +1,12 @@
-We could put some notes in here...
+Consider only making it so meals are added to planner (ingredients can just be put alone in "meals").
+Make adding description to meals part of the description.
+Check items off of grocery list.
+Change filter to filter/sort.
+Login is partly assumed, Grocery list is priority 1.
+Remove and filters are updated to 2.
+Nutrition information to a 3.
+Notes remain priority 4.
+Start with calories and macros for initial sorts.
+Consider a json dump for database. 
+Use case scenario for each user feature.
+Product backlog for individual tasks.
