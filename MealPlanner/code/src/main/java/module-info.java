@@ -1,4 +1,4 @@
-module edu.westga.cs3211.piratestorage {
+module edu.westga.cs3211.mealplanner {
     requires javafx.controls;
     requires javafx.fxml;
     requires transitive javafx.graphics;
