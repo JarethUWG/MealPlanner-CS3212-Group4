@@ -15,36 +15,36 @@ import javafx.scene.layout.Pane;
  */
 public class Main extends Application {
 
-	public static final String LOGIN_TITLE = "Login";
-	public static final String LOGIN_FXML = "view/login.fxml";
-	private static Stage mainStage;
-	
-	@Override
-	public void start(Stage primaryStage) {
-		mainStage = primaryStage;
-		try {
-			Pane root = this.loadGui();
-			Scene scene = new Scene(root);
+    public static final String LOGIN_TITLE = "Login";
+    public static final String LOGIN_FXML = "view/login.fxml";
+    private static Stage mainStage;
 
-			primaryStage.setScene(scene);
-			primaryStage.setTitle(LOGIN_TITLE);
-			primaryStage.show();
-		} catch (Exception exc) {
-			exc.printStackTrace();
-		}
-	}
+    @Override
+    public void start(Stage primaryStage) {
+        mainStage = primaryStage;
+        try {
+            Pane root = this.loadGui();
+            Scene scene = new Scene(root);
 
-	private Pane loadGui() throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource(LOGIN_FXML));
-		return (Pane) loader.load();
-	}
-	
+            primaryStage.setScene(scene);
+            primaryStage.setTitle(LOGIN_TITLE);
+            primaryStage.show();
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }
+
+    private Pane loadGui() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(LOGIN_FXML));
+        return (Pane) loader.load();
+    }
+
     /**
-	 * Gets the main stage of the application.
-	 * 
+     * Gets the main stage of the application.
+     *
 	 * @return The main stage of the application.
-	 */
+     */
     public static Stage getMainStage() {
         return mainStage;
     }
