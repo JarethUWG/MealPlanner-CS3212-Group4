@@ -3,6 +3,9 @@ package edu.westga.cs3211.mealplanner.model;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * The class GroceryList stores a collection of food objects.
+ */
 public class GroceryList {
 
     Objects[] shoppingList;
