@@ -1,4 +1,4 @@
-package edu.westga.cs3211.mealplanner.view;
+package edu.westga.cs3212.mealplanner.view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

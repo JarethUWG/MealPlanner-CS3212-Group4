@@ -1,4 +1,4 @@
-package edu.westga.cs3211.mealplanner;
+package edu.westga.cs3212.mealplanner;
 
 import java.io.IOException;
 
@@ -36,25 +36,25 @@ public class Main extends Application {
 
     private Pane loadGui() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(LOGIN_FXML));
-        return (Pane) loader.load();
+        loader.setLocation(this.getClass().getResource(LOGIN_FXML));
+        return loader.load();
     }
 
     /**
      * Gets the main stage of the application.
      *
-	 * @return The main stage of the application.
+     * @return The main stage of the application.
      */
     public static Stage getMainStage() {
         return mainStage;
     }
 
-	/**
-	 * Entry point for the application
-	 * 
-	 * @param args not used
-	 */
-	public static void main(String[] args) {
-		launch(args);
-	}
+    /**
+     * Entry point for the application.
+     *
+     * @param args not used
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
