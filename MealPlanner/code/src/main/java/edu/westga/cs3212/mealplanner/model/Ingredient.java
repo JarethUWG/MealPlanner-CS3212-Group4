@@ -8,11 +8,11 @@ public class Ingredient {
     private double calories;
 
     /**
-     * Basic constructor for an Ingredient.
+     * Constructor for an Ingredient.
      * @param name Name of the ingredient
      * @param calories Caloric value of the ingredient
      *
-     * @post this.name = name, this.calories = calories, this.desc = desc.
+     * @post this.name = name, this.calories = calories.
      * If name is not provided, defaults to "Unnamed Ingredient".
      * If calories given are below 0, defaults to 0.
      */
