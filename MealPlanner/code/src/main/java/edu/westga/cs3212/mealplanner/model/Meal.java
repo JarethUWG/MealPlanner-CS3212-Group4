@@ -31,6 +31,9 @@ public class Meal {
      * If ingredients are null, defaults to an empty ingredient list.
      * If name is not provided, defaults to "New Meal"
      * If description is not provided, defaults to "No further description".
+     *
+     * This does not currently account for a list of ingredients that contains null values,
+     * rather than a null list in itself.
      */
     public Meal(List<Ingredient> ingredients, String name, String description) {
         this.ingredients = ingredients;
@@ -43,7 +46,7 @@ public class Meal {
             this.name = "New Meal";
         }
         if (description == null || description.isBlank()) {
-            this.name = "No further description";
+            this.description = "No further description";
         }
     }
 
