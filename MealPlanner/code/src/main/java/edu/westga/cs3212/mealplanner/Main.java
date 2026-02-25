@@ -17,6 +17,8 @@ public class Main extends Application {
 
     public static final String LOGIN_TITLE = "Login";
     public static final String LOGIN_FXML = "view/login.fxml";
+    public static final String CREATE_ACCOUNT_TITLE = "Create account";
+    public static final String CREATE_ACCOUNT_FXML = "view/createAccount.fxml";
     private static Stage mainStage;
 
     @Override

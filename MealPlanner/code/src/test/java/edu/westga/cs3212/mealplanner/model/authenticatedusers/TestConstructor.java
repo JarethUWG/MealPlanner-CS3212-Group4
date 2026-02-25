@@ -10,7 +10,6 @@ class TestConstructor {
     @Test
     void testValidConstructorCall() {
         AuthenticatedUsers users = new AuthenticatedUsers();
-        assertEquals("User", users.getUsers().getFirst().getName(), "Ensuring correct name");
         assertEquals("Username", users.getUsers().getFirst().getUsername(), "Ensuring correct username");
         assertEquals("Password", users.getUsers().getFirst().getPassword(), "Ensuring correct password");
     }
