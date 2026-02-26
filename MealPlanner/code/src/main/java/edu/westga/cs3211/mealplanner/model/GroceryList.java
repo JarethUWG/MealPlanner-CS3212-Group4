@@ -1,27 +1,41 @@
 package edu.westga.cs3211.mealplanner.model;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * The class GroceryList stores a collection of food objects.
  */
 public class GroceryList {
 
-    Objects[] shoppingList;
-
-    public GroceryList (ArrayList<Objects> items) {
-        this.createGroceryList(items);
-    }
+    /**
+     * The shopping list
+     */
+    List<String> shoppingList = new ArrayList<>();;
 
     /**
-     * Takes an arraylist of ingredients/food items and creates an array for a shopping list
-     *
-     * @param items arraylist of food items
+     * Takes in a day parameter and returns all ingredients of the meals from that day.
+     * @param map
+     *          the hashmap of meals
+     * @param day
+     *          the selected day
+     * @return
+     *          a list of Strings of ingredient names
      */
-    public void createGroceryList(ArrayList<Objects> items) {
-        this.shoppingList = items.toArray(shoppingList);
+    public List<String> getNamesForDay(HashMap<String, Object> map, int day) {
+
+
+        //TODO: Plug in meal object when implemented
+//        for (Object currentMeal : map.values()) {
+//            if (currentMeal.getDay() == day) {
+//                result.add(currentMeal.getIngredient());
+//            }
+//        }
+
+        return shoppingList;
     }
+
 
     /**
      * Builds a string builder format for the shopping list.
