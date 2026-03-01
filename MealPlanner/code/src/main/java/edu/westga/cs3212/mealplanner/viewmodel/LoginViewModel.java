@@ -38,7 +38,7 @@ public class LoginViewModel {
         this.passwordFocusProperty = new SimpleBooleanProperty(false);
         this.loginDisabledProperty = new SimpleBooleanProperty(true);
         this.authenticatedUsers = new AuthenticatedUsers();
-        this.setFocusChangeListeners();
+        this.setCredentialChangeListeners();
     }
 
     /**
@@ -134,7 +134,19 @@ public class LoginViewModel {
         return false;
     }
 
-    private void setFocusChangeListeners() {
+    private void setCredentialChangeListeners() {
+        this.usernameFocusProperty.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                LoginViewModel.this.respondToCredentialInput();
+            }
+        });
+        this.passwordFocusProperty.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                LoginViewModel.this.respondToCredentialInput();
+            }
+        });
         this.usernameProperty.addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
