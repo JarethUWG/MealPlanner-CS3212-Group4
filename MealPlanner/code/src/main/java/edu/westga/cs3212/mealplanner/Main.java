@@ -2,6 +2,7 @@ package edu.westga.cs3212.mealplanner;
 
 import java.io.IOException;
 
+import edu.westga.cs3212.mealplanner.model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -17,6 +18,9 @@ public class Main extends Application {
 
     public static final String LOGIN_TITLE = "Login";
     public static final String LOGIN_FXML = "view/login.fxml";
+    public static final String LANDING_TITLE = "Landing Page";
+    public static final String LANDING_FXML = "view/landingPage.fxml";
+    public static User loggedInUser = null;
     private static Stage mainStage;
 
     @Override
