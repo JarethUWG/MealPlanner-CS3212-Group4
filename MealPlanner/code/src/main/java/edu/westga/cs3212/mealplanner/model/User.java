@@ -7,48 +7,32 @@ package edu.westga.cs3212.mealplanner.model;
  * @version Spring 2025
  */
 public class User {
-    private String name;
     private String username;
     private String password;
     // private Planner userPlanner; should go here when implemented.
+    // private List<Meal> customMeals; should go here when implemented
 
     /**
      * Initializes a new user.
      *
-     * @precondition name != null && !name.isEmpty,
-     *        		 username != null && !username.isEmpty,
-     *        		 password != null && !password.isEmpty,
+     * @precondition username != null && !username.isEmpty,
+     *               password != null && !password.isEmpty,
      *
-     * @postcondition this.name == name
-     *                this.username == username
+     * @postcondition this.username == username
      *                this.password == password
      *
-     * @param name the name of the user.
      * @param username the username of the user.
      * @param password the password of the user.
      */
-    public User(String name, String username, String password) {
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Please input valid name");
-        }
+    public User(String username, String password) {
         if (username == null || username.isBlank()) {
             throw new IllegalArgumentException("Please input valid username");
         }
         if (password == null || password.isBlank()) {
             throw new IllegalArgumentException("Please input valid password");
         }
-        this.name = name;
         this.username = username;
         this.password = password;
-    }
-
-    /**
-     * Gets the current value of name.
-     *
-     * @return The current value of name.
-     */
-    public String getName() {
-        return this.name;
     }
 
     /**

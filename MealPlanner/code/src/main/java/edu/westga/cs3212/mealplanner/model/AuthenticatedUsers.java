@@ -20,7 +20,7 @@ public class AuthenticatedUsers {
      */
     public AuthenticatedUsers() {
         this.users = new ArrayList<User>();
-        User matt = new User("User", "Username", "Password");
+        User matt = new User("Username", "Password");
         this.users.add(matt);
     }
 
