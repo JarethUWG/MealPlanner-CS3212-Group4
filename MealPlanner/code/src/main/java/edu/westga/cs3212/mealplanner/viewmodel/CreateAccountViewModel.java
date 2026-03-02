@@ -1,7 +1,4 @@
 package edu.westga.cs3212.mealplanner.viewmodel;
-
-import edu.westga.cs3212.mealplanner.Main;
-import edu.westga.cs3212.mealplanner.model.AuthenticatedUsers;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import edu.westga.cs3212.mealplanner.model.User;
 import javafx.beans.property.BooleanProperty;
