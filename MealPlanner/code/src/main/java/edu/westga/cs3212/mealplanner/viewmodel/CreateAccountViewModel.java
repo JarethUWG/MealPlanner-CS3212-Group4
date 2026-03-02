@@ -126,9 +126,6 @@ public class CreateAccountViewModel {
         }
         User createdUser = new User(this.usernameProperty.get(), this.passwordProperty.get());
         SystemInfo.getAuthenticatedUsers().addUser(createdUser);
-        this.createAccountDisabledProperty.set(true);
-        this.usernameProperty.set("");
-        this.passwordProperty.set("");
         return true;
     }
 
@@ -148,17 +145,13 @@ public class CreateAccountViewModel {
         this.usernameProperty.addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (oldValue.isBlank() && !newValue.isBlank()) {
-                    CreateAccountViewModel.this.respondToCredentialInput();
-                }
+                CreateAccountViewModel.this.respondToCredentialInput();
             }
         });
         this.passwordProperty.addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (oldValue.isBlank() && !newValue.isBlank()) {
-                    CreateAccountViewModel.this.respondToCredentialInput();
-                }
+                CreateAccountViewModel.this.respondToCredentialInput();
             }
         });
     }
@@ -173,7 +166,7 @@ public class CreateAccountViewModel {
      * @postcondition this.createAccountDisabledProperty.get == true
      */
     private void respondToCredentialInput() {
-        if (this.usernameProperty.get().isBlank() && !(this.passwordProperty.get().isBlank() || this.passwordProperty.get().length() < 5)) {
+        if (this.usernameProperty.get().isBlank() && !(this.passwordProperty.get().isBlank() && this.passwordProperty.get().length() < 5)) {
             this.usernameReminderProperty.set("Must input username");
         } else {
             this.usernameReminderProperty.set("");

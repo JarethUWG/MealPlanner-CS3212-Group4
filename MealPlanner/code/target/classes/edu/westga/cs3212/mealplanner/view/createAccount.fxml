@@ -14,7 +14,7 @@
       <Label layoutX="107.0" layoutY="128.0" text="Password" />
       <TextField fx:id="passwordTextField" layoutX="45.0" layoutY="146.0" prefHeight="26.0" prefWidth="174.0" promptText="Enter your account's password" />
       <Label fx:id="usernameReminderText" layoutX="75.0" layoutY="93.0" prefHeight="18.0" prefWidth="118.0" text="Must input username" textFill="RED" />
-      <Label fx:id="passwordReminderText" layoutX="32.0" layoutY="180.0" text="Password must be at least 5 characters" textFill="RED" />
+      <Label fx:id="passwordReminderText" layoutX="20.0" layoutY="180.0" text="Password must be at least 5 characters" textFill="RED" />
       <Label layoutX="64.0" layoutY="285.0" text="Already have an account?" />
       <Button layoutX="84.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleLoginReturn" text="Return to login" />
          </children>

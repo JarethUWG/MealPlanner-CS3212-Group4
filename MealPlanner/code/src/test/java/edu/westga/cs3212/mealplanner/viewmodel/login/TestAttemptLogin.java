@@ -1,18 +1,26 @@
 package edu.westga.cs3212.mealplanner.viewmodel.login;
 
+import edu.westga.cs3212.mealplanner.model.AuthenticatedUsers;
+import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import edu.westga.cs3212.mealplanner.viewmodel.LoginViewModel;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestAttemptLogin {
+    @BeforeEach
+    void setUp() {
+        SystemInfo.setLoggedInUser(null);
+        SystemInfo.setAuthenticatedUsers(new AuthenticatedUsers());
+    }
 
     @Test
-    void testAttemptLoginNoUsername() {
+    void testNoUsername() {
         StringProperty usernameProperty = new SimpleStringProperty();
         StringProperty passwordProperty = new SimpleStringProperty();
 
@@ -26,7 +34,7 @@ class TestAttemptLogin {
     }
 
     @Test
-    void testAttemptLoginNoPassword() {
+    void testNoPassword() {
         StringProperty usernameProperty = new SimpleStringProperty();
         StringProperty passwordProperty = new SimpleStringProperty();
 
@@ -40,7 +48,7 @@ class TestAttemptLogin {
     }
 
     @Test
-    void testAttemptLoginDoesntMatch() {
+    void testCredentialsDontMatch() {
         StringProperty usernameProperty = new SimpleStringProperty();
         StringProperty passwordProperty = new SimpleStringProperty();
 
@@ -54,7 +62,7 @@ class TestAttemptLogin {
     }
 
     @Test
-    void testAttemptLoginMatches() {
+    void testCredentialsMatch() {
         StringProperty usernameProperty = new SimpleStringProperty();
         StringProperty passwordProperty = new SimpleStringProperty();
 

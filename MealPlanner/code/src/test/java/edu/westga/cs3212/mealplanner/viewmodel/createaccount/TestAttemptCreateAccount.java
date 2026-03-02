@@ -1,67 +1,76 @@
 package edu.westga.cs3212.mealplanner.viewmodel.createaccount;
 
+import edu.westga.cs3212.mealplanner.model.AuthenticatedUsers;
+import edu.westga.cs3212.mealplanner.model.SystemInfo;
+import edu.westga.cs3212.mealplanner.viewmodel.CreateAccountViewModel;
 import edu.westga.cs3212.mealplanner.viewmodel.LoginViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestAttemptCreateAccount {
+    @BeforeEach
+    void setUp() {
+        SystemInfo.setLoggedInUser(null);
+        SystemInfo.setAuthenticatedUsers(new AuthenticatedUsers());
+    }
 
     @Test
-    void testAttemptLoginNoUsername() {
+    void testNoUsername() {
         StringProperty usernameProperty = new SimpleStringProperty();
         StringProperty passwordProperty = new SimpleStringProperty();
 
-        LoginViewModel testViewModel = new LoginViewModel();
+        CreateAccountViewModel testViewModel = new CreateAccountViewModel();
         usernameProperty.bindBidirectional(testViewModel.usernameProperty());
         passwordProperty.bindBidirectional(testViewModel.passwordProperty());
         usernameProperty.set("");
         passwordProperty.set("Test");
 
-        assertThrows(IllegalArgumentException.class, testViewModel::attemptLogin);
+        assertThrows(IllegalArgumentException.class, testViewModel::attemptCreateAccount);
     }
 
     @Test
-    void testAttemptLoginNoPassword() {
+    void testNoPassword() {
         StringProperty usernameProperty = new SimpleStringProperty();
         StringProperty passwordProperty = new SimpleStringProperty();
 
-        LoginViewModel testViewModel = new LoginViewModel();
+        CreateAccountViewModel testViewModel = new CreateAccountViewModel();
         usernameProperty.bindBidirectional(testViewModel.usernameProperty());
         passwordProperty.bindBidirectional(testViewModel.passwordProperty());
         usernameProperty.set("Test");
         passwordProperty.set("");
 
-        assertThrows(IllegalArgumentException.class, testViewModel::attemptLogin);
+        assertThrows(IllegalArgumentException.class, testViewModel::attemptCreateAccount);
     }
 
     @Test
-    void testAttemptLoginDoesntMatch() {
+    void testCredentialsDontMatch() {
         StringProperty usernameProperty = new SimpleStringProperty();
         StringProperty passwordProperty = new SimpleStringProperty();
 
-        LoginViewModel testViewModel = new LoginViewModel();
+        CreateAccountViewModel testViewModel = new CreateAccountViewModel();
         usernameProperty.bindBidirectional(testViewModel.usernameProperty());
         passwordProperty.bindBidirectional(testViewModel.passwordProperty());
         usernameProperty.set("Test Name");
         passwordProperty.set("Test Password");
 
-        assertFalse(testViewModel.attemptLogin());
+        assertTrue(testViewModel.attemptCreateAccount());
     }
 
     @Test
-    void testAttemptLoginMatches() {
+    void testCredentialsMatch() {
         StringProperty usernameProperty = new SimpleStringProperty();
         StringProperty passwordProperty = new SimpleStringProperty();
 
-        LoginViewModel testViewModel = new LoginViewModel();
+        CreateAccountViewModel testViewModel = new CreateAccountViewModel();
         usernameProperty.bindBidirectional(testViewModel.usernameProperty());
         passwordProperty.bindBidirectional(testViewModel.passwordProperty());
         usernameProperty.set("Username");
         passwordProperty.set("Password");
 
-        assertTrue(testViewModel.attemptLogin());
+        assertFalse(testViewModel.attemptCreateAccount());
     }
 }
