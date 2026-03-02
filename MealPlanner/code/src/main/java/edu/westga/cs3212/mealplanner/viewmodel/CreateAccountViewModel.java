@@ -12,36 +12,32 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 /**
- * The Login ViewModel.
+ * The CreateAccount ViewModel.
  *
  * @author Jareth Batty
  * @version Spring 2025
  */
-public class LoginViewModel {
+public class CreateAccountViewModel {
     private StringProperty usernameProperty;
     private StringProperty passwordProperty;
     private StringProperty usernameReminderProperty;
     private StringProperty passwordReminderProperty;
     private BooleanProperty usernameFocusProperty;
     private BooleanProperty passwordFocusProperty;
-    private BooleanProperty loginDisabledProperty;
-    private AuthenticatedUsers authenticatedUsers;
+    private BooleanProperty createAccountDisabledProperty;
 
     /**
      * Instantiates a new login view model.
      */
-    public LoginViewModel() {
+    public CreateAccountViewModel() {
         this.passwordProperty = new SimpleStringProperty("");
         this.usernameProperty = new SimpleStringProperty("");
         this.usernameReminderProperty = new SimpleStringProperty("");
         this.passwordReminderProperty = new SimpleStringProperty("");
         this.usernameFocusProperty = new SimpleBooleanProperty(false);
         this.passwordFocusProperty = new SimpleBooleanProperty(false);
-        this.loginDisabledProperty = new SimpleBooleanProperty(true);
+        this.createAccountDisabledProperty = new SimpleBooleanProperty(true);
         this.setCredentialChangeListeners();
-        if (SystemInfo.getAuthenticatedUsers() == null) {
-            SystemInfo.setAuthenticatedUsers(new AuthenticatedUsers());
-        }
     }
 
     /**
@@ -99,26 +95,27 @@ public class LoginViewModel {
     }
 
     /**
-     * Gets the login disabled property.
+     * Gets the create account disabled property.
      *
-     * @return the loginDisabledProperty
+     * @return the createAccountDisabledProperty
      */
-    public BooleanProperty loginDisabledProperty() {
-        return this.loginDisabledProperty;
+    public BooleanProperty createAccountDisabledProperty() {
+        return this.createAccountDisabledProperty;
     }
 
     /**
-     * Attempt to login the user
+     * Attempt to create a new user account
      *
      * @precondition: username != null && !username.isBlank()
      * 				  password != null && !password.isBlank()
-     * @postcondition: user will be checked against AuthenticatedUsers
-     * 				   if the username and password match one of the AthenticatedUsers
-     * 				   then loggedInUser will be set to that AthenticatedUser
-     * 			 	   else nothing will happen.
-     * @return true if login was successful else false
+     * 				  The username is not present in Username
+     * @postcondition: username will be checked against AuthenticatedUsers
+     * 				   if the username matches one of the AthenticatedUsers
+     * 				   then the account will not be added.
+     * 			 	   else the account will be added.
+     * @return true if creation was successful else false
      */
-    public boolean attemptLogin() {
+    public boolean attemptCreateAccount() {
         if (this.usernameProperty == null || this.usernameProperty.get() == null || this.usernameProperty.get().isBlank()) {
             throw new IllegalArgumentException("Username cannot be null or blank.");
         }
@@ -126,46 +123,36 @@ public class LoginViewModel {
             throw new IllegalArgumentException("Password cannot be null or blank.");
         }
         for (User user : SystemInfo.getAuthenticatedUsers().getUsers()) {
-            if (user.getUsername().equals(this.usernameProperty.get()) && user.getPassword().equals(this.passwordProperty.get())) {
-                this.updateSystemInfo(user);
-                return true;
+            if (user.getUsername().equals(this.usernameProperty.get())) {
+                return false;
             }
         }
-        this.loginDisabledProperty.set(true);
+        User createdUser = new User(this.usernameProperty.get(), this.passwordProperty.get());
+        SystemInfo.getAuthenticatedUsers().addUser(createdUser);
+        this.createAccountDisabledProperty.set(true);
         this.usernameProperty.set("");
         this.passwordProperty.set("");
-        return false;
-    }
-
-    /**
-     * Updates the system info depending on prior state.
-     * @param loggedInUser The user who is logged in
-     */
-    public void updateSystemInfo(User loggedInUser) {
-        SystemInfo.setLoggedInUser(loggedInUser);
-        if (SystemInfo.getAuthenticatedUsers() == null) {
-            SystemInfo.setAuthenticatedUsers(new AuthenticatedUsers());
-        }
+        return true;
     }
 
     private void setCredentialChangeListeners() {
         this.usernameFocusProperty.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                LoginViewModel.this.respondToCredentialInput();
+                CreateAccountViewModel.this.respondToCredentialInput();
             }
         });
         this.passwordFocusProperty.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                LoginViewModel.this.respondToCredentialInput();
+                CreateAccountViewModel.this.respondToCredentialInput();
             }
         });
         this.usernameProperty.addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (oldValue.isBlank() && !newValue.isBlank()) {
-                    LoginViewModel.this.respondToCredentialInput();
+                    CreateAccountViewModel.this.respondToCredentialInput();
                 }
             }
         });
@@ -173,35 +160,36 @@ public class LoginViewModel {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (oldValue.isBlank() && !newValue.isBlank()) {
-                    LoginViewModel.this.respondToCredentialInput();
+                    CreateAccountViewModel.this.respondToCredentialInput();
                 }
             }
         });
     }
 
     /**
-     * Shows reminder text for credentials if they aren't filled
-     * and turns on the login button if both credentials are filled.
+     * Shows reminder text for credentials if they aren't filled or if password is too short
+     * and turns on the login button if both credentials are filled and valid.
      *
-     * @precondition !this.passwordProperty.get().isBlank()
-     *               !this.usernameProperty.get().isBlank()
-     * @postcondition this.loginDisabledProperty.get == false;
+     * @precondition !this.usernameProperty.get().isBlank()
+     *               !this.passwordProperty.get().isBlank()
+     *               !this.passwordProperty.get().length() < 5
+     * @postcondition this.createAccountDisabledProperty.get == true
      */
     private void respondToCredentialInput() {
-        if (this.usernameProperty.get().isBlank() && !this.passwordProperty.get().isBlank()) {
+        if (this.usernameProperty.get().isBlank() && !(this.passwordProperty.get().isBlank() || this.passwordProperty.get().length() < 5)) {
             this.usernameReminderProperty.set("Must input username");
         } else {
             this.usernameReminderProperty.set("");
         }
-        if (this.passwordProperty.get().isBlank() && !this.usernameProperty.get().isBlank()) {
-            this.passwordReminderProperty.set("Must input password");
+        if ((this.passwordProperty.get().isBlank() || this.passwordProperty.get().length() < 5) && !this.usernameProperty.get().isBlank()) {
+            this.passwordReminderProperty.set("Must Password must be at least 5 characters");
         } else {
             this.passwordReminderProperty.set("");
         }
-        if (!this.usernameProperty.get().isBlank() && !this.passwordProperty.get().isBlank()) {
-            this.loginDisabledProperty.set(false);
+        if (!this.usernameProperty.get().isBlank() && !(this.passwordProperty.get().isBlank() || this.passwordProperty.get().length() < 5)) {
+            this.createAccountDisabledProperty.set(false);
         } else {
-            this.loginDisabledProperty.set(true);
+            this.createAccountDisabledProperty.set(true);
         }
     }
 

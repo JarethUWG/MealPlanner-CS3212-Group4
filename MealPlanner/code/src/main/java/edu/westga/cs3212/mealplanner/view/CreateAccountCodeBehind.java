@@ -1,7 +1,7 @@
 package edu.westga.cs3212.mealplanner.view;
 
 import edu.westga.cs3212.mealplanner.Main;
-import edu.westga.cs3212.mealplanner.viewmodel.LoginViewModel;
+import edu.westga.cs3212.mealplanner.viewmodel.CreateAccountViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -10,13 +10,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-public class LoginCodeBehind {
+/**
+ * Instantiates a new create account code behind.
+ *
+ * @precondition none
+ * @precondition none
+ */
+public class CreateAccountCodeBehind {
 
     @FXML
-    private Button loginButton;
+    private Button createAccountButton;
 
     @FXML
-    private AnchorPane loginPane;
+    private AnchorPane createAccountPane;
 
     @FXML
     private Label passwordReminderText;
@@ -30,16 +36,16 @@ public class LoginCodeBehind {
     @FXML
     private TextField usernameTextField;
 
-    private LoginViewModel viewModel;
+    private CreateAccountViewModel viewModel;
 
     /**
-     * Instantiates a new login code behind.
+     * Instantiates a new create account code behind.
      *
      * @precondition none
      * @precondition none
      */
-    public LoginCodeBehind() {
-        this.viewModel = new LoginViewModel();
+    public CreateAccountCodeBehind() {
+        this.viewModel = new CreateAccountViewModel();
     }
 
     @FXML
@@ -52,25 +58,27 @@ public class LoginCodeBehind {
         this.passwordReminderText.textProperty().bindBidirectional(this.viewModel.passwordReminderProperty());
         this.usernameTextField.textProperty().bindBidirectional(this.viewModel.usernameProperty());
         this.passwordTextField.textProperty().bindBidirectional(this.viewModel.passwordProperty());
-        this.loginButton.disableProperty().bindBidirectional(this.viewModel.loginDisabledProperty());
+        this.createAccountButton.disableProperty().bindBidirectional(this.viewModel.createAccountDisabledProperty());
         this.viewModel.usernameFocusProperty().bind(this.usernameTextField.focusedProperty());
         this.viewModel.passwordFocusProperty().bind(this.passwordTextField.focusedProperty());
     }
 
     @FXML
-    void createAccount(ActionEvent event) {
-        Main.getMainStage().setTitle(Main.CREATE_ACCOUNT_TITLE);
-        new SwitchScene(this.loginPane, Main.CREATE_ACCOUNT_FXML);
+    void handleLoginReturn(ActionEvent event) {
+        Main.getMainStage().setTitle(Main.LOGIN_TITLE);
+        new SwitchScene(this.createAccountPane, Main.LOGIN_FXML);
     }
 
     @FXML
-    void handleLogin(ActionEvent event) {
-        if (!this.viewModel.attemptLogin()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid credentials, please try again.");
+    void handleAccountCreation(ActionEvent event) {
+        if (!this.viewModel.attemptCreateAccount()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Username already in use. Choose a new username.");
             alert.showAndWait();
         } else {
-            Main.getMainStage().setTitle(Main.LANDING_TITLE);
-            new SwitchScene(this.loginPane, Main.LANDING_FXML);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Account successfully created. Redirecting to login.");
+            alert.showAndWait();
+            Main.getMainStage().setTitle(Main.LOGIN_TITLE);
+            new SwitchScene(this.createAccountPane, Main.LOGIN_FXML);
         }
     }
 
