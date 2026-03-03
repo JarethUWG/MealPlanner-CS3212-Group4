@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Loads and save out a list of users.
- * NOTE: save and load functionality will be implemented
- * with create account functionality for now the class provides a base user for
- * to utilize login functionality.
+ * Holds a list of authenticated users for the system.
  *
  * @author Jareth Batty
  * @version Fall 2025
@@ -16,7 +13,7 @@ public class AuthenticatedUsers {
     private List<User> users;
 
     /**
-     * Creates a list of authenticated users.
+     * Instantiates a list of authenticated users.
      */
     public AuthenticatedUsers() {
         this.users = new ArrayList<User>();

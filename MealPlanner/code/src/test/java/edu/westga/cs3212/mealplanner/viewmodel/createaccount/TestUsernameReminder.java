@@ -1,77 +1,85 @@
-package edu.westga.cs3212.mealplanner.viewmodel.login;
+package edu.westga.cs3212.mealplanner.viewmodel.createaccount;
 
 import edu.westga.cs3212.mealplanner.model.AuthenticatedUsers;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
+import edu.westga.cs3212.mealplanner.viewmodel.CreateAccountViewModel;
 import edu.westga.cs3212.mealplanner.viewmodel.LoginViewModel;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TestAttemptLogin {
-    @BeforeEach
-    void setUp() {
+class TestUsernameReminder {
+    @BeforeAll
+    static void setUp() {
         SystemInfo.setLoggedInUser(null);
         SystemInfo.setAuthenticatedUsers(new AuthenticatedUsers());
     }
 
     @Test
-    void testNoUsername() {
+    void testCredentialsAreBlank() {
         StringProperty usernameProperty = new SimpleStringProperty();
         StringProperty passwordProperty = new SimpleStringProperty();
 
-        LoginViewModel testViewModel = new LoginViewModel();
+        CreateAccountViewModel testViewModel = new CreateAccountViewModel();
+        usernameProperty.bindBidirectional(testViewModel.usernameProperty());
+        passwordProperty.bindBidirectional(testViewModel.passwordProperty());
+        usernameProperty.set("");
+        passwordProperty.set("");
+
+        String actual = testViewModel.usernameReminderProperty().get();
+
+        assertEquals("", actual);
+    }
+
+    @Test
+    void testUsernameIsBlank() {
+        StringProperty usernameProperty = new SimpleStringProperty();
+        StringProperty passwordProperty = new SimpleStringProperty();
+
+        CreateAccountViewModel testViewModel = new CreateAccountViewModel();
         usernameProperty.bindBidirectional(testViewModel.usernameProperty());
         passwordProperty.bindBidirectional(testViewModel.passwordProperty());
         usernameProperty.set("");
         passwordProperty.set("Test");
 
-        assertThrows(IllegalArgumentException.class, testViewModel::attemptLogin);
+        String actual = testViewModel.usernameReminderProperty().get();
+
+        assertEquals("Must input username", actual);
     }
 
     @Test
-    void testNoPassword() {
+    void testPasswordIsBlank() {
         StringProperty usernameProperty = new SimpleStringProperty();
         StringProperty passwordProperty = new SimpleStringProperty();
 
-        LoginViewModel testViewModel = new LoginViewModel();
+        CreateAccountViewModel testViewModel = new CreateAccountViewModel();
         usernameProperty.bindBidirectional(testViewModel.usernameProperty());
         passwordProperty.bindBidirectional(testViewModel.passwordProperty());
         usernameProperty.set("Test");
         passwordProperty.set("");
 
-        assertThrows(IllegalArgumentException.class, testViewModel::attemptLogin);
+        String actual = testViewModel.usernameReminderProperty().get();
+
+        assertEquals("", actual);
     }
 
     @Test
-    void testCredentialsDontMatch() {
+    void testNoneAreBlank() {
         StringProperty usernameProperty = new SimpleStringProperty();
         StringProperty passwordProperty = new SimpleStringProperty();
 
-        LoginViewModel testViewModel = new LoginViewModel();
+        CreateAccountViewModel testViewModel = new CreateAccountViewModel();
         usernameProperty.bindBidirectional(testViewModel.usernameProperty());
         passwordProperty.bindBidirectional(testViewModel.passwordProperty());
-        usernameProperty.set("Test Name");
-        passwordProperty.set("Test Password");
+        usernameProperty.set("Test");
+        passwordProperty.set("Test");
 
-        assertFalse(testViewModel.attemptLogin());
-    }
+        String actual = testViewModel.usernameReminderProperty().get();
 
-    @Test
-    void testCredentialsMatch() {
-        StringProperty usernameProperty = new SimpleStringProperty();
-        StringProperty passwordProperty = new SimpleStringProperty();
-
-        LoginViewModel testViewModel = new LoginViewModel();
-        usernameProperty.bindBidirectional(testViewModel.usernameProperty());
-        passwordProperty.bindBidirectional(testViewModel.passwordProperty());
-        usernameProperty.set("Username");
-        passwordProperty.set("Password");
-
-        assertTrue(testViewModel.attemptLogin());
+        assertEquals("", actual);
     }
 }
+

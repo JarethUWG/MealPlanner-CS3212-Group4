@@ -4,6 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * Instantiates a new landing page code behind.
+ *
+ * @precondition none
+ * @precondition none
+ */
 public class LandingPageCodeBehind {
 
     @FXML
