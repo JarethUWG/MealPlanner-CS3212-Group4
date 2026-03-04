@@ -24,14 +24,19 @@ public class PlannerCodeBehind {
      */
     public Label calendarHeader;
 
+    private PlannerViewModel viewModel;
+
     /**
      * Initialize a new planner code-behind.
      */
     public PlannerCodeBehind() {
+        this.viewModel = new PlannerViewModel();
     }
 
     @FXML
     void initialize() {
+        this.updateEnabledButtons();
+        this.calendarHeader.textProperty().bind(this.viewModel.CalendarHeaderProperty());
     }
 
     /**
@@ -39,6 +44,8 @@ public class PlannerCodeBehind {
      */
     @FXML
     public void showPreviousMonth() {
+        this.viewModel.DisplayPreviousMonth();
+        this.updateEnabledButtons();
     }
 
     /**
@@ -46,6 +53,25 @@ public class PlannerCodeBehind {
      */
     @FXML
     public void showNextMonth() {
+        this.viewModel.DisplayNextMonth();
+        this.updateEnabledButtons();
+    }
+
+    private void updateEnabledButtons() {
+        for (Node childNode : this.datesGrid.getChildren()) {
+            Button buttonNode = (Button) childNode;
+            Point2D point = this.getColumnAndRow(childNode);
+            int dayThisMonth = this.viewModel.GetDayThisMonth((int) point.getX(), (int) point.getY());
+            boolean dayIsInMonth = dayThisMonth != -1;
+
+            childNode.setDisable(!dayIsInMonth);
+
+            if (dayIsInMonth) {
+                buttonNode.setText(String.valueOf(dayThisMonth));
+            } else {
+                buttonNode.setText("");
+            }
+        }
     }
 
     /**
