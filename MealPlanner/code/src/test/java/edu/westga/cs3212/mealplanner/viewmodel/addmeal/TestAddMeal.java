@@ -47,9 +47,12 @@ class TestAddMeal {
         this.viewModel.setDate(time);
         var mealA = this.viewModel.addMeal("A", "");
         this.viewModel.addIngredient(new Ingredient("ing 2", 8881));
+        this.viewModel.addIngredient(new Ingredient("ing 3", 13));
+        this.viewModel.addIngredient(new Ingredient("ing 4", 554));
         this.viewModel.setDate(time);
         var mealB = this.viewModel.addMeal("B", "");
-        this.viewModel.addIngredient(new Ingredient("ing 3", 37));
+        this.viewModel.addIngredient(new Ingredient("ing 5", 12));
+        this.viewModel.addIngredient(new Ingredient("ing 6", 37));
         this.viewModel.setDate(time);
         var mealC = this.viewModel.addMeal("C", "");
         var mealsMade = new ArrayList<Meal>(Arrays.asList(mealA, mealB, mealC));
