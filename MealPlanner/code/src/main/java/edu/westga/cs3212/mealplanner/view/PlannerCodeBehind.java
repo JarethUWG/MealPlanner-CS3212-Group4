@@ -1,8 +1,7 @@
 package edu.westga.cs3212.mealplanner.view;
 
 import edu.westga.cs3212.mealplanner.Main;
-import edu.westga.cs3212.mealplanner.model.Database;
-import edu.westga.cs3212.mealplanner.model.Ingredient;
+import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import edu.westga.cs3212.mealplanner.viewmodel.PlannerViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -100,7 +99,7 @@ public class PlannerCodeBehind {
             stage.setScene(new Scene(loader.load()));
             stage.setTitle(Main.ADD_MEAL_TITLE);
             AddMealCodeBehind controller = loader.getController();
-            controller.setDateAndPlanner(currentDate, this.viewModel.getPlanner());
+            controller.setDate(currentDate);
         } catch (Exception exception) {
             exception.printStackTrace();
         }

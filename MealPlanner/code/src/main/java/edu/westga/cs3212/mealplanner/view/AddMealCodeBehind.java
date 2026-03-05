@@ -5,10 +5,7 @@ import edu.westga.cs3212.mealplanner.model.Database;
 import edu.westga.cs3212.mealplanner.model.Ingredient;
 import edu.westga.cs3212.mealplanner.model.Planner;
 import edu.westga.cs3212.mealplanner.viewmodel.AddMealViewModel;
-import javafx.beans.Observable;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -69,20 +66,27 @@ public class AddMealCodeBehind {
     /**
      * Indicates what date and planner meals should be added to.
      * @param date The date the meal should be added to.
-     * @param planner The planner the meal should be added to.
      */
-    public void setDateAndPlanner(LocalDate date, Planner planner) {
-        this.viewModel.setDateAndPlanner(date, planner);
+    public void setDate(LocalDate date) {
+        this.viewModel.setDate(date);
         this.dateReminder.textProperty().set("Adding to " + date);
     }
 
     @FXML
-    void addMealToPlanner(ActionEvent actionEvent) {
-
+    void addMealToPlanner() {
+        if (this.viewModel.addMeal(this.nameField.getText(), this.descField.getText())) {
+            this.mealStatus.textProperty().set("Successfully added meal " + this.nameField.getText() + " to planner!");
+            this.mealStatus.setTextFill(Color.LIGHTGREEN);
+            this.nameField.setText("");
+            this.descField.setText("");
+        } else {
+            this.mealStatus.textProperty().set("Failed to add meal with no ingredients.");
+            this.mealStatus.setTextFill(Color.RED);
+        }
     }
 
     @FXML
-    void addIngredientToMeal(ActionEvent actionEvent) {
+    void addIngredientToMeal() {
         if(this.viewModel.addIngredient(this.ingredientDisplay.getSelectionModel().getSelectedItem())) {
             this.mealStatus.textProperty().set("Added ingredient " + this.ingredientDisplay.getSelectionModel().getSelectedItem().getName() + " to meal!");
             this.mealStatus.setTextFill(Color.LIGHTGREEN);
@@ -93,14 +97,14 @@ public class AddMealCodeBehind {
     }
 
     @FXML
-    void resetIngredients(ActionEvent actionEvent) {
+    void resetIngredients() {
         this.viewModel.resetIngredients();
         this.mealStatus.textProperty().set("Cleared prepared ingredients.");
         this.mealStatus.setTextFill(Color.DARKGREEN);
     }
 
     @FXML
-    void handlePlannerReturn(ActionEvent actionEvent) {
+    void handlePlannerReturn() {
         Main.getMainStage().setTitle("Planner");
         new SwitchScene(this.addMealPane, "view/plannerPage.fxml");
     }

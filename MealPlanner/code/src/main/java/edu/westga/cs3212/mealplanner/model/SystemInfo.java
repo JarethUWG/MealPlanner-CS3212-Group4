@@ -3,6 +3,7 @@ package edu.westga.cs3212.mealplanner.model;
 public class SystemInfo {
     private static User loggedInUser;
     private static AuthenticatedUsers authenticatedUsers;
+    private static Planner currentPlanner;
 
     /**
      * Gets the currently logged in user
@@ -22,6 +23,9 @@ public class SystemInfo {
         return authenticatedUsers;
     }
 
+    public static Planner getCurrentPlanner() {
+        return currentPlanner;
+    }
     /**
      * Sets the currently logged in user
      *
@@ -38,5 +42,9 @@ public class SystemInfo {
      */
     public static void setAuthenticatedUsers(AuthenticatedUsers users) {
         SystemInfo.authenticatedUsers = users;
+    }
+
+    public static void setCurrentPlanner(Planner planner) {
+        SystemInfo.currentPlanner = planner;
     }
 }
