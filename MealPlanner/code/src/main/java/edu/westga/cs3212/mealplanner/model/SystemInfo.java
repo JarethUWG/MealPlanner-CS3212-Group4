@@ -1,12 +1,15 @@
 package edu.westga.cs3212.mealplanner.model;
 
+/**
+ * Utility class containing the list of valid users, and the currently active user and planner.
+ */
 public class SystemInfo {
     private static User loggedInUser;
     private static AuthenticatedUsers authenticatedUsers;
     private static Planner currentPlanner;
 
     /**
-     * Gets the currently logged in user
+     * Gets the currently logged in user.
      *
      * @return The currently logged in user
      */
@@ -15,7 +18,7 @@ public class SystemInfo {
     }
 
     /**
-     * Gets the authenticated users
+     * Gets the authenticated users.
      *
      * @return The authenticated users
      */
@@ -23,11 +26,19 @@ public class SystemInfo {
         return authenticatedUsers;
     }
 
+    /**
+     * Gets the current planner.
+     * In future implementation, this may be based on the planner associated with an individual user,
+     * instead of creating a brand new one each time the program runs.
+     *
+     * @return The planner currently being run with
+     */
     public static Planner getCurrentPlanner() {
         return currentPlanner;
     }
+
     /**
-     * Sets the currently logged in user
+     * Sets the currently logged in user.
      *
      * @param loggedInUser The currently logged in user
      */
@@ -36,7 +47,7 @@ public class SystemInfo {
     }
 
     /**
-     * Sets the authenticated users
+     * Sets the authenticated users.
      *
      * @param users The authenticated users
      */
@@ -44,6 +55,11 @@ public class SystemInfo {
         SystemInfo.authenticatedUsers = users;
     }
 
+    /**
+     * Sets the current planner.
+     *
+     * @param planner The planner to begin running with
+     */
     public static void setCurrentPlanner(Planner planner) {
         SystemInfo.currentPlanner = planner;
     }

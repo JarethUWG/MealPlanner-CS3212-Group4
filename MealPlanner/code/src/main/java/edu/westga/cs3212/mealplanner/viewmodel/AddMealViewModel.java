@@ -9,14 +9,30 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Meal adder view model.
+ */
 public class AddMealViewModel {
     private LocalDate currDate;
     private List<Ingredient> plannedIngredients = new ArrayList<>();
 
+    /**
+     * Sets the date meals are to be added to.
+     *
+     * @param date LocalDate of the day on the planner chosen.
+     * @post this.currDate == date
+     */
     public void setDate(LocalDate date) {
         this.currDate = date;
     }
 
+    /**
+     * Queues an ingredient to be added to the next meal.
+     *
+     * @param toAdd Ingredient to be stored
+     * @post this.plannedIngredients contains toAdd
+     * @return true if ingredient was added successfully, false if not (if ingredient was null)
+     */
     public boolean addIngredient(Ingredient toAdd) {
         if (toAdd != null) {
             this.plannedIngredients.add(toAdd);
@@ -26,10 +42,21 @@ public class AddMealViewModel {
         }
     }
 
+    /**
+     * Empties the list of stored ingredients.
+     *
+     * @post this.plannedIngredients.isEmpty == true
+     */
     public void resetIngredients() {
         this.plannedIngredients.clear();
     }
 
+    /**
+     * Creates a meal using the stored ingredients, and a given name/description, and adds it to the current planner.
+     * @param name Name of the new meal (if given)
+     * @param desc Description of the new meal (if given)
+     * @return true if meal was created and added successfully, false if not (no ingredients were given)
+     */
     public boolean addMeal(String name, String desc) {
         if (this.plannedIngredients.isEmpty()) {
             return false;
@@ -39,10 +66,20 @@ public class AddMealViewModel {
         }
     }
 
+    /**
+     * Gets the current date selected on the planner.
+     *
+     * @return LocalDate of the date selected
+     */
     public LocalDate getDate() {
         return this.currDate;
     }
 
+    /**
+     * Gets the current list of stored ingredients.
+     *
+     * @return List of all ingredients slated for the next meal
+     */
     public List<Ingredient> getPlannedIngredients() {
         return this.plannedIngredients;
     }
