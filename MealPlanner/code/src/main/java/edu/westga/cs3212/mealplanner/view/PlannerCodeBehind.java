@@ -1,5 +1,6 @@
 package edu.westga.cs3212.mealplanner.view;
 
+import edu.westga.cs3212.mealplanner.viewmodel.PlannerViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
