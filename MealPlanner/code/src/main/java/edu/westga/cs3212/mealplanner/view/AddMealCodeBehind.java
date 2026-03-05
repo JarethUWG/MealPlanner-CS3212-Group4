@@ -21,9 +21,6 @@ import java.time.LocalDate;
 public class AddMealCodeBehind {
 
     @FXML
-    private Button mealButton;
-
-    @FXML
     private Button ingredientButton;
 
     @FXML
@@ -73,7 +70,7 @@ public class AddMealCodeBehind {
 
     @FXML
     void addMealToPlanner() {
-        if (this.viewModel.addMeal(this.nameField.getText(), this.descField.getText())) {
+        if (this.viewModel.addMeal(this.nameField.getText(), this.descField.getText()) != null) {
             this.mealStatus.textProperty().set("Successfully added meal " + this.nameField.getText() + " to planner!");
             this.mealStatus.setTextFill(Color.GREEN);
             this.resetInputFields();
@@ -85,7 +82,7 @@ public class AddMealCodeBehind {
 
     @FXML
     void addIngredientToMeal() {
-        if(this.viewModel.addIngredient(this.ingredientDisplay.getSelectionModel().getSelectedItem())) {
+        if (this.viewModel.addIngredient(this.ingredientDisplay.getSelectionModel().getSelectedItem())) {
             this.mealStatus.textProperty().set("Added ingredient " + this.ingredientDisplay.getSelectionModel().getSelectedItem().getName() + " to meal!");
             this.mealStatus.setTextFill(Color.GREEN);
         } else {
@@ -110,6 +107,5 @@ public class AddMealCodeBehind {
     private void resetInputFields() {
         this.nameField.setText("");
         this.descField.setText("");
-        this.viewModel.resetIngredients();
     }
 }

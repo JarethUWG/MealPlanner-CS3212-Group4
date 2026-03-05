@@ -71,7 +71,6 @@ public class LoginCodeBehind {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid credentials, please try again.");
             alert.showAndWait();
         } else {
-            SystemInfo.setCurrentPlanner(new Planner());
             Main.getMainStage().setTitle(Main.LANDING_TITLE);
             new SwitchScene(this.loginPane, Main.LANDING_FXML);
         }

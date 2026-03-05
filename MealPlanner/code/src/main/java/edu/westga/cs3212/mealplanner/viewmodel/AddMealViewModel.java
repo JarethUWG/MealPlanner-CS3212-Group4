@@ -2,7 +2,6 @@ package edu.westga.cs3212.mealplanner.viewmodel;
 
 import edu.westga.cs3212.mealplanner.model.Ingredient;
 import edu.westga.cs3212.mealplanner.model.Meal;
-import edu.westga.cs3212.mealplanner.model.Planner;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 
 import java.time.LocalDate;
@@ -55,14 +54,16 @@ public class AddMealViewModel {
      * Creates a meal using the stored ingredients, and a given name/description, and adds it to the current planner.
      * @param name Name of the new meal (if given)
      * @param desc Description of the new meal (if given)
-     * @return true if meal was created and added successfully, false if not (no ingredients were given)
+     * @return The meal that was created, or null if the meal was failed to be added (no ingredients were provided)
      */
-    public boolean addMeal(String name, String desc) {
+    public Meal addMeal(String name, String desc) {
         if (this.plannedIngredients.isEmpty()) {
-            return false;
+            return null;
         } else {
-            SystemInfo.getCurrentPlanner().addMeal(this.currDate, new Meal(this.plannedIngredients, name, desc));
-            return true;
+            var toAdd = new Meal(this.plannedIngredients, name, desc);
+            SystemInfo.getCurrentPlanner().addMeal(this.currDate, toAdd);
+            this.resetIngredients();
+            return toAdd;
         }
     }
 
