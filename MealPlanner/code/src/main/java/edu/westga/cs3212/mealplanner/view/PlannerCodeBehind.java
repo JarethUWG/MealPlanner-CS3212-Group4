@@ -1,13 +1,21 @@
 package edu.westga.cs3212.mealplanner.view;
 
+import edu.westga.cs3212.mealplanner.Main;
+import edu.westga.cs3212.mealplanner.model.Database;
+import edu.westga.cs3212.mealplanner.model.Ingredient;
 import edu.westga.cs3212.mealplanner.viewmodel.PlannerViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+import java.time.LocalDate;
 
 /**
  * Planner view code-behind.
@@ -83,8 +91,19 @@ public class PlannerCodeBehind {
     @FXML
     public void selectDate(ActionEvent event) {
         Button pressedDateButton = (Button) event.getSource();
-
         Point2D columnAndRow = this.getColumnAndRow(pressedDateButton);
+        LocalDate currentDate = this.viewModel.getMonth().plusDays(
+                this.viewModel.GetDayThisMonth((int) columnAndRow.getX(), (int) columnAndRow.getY()) - 1);
+        try {
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource(Main.ADD_MEAL_FXML));
+            Stage stage = Main.getMainStage();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle(Main.ADD_MEAL_TITLE);
+            AddMealCodeBehind controller = loader.getController();
+            controller.setDateAndPlanner(currentDate, this.viewModel.getPlanner());
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     private Point2D getColumnAndRow(Node node) {
