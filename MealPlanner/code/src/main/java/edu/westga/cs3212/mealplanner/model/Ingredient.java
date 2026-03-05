@@ -42,4 +42,9 @@ public class Ingredient {
     public double getCalories() {
         return this.calories;
     }
+
+    @Override
+    public String toString() {
+        return this.getName() + ", " + this.getCalories() + " calories";
+    }
 }
