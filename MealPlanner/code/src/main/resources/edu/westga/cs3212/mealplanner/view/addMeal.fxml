@@ -15,6 +15,6 @@
         <Label fx:id="dateReminder" layoutX="130.0" layoutY="19.0" prefHeight="18.0" prefWidth="135.0" text="Adding to" />
         <Button fx:id="ingredientButton" layoutX="67.0" layoutY="246.0" mnemonicParsing="false" onAction="#addIngredientToMeal" prefHeight="26.0" prefWidth="134.0" text="Add Ingredient" />
         <Button layoutX="67.0" layoutY="283.0" mnemonicParsing="false" onAction="#resetIngredients" prefHeight="26.0" prefWidth="134.0" text="Reset Ingredients" />
-        <Label fx:id="mealStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="324.0" prefHeight="18.0" prefWidth="203.0" textAlignment="CENTER" />
+        <Label fx:id="mealStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="324.0" prefHeight="18.0" prefWidth="238.0" textAlignment="CENTER" />
     </children>
 </AnchorPane>

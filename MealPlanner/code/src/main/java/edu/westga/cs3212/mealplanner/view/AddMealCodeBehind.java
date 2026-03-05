@@ -3,7 +3,6 @@ package edu.westga.cs3212.mealplanner.view;
 import edu.westga.cs3212.mealplanner.Main;
 import edu.westga.cs3212.mealplanner.model.Database;
 import edu.westga.cs3212.mealplanner.model.Ingredient;
-import edu.westga.cs3212.mealplanner.model.Planner;
 import edu.westga.cs3212.mealplanner.viewmodel.AddMealViewModel;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -76,9 +75,8 @@ public class AddMealCodeBehind {
     void addMealToPlanner() {
         if (this.viewModel.addMeal(this.nameField.getText(), this.descField.getText())) {
             this.mealStatus.textProperty().set("Successfully added meal " + this.nameField.getText() + " to planner!");
-            this.mealStatus.setTextFill(Color.LIGHTGREEN);
-            this.nameField.setText("");
-            this.descField.setText("");
+            this.mealStatus.setTextFill(Color.GREEN);
+            this.resetInputFields();
         } else {
             this.mealStatus.textProperty().set("Failed to add meal with no ingredients.");
             this.mealStatus.setTextFill(Color.RED);
@@ -89,7 +87,7 @@ public class AddMealCodeBehind {
     void addIngredientToMeal() {
         if(this.viewModel.addIngredient(this.ingredientDisplay.getSelectionModel().getSelectedItem())) {
             this.mealStatus.textProperty().set("Added ingredient " + this.ingredientDisplay.getSelectionModel().getSelectedItem().getName() + " to meal!");
-            this.mealStatus.setTextFill(Color.LIGHTGREEN);
+            this.mealStatus.setTextFill(Color.GREEN);
         } else {
             this.mealStatus.textProperty().set("Failed to add ingredient.");
             this.mealStatus.setTextFill(Color.RED);
@@ -100,12 +98,18 @@ public class AddMealCodeBehind {
     void resetIngredients() {
         this.viewModel.resetIngredients();
         this.mealStatus.textProperty().set("Cleared prepared ingredients.");
-        this.mealStatus.setTextFill(Color.DARKGREEN);
+        this.mealStatus.setTextFill(Color.DARKOLIVEGREEN);
     }
 
     @FXML
     void handlePlannerReturn() {
         Main.getMainStage().setTitle("Planner");
         new SwitchScene(this.addMealPane, "view/plannerPage.fxml");
+    }
+
+    private void resetInputFields() {
+        this.nameField.setText("");
+        this.descField.setText("");
+        this.viewModel.resetIngredients();
     }
 }
