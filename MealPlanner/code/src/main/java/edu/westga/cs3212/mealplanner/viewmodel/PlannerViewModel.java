@@ -1,5 +1,6 @@
 package edu.westga.cs3212.mealplanner.viewmodel;
 
+import edu.westga.cs3212.mealplanner.model.Planner;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ public class PlannerViewModel {
     private static int DAYS_IN_WEEK = 7;
     private LocalDate displayedMonth;
     private SimpleStringProperty calendarHeaderProperty;
+    private Planner planner;
 
     /**
      * Calendar header property.
@@ -30,6 +32,7 @@ public class PlannerViewModel {
     public PlannerViewModel() {
         this.displayedMonth = LocalDate.now().withDayOfMonth(1);
         this.calendarHeaderProperty = new SimpleStringProperty();
+        this.planner = new Planner();
         this.updateHeader();
     }
 
@@ -61,6 +64,24 @@ public class PlannerViewModel {
         String newHeader = month + " " + year;
 
         this.calendarHeaderProperty.set(newHeader);
+    }
+
+    /**
+     * Returns the current month/year being displayed.
+     *
+     * @return The local date of the current month.
+     */
+    public LocalDate getMonth() {
+        return this.displayedMonth;
+    }
+
+    /**
+     * Returns the current map of planned meals.
+     *
+     * @return Planner associated with this view
+     */
+    public Planner getPlanner() {
+        return this.planner;
     }
 
     /**
