@@ -27,9 +27,8 @@ public class LandingPageCodeBehind {
 
     @FXML
     void handleGoToPlanner(ActionEvent event) {
-        //Main.getMainStage().setTitle(Main.PLANNER_TITLE);
-        //new SwitchScene(this.landingPane, Main.PLANNER_FXML);
-        // Uncomment when main files are added.
+        new SwitchScene(this.landingPane, Main.PLANNER_FXML);
+        Main.getMainStage().setTitle(Main.PLANNER_TITLE);
     }
 
     @FXML

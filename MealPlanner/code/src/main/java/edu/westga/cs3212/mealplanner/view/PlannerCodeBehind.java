@@ -1,5 +1,6 @@
 package edu.westga.cs3212.mealplanner.view;
 
+import edu.westga.cs3212.mealplanner.Main;
 import edu.westga.cs3212.mealplanner.viewmodel.PlannerViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,6 +8,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -24,6 +26,10 @@ public class PlannerCodeBehind {
      * Calendar header label.
      */
     public Label calendarHeader;
+    /**
+     * Main pane.
+     */
+    public AnchorPane plannerPane;
 
     private PlannerViewModel viewModel;
 
@@ -85,6 +91,11 @@ public class PlannerCodeBehind {
         Button pressedDateButton = (Button) event.getSource();
 
         Point2D columnAndRow = this.getColumnAndRow(pressedDateButton);
+    }
+
+    @FXML
+    public void returnToLandingPage() {
+        new SwitchScene(this.plannerPane, Main.LANDING_FXML);
     }
 
     private Point2D getColumnAndRow(Node node) {
