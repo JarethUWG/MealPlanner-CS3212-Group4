@@ -2,6 +2,8 @@ package edu.westga.cs3212.mealplanner.view;
 
 import edu.westga.cs3212.mealplanner.Main;
 import edu.westga.cs3212.mealplanner.viewmodel.LoginViewModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -53,8 +55,12 @@ public class LoginCodeBehind {
         this.usernameTextField.textProperty().bindBidirectional(this.viewModel.usernameProperty());
         this.passwordTextField.textProperty().bindBidirectional(this.viewModel.passwordProperty());
         this.loginButton.disableProperty().bindBidirectional(this.viewModel.loginDisabledProperty());
-        this.viewModel.usernameFocusProperty().bind(this.usernameTextField.focusedProperty());
-        this.viewModel.passwordFocusProperty().bind(this.passwordTextField.focusedProperty());
+        this.usernameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            this.viewModel.respondToCredentialInput();
+        });
+        this.passwordTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            this.viewModel.respondToCredentialInput();
+        });
     }
 
     @FXML

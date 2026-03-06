@@ -59,8 +59,12 @@ public class CreateAccountCodeBehind {
         this.usernameTextField.textProperty().bindBidirectional(this.viewModel.usernameProperty());
         this.passwordTextField.textProperty().bindBidirectional(this.viewModel.passwordProperty());
         this.createAccountButton.disableProperty().bindBidirectional(this.viewModel.createAccountDisabledProperty());
-        this.viewModel.usernameFocusProperty().bind(this.usernameTextField.focusedProperty());
-        this.viewModel.passwordFocusProperty().bind(this.passwordTextField.focusedProperty());
+        this.usernameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            this.viewModel.respondToCredentialInput();
+        });
+        this.passwordTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            this.viewModel.respondToCredentialInput();
+        });
     }
 
     @FXML

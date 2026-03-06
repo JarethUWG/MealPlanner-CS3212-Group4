@@ -19,8 +19,6 @@ public class CreateAccountViewModel {
     private StringProperty passwordProperty;
     private StringProperty usernameReminderProperty;
     private StringProperty passwordReminderProperty;
-    private BooleanProperty usernameFocusProperty;
-    private BooleanProperty passwordFocusProperty;
     private BooleanProperty createAccountDisabledProperty;
 
     /**
@@ -31,8 +29,6 @@ public class CreateAccountViewModel {
         this.usernameProperty = new SimpleStringProperty("");
         this.usernameReminderProperty = new SimpleStringProperty("");
         this.passwordReminderProperty = new SimpleStringProperty("");
-        this.usernameFocusProperty = new SimpleBooleanProperty(false);
-        this.passwordFocusProperty = new SimpleBooleanProperty(false);
         this.createAccountDisabledProperty = new SimpleBooleanProperty(true);
         this.setCredentialChangeListeners();
     }
@@ -74,24 +70,6 @@ public class CreateAccountViewModel {
     }
 
     /**
-     * Gets the username focus property.
-     *
-     * @return the usernameFocusProperty
-     */
-    public BooleanProperty usernameFocusProperty() {
-        return this.usernameFocusProperty;
-    }
-
-    /**
-     * Gets the password focus property.
-     *
-     * @return the passwordFocusProperty
-     */
-    public BooleanProperty passwordFocusProperty() {
-        return this.passwordFocusProperty;
-    }
-
-    /**
      * Gets the create account disabled property.
      *
      * @return the createAccountDisabledProperty
@@ -130,18 +108,6 @@ public class CreateAccountViewModel {
     }
 
     private void setCredentialChangeListeners() {
-        this.usernameFocusProperty.addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                CreateAccountViewModel.this.respondToCredentialInput();
-            }
-        });
-        this.passwordFocusProperty.addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                CreateAccountViewModel.this.respondToCredentialInput();
-            }
-        });
         this.usernameProperty.addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -158,14 +124,14 @@ public class CreateAccountViewModel {
 
     /**
      * Shows reminder text for credentials if they aren't filled or if password is too short
-     * and turns on the login button if both credentials are filled and valid.
+     * and turns on the create account button if both credentials are filled and valid.
      *
      * @precondition !this.usernameProperty.get().isBlank()
      *               !this.passwordProperty.get().isBlank()
      *               !this.passwordProperty.get().length() < 5
      * @postcondition this.createAccountDisabledProperty.get == true
      */
-    private void respondToCredentialInput() {
+    public void respondToCredentialInput() {
         if (this.usernameProperty.get().isBlank() && !(this.passwordProperty.get().isBlank() && this.passwordProperty.get().length() < 5)) {
             this.usernameReminderProperty.set("Must input username");
         } else {
