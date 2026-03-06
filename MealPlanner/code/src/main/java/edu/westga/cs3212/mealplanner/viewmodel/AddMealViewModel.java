@@ -61,7 +61,7 @@ public class AddMealViewModel {
             return null;
         } else {
             var toAdd = new Meal(this.plannedIngredients, name, desc);
-            SystemInfo.getCurrentPlanner().addMeal(this.currDate, toAdd);
+            SystemInfo.getLoggedInUser().getUserPlanner().addMeal(this.currDate, toAdd);
             this.resetIngredients();
             return toAdd;
         }

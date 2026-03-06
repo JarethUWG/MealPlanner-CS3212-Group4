@@ -1,9 +1,6 @@
 package edu.westga.cs3212.mealplanner.viewmodel.addmeal;
 
-import edu.westga.cs3212.mealplanner.model.Ingredient;
-import edu.westga.cs3212.mealplanner.model.Meal;
-import edu.westga.cs3212.mealplanner.model.Planner;
-import edu.westga.cs3212.mealplanner.model.SystemInfo;
+import edu.westga.cs3212.mealplanner.model.*;
 import edu.westga.cs3212.mealplanner.viewmodel.AddMealViewModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +18,7 @@ class TestAddMeal {
     @BeforeEach
     void setup() {
         this.viewModel = new AddMealViewModel();
-        SystemInfo.setCurrentPlanner(new Planner());
+        SystemInfo.setLoggedInUser(new User("Test User", "Test Password"));
     }
 
     @Test
@@ -36,7 +33,7 @@ class TestAddMeal {
         this.viewModel.setDate(time);
         var mealAdded = this.viewModel.addMeal("meal", "");
         var mealMade = new ArrayList<Meal>(Collections.singletonList(mealAdded));
-        var storedMeals = SystemInfo.getCurrentPlanner().getPlannedMeals();
+        var storedMeals = SystemInfo.getLoggedInUser().getUserPlanner().getPlannedMeals();
         assertEquals(mealMade, storedMeals);
     }
 
@@ -56,7 +53,7 @@ class TestAddMeal {
         this.viewModel.setDate(time);
         var mealC = this.viewModel.addMeal("C", "");
         var mealsMade = new ArrayList<Meal>(Arrays.asList(mealA, mealB, mealC));
-        var storedMeals = SystemInfo.getCurrentPlanner().getPlannedMeals();
+        var storedMeals = SystemInfo.getLoggedInUser().getUserPlanner().getPlannedMeals();
         assertEquals(mealsMade, storedMeals);
     }
 }

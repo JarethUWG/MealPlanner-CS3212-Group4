@@ -27,17 +27,6 @@ public class SystemInfo {
     }
 
     /**
-     * Gets the current planner.
-     * In future implementation, this may be based on the planner associated with an individual user,
-     * instead of creating a brand new one each time the program runs.
-     *
-     * @return The planner currently being run with
-     */
-    public static Planner getCurrentPlanner() {
-        return currentPlanner;
-    }
-
-    /**
      * Sets the currently logged in user.
      *
      * @param loggedInUser The currently logged in user
@@ -53,14 +42,5 @@ public class SystemInfo {
      */
     public static void setAuthenticatedUsers(AuthenticatedUsers users) {
         SystemInfo.authenticatedUsers = users;
-    }
-
-    /**
-     * Sets the current planner.
-     *
-     * @param planner The planner to begin running with
-     */
-    public static void setCurrentPlanner(Planner planner) {
-        SystemInfo.currentPlanner = planner;
     }
 }

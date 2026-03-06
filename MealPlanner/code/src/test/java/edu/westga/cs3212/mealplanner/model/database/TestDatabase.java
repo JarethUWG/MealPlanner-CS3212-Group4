@@ -4,13 +4,11 @@ import edu.westga.cs3212.mealplanner.model.Database;
 import edu.westga.cs3212.mealplanner.model.Ingredient;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestDatabase {
 

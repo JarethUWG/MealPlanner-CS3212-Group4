@@ -144,7 +144,6 @@ public class LoginViewModel {
      */
     public void updateSystemInfo(User loggedInUser) {
         SystemInfo.setLoggedInUser(loggedInUser);
-        SystemInfo.setCurrentPlanner(new Planner());
         if (SystemInfo.getAuthenticatedUsers() == null) {
             SystemInfo.setAuthenticatedUsers(new AuthenticatedUsers());
         }
