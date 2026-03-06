@@ -1,5 +1,8 @@
 package edu.westga.cs3212.mealplanner.view;
 
+import edu.westga.cs3212.mealplanner.Main;
+import edu.westga.cs3212.mealplanner.model.SystemInfo;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -16,5 +19,23 @@ public class LandingPageCodeBehind {
     private AnchorPane landingPane;
 
     @FXML
-    private Label loginConfirm;
+    void handleLogOut(ActionEvent event) {
+        SystemInfo.setLoggedInUser(null);
+        Main.getMainStage().setTitle(Main.LOGIN_TITLE);
+        new SwitchScene(this.landingPane, Main.LOGIN_FXML);
+    }
+
+    @FXML
+    void handleGoToPlanner(ActionEvent event) {
+        //Main.getMainStage().setTitle(Main.PLANNER_TITLE);
+        //new SwitchScene(this.landingPane, Main.PLANNER_FXML);
+        // Uncomment when main files are added.
+    }
+
+    @FXML
+    void handleGenerateGrocery(ActionEvent event) {
+        //Main.getMainStage().setTitle(Main.GROCERY_LIST_TITLE);
+        //new SwitchScene(this.landingPane, Main.GROCERY_LIST_FXML);
+        // Uncomment when main files are added.
+    }
 }
