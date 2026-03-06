@@ -68,15 +68,6 @@ public class AddMealViewModel {
     }
 
     /**
-     * Gets the current date selected on the planner.
-     *
-     * @return LocalDate of the date selected
-     */
-    public LocalDate getDate() {
-        return this.currDate;
-    }
-
-    /**
      * Gets the current list of stored ingredients.
      *
      * @return List of all ingredients slated for the next meal

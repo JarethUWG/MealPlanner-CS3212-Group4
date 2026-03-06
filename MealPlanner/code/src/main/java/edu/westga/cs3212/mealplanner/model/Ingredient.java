@@ -52,6 +52,9 @@ public class Ingredient {
 
     @Override
     public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
         if (!(obj.getClass() == Ingredient.class)) {
             return false;
         }
