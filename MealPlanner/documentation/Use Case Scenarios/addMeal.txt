@@ -1,0 +1,13 @@
+Meal Input 
+
+Context: User is logged in. 
+
+Primary flow 
+
+(1) User selects one or more Ingredient items. 
+
+(2) The user provides a name for the Meal. 
+
+(3) The user presses the “Add Meal” button. 
+
+(4) The server saves the Meal item. 

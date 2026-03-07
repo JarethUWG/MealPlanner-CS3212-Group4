@@ -1,0 +1,24 @@
+Create account
+
+Primary flow 
+
+(1) User inputs valid credentials into appropriate spaces. 
+
+(2) User clicks the create account button. 
+
+(3) The server verifies that the username is not in use and the password is
+at least 5 characters long. 
+
+(4) The server passes appropriate user data back to the client. 
+
+(5) The user account is created.
+
+Alternative flows 
+
+Invalid credentials 
+
+(3a) The server verifies that the username is already in use.
+
+(4a) The server passes appropriate error information back. 
+
+(5a) Return to primary (1). 

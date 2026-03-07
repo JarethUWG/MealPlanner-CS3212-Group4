@@ -1,0 +1,21 @@
+View Planner 
+
+Context: User is logged in. 
+
+Primary flow 
+
+(1) The user clicks the “View Planner” button. 
+
+(2) The server verifies that there is food information within the next 30 days. 
+
+(3) The server retrieves all food information within the next 30 days. 
+
+(4) The food information is displayed in chronological order. 
+
+Alternative flows 
+
+No food information 
+
+(2a) The server verifies that there isn’t food information within the next 30 days. 
+
+(3a) The user is informed that there is no food planned within the next 30 days and suggests that the user schedule food information. 
