@@ -9,7 +9,7 @@ import java.util.List;
  * Defines a planner object.
  *
  * @author Kirya Duncan II
- * @version Spring 2025
+ * @version Spring 2026
  */
 public class Planner {
 

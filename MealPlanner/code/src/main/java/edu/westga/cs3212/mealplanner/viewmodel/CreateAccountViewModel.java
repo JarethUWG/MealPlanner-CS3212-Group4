@@ -12,7 +12,7 @@ import javafx.beans.value.ObservableValue;
  * The CreateAccount ViewModel.
  *
  * @author Jareth Batty
- * @version Spring 2025
+ * @version Spring 2026
  */
 public class CreateAccountViewModel {
     private StringProperty usernameProperty;

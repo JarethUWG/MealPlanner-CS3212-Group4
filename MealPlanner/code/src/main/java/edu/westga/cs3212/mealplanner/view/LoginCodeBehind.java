@@ -14,6 +14,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * Instantiates a new login code behind.
+ *
+ * @precondition none
+ * @precondition none
+ */
 public class LoginCodeBehind {
 
     @FXML

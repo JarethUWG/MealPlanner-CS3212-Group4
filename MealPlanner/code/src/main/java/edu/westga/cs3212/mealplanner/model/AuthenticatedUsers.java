@@ -7,7 +7,7 @@ import java.util.List;
  * Holds a list of authenticated users for the system.
  *
  * @author Jareth Batty
- * @version Fall 2025
+ * @version Spring 2026
  */
 public class AuthenticatedUsers {
     private List<User> users;

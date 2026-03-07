@@ -1,0 +1,13 @@
+Generate Grocery List 
+
+Context: User is logged in. 
+
+Primary flow 
+
+(1) The user clicks the “Generate Grocery List” button. 
+
+(2) The user is prompted to give a time frame for the list. 
+
+(3) The server verifies that there is food information for the given time frame. 
+
+(4) The server retrieves all ingredients in the given time frame including those in meals. 

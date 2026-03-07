@@ -1,7 +1,12 @@
 package edu.westga.cs3212.mealplanner.model;
 
 /**
- * Utility class containing the list of valid users, and the currently active user and planner.
+ * Holds information that needs to be accessed across the system
+ * Note: this class will likely be replaced by the server in future
+ * implementations.
+ *
+ * @author Jareth Batty
+ * @version Spring 2026
  */
 public class SystemInfo {
     private static User loggedInUser;
