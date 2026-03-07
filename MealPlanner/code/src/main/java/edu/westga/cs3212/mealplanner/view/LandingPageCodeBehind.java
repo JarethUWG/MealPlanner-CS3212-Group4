@@ -33,8 +33,7 @@ public class LandingPageCodeBehind {
 
     @FXML
     void handleGenerateGrocery(ActionEvent event) {
-        //Main.getMainStage().setTitle(Main.GROCERY_LIST_TITLE);
-        //new SwitchScene(this.landingPane, Main.GROCERY_LIST_FXML);
-        // Uncomment when main files are added.
+        Main.getMainStage().setTitle(Main.GROCERY_LIST_TITLE);
+        new SwitchScene(this.landingPane, Main.GROCERY_LIST_FXML);
     }
 }
