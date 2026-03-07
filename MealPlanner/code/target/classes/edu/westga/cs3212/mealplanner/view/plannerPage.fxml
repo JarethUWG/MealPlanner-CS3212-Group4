@@ -3,46 +3,33 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="268.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.mealplanner.view.PlannerCodeBehind">
-    <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0"
-              prefWidth="268.0">
+<AnchorPane fx:id="plannerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="268.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.mealplanner.view.PlannerCodeBehind">
+    <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="268.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="ALWAYS"/>
-            <ColumnConstraints hgrow="ALWAYS"/>
-            <ColumnConstraints hgrow="ALWAYS"/>
-            <ColumnConstraints hgrow="ALWAYS"/>
-            <ColumnConstraints hgrow="ALWAYS"/>
-            <ColumnConstraints hgrow="ALWAYS"/>
-            <ColumnConstraints hgrow="ALWAYS"/>
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="ALWAYS" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
-        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" text="Sun" GridPane.halignment="CENTER" GridPane.rowIndex="1"
-               GridPane.valignment="CENTER"/>
-        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" text="Mon" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" text="Tue" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" text="Wed" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" text="Thu" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
-        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" text="Fri" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
-        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" text="Sat" GridPane.columnIndex="6" GridPane.rowIndex="1"/>
-        <Label fx:id="calendarHeader" alignment="CENTER" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" text="Month Year" GridPane.columnIndex="1" GridPane.columnSpan="5"
-               GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER"/>
-        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                onAction="#showPreviousMonth" text="&lt;"/>
-        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                onAction="#showNextMonth" text="&gt;" GridPane.columnIndex="6"/>
+        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sun" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mon" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tue" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Wed" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Thu" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Fri" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sat" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+        <Label fx:id="calendarHeader" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Month Year" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showPreviousMonth" text="&lt;" />
+        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showNextMonth" text="&gt;" GridPane.columnIndex="6" />
     </GridPane>
-    <GridPane fx:id="datesGrid" layoutY="50.0" prefHeight="346.0" prefWidth="268.0">
+    <GridPane fx:id="datesGrid" layoutY="50.0" prefHeight="321.0" prefWidth="268.0">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
             <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
@@ -96,8 +83,7 @@
         <Button disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectDate" GridPane.columnIndex="4" GridPane.rowIndex="4" />
         <Button disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectDate" GridPane.columnIndex="5" GridPane.rowIndex="4" />
         <Button disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectDate" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-        <Button disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                mnemonicParsing="false" onAction="#selectDate" GridPane.rowIndex="5"/>
+        <Button disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectDate" GridPane.rowIndex="5" />
         <Button disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectDate" GridPane.columnIndex="1" GridPane.rowIndex="5" />
         <Button disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectDate" GridPane.columnIndex="2" GridPane.rowIndex="5" />
         <Button disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectDate" GridPane.columnIndex="3" GridPane.rowIndex="5" />
@@ -105,4 +91,5 @@
         <Button disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectDate" GridPane.columnIndex="5" GridPane.rowIndex="5" />
         <Button disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectDate" GridPane.columnIndex="6" GridPane.rowIndex="5" />
     </GridPane>
+   <Button layoutY="370.0" mnemonicParsing="false" onAction="#returnToLandingPage" prefHeight="25.0" prefWidth="268.0" text="Back" />
 </AnchorPane>

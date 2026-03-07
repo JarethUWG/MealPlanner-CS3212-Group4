@@ -1,4 +1,4 @@
-package edu.westga.cs3211.mealplanner.model;
+package edu.westga.cs3212.mealplanner.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
