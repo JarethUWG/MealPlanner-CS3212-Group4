@@ -73,5 +73,6 @@ class TestAttemptLogin {
         passwordProperty.set("Password");
 
         assertTrue(testViewModel.attemptLogin());
+        assertNotNull(SystemInfo.getLoggedInUser());
     }
 }

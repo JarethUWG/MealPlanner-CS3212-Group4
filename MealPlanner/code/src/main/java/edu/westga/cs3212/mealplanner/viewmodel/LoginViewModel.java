@@ -23,8 +23,6 @@ public class LoginViewModel {
     private StringProperty passwordProperty;
     private StringProperty usernameReminderProperty;
     private StringProperty passwordReminderProperty;
-    private BooleanProperty usernameFocusProperty;
-    private BooleanProperty passwordFocusProperty;
     private BooleanProperty loginDisabledProperty;
     private AuthenticatedUsers authenticatedUsers;
 
@@ -36,8 +34,6 @@ public class LoginViewModel {
         this.usernameProperty = new SimpleStringProperty("");
         this.usernameReminderProperty = new SimpleStringProperty("");
         this.passwordReminderProperty = new SimpleStringProperty("");
-        this.usernameFocusProperty = new SimpleBooleanProperty(false);
-        this.passwordFocusProperty = new SimpleBooleanProperty(false);
         this.loginDisabledProperty = new SimpleBooleanProperty(true);
         this.setCredentialChangeListeners();
         if (SystemInfo.getAuthenticatedUsers() == null) {
@@ -82,24 +78,6 @@ public class LoginViewModel {
     }
 
     /**
-     * Gets the username focus property.
-     *
-     * @return the usernameFocusProperty
-     */
-    public BooleanProperty usernameFocusProperty() {
-        return this.usernameFocusProperty;
-    }
-
-    /**
-     * Gets the password focus property.
-     *
-     * @return the passwordFocusProperty
-     */
-    public BooleanProperty passwordFocusProperty() {
-        return this.passwordFocusProperty;
-    }
-
-    /**
      * Gets the login disabled property.
      *
      * @return the loginDisabledProperty
@@ -128,7 +106,7 @@ public class LoginViewModel {
         }
         for (User user : SystemInfo.getAuthenticatedUsers().getUsers()) {
             if (user.getUsername().equals(this.usernameProperty.get()) && user.getPassword().equals(this.passwordProperty.get())) {
-                this.updateSystemInfo(user);
+                SystemInfo.setLoggedInUser(user);
                 return true;
             }
         }
@@ -138,30 +116,7 @@ public class LoginViewModel {
         return false;
     }
 
-    /**
-     * Updates the system info depending on prior state.
-     * @param loggedInUser The user who is logged in
-     */
-    public void updateSystemInfo(User loggedInUser) {
-        SystemInfo.setLoggedInUser(loggedInUser);
-        if (SystemInfo.getAuthenticatedUsers() == null) {
-            SystemInfo.setAuthenticatedUsers(new AuthenticatedUsers());
-        }
-    }
-
     private void setCredentialChangeListeners() {
-        this.usernameFocusProperty.addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                LoginViewModel.this.respondToCredentialInput();
-            }
-        });
-        this.passwordFocusProperty.addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                LoginViewModel.this.respondToCredentialInput();
-            }
-        });
         this.usernameProperty.addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -188,7 +143,7 @@ public class LoginViewModel {
      *               !this.usernameProperty.get().isBlank()
      * @postcondition this.loginDisabledProperty.get == false;
      */
-    private void respondToCredentialInput() {
+    public void respondToCredentialInput() {
         if (this.usernameProperty.get().isBlank() && !this.passwordProperty.get().isBlank()) {
             this.usernameReminderProperty.set("Must input username");
         } else {
