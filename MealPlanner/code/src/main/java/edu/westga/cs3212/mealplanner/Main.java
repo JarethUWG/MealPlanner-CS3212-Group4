@@ -21,6 +21,8 @@ public class Main extends Application {
     public static final String CREATE_ACCOUNT_FXML = "view/createAccount.fxml";
     public static final String LANDING_TITLE = "Landing Page";
     public static final String LANDING_FXML = "view/landingPage.fxml";
+    public static final String PLANNER_TITLE = "Planner";
+    public static final String PLANNER_FXML = "view/plannerPage.fxml";
     public static final String ADD_MEAL_TITLE = "Add meal";
     public static final String ADD_MEAL_FXML = "addMeal.fxml";
     public static final String GROCERY_LIST_TITLE = "Grocery List"

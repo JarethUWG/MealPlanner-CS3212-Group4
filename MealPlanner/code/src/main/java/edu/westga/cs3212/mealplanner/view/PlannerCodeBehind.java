@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -31,6 +32,10 @@ public class PlannerCodeBehind {
      * Calendar header label.
      */
     public Label calendarHeader;
+    /**
+     * Main pane.
+     */
+    public AnchorPane plannerPane;
 
     private PlannerViewModel viewModel;
 
@@ -103,6 +108,11 @@ public class PlannerCodeBehind {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+    }
+
+    @FXML
+    public void returnToLandingPage() {
+        new SwitchScene(this.plannerPane, Main.LANDING_FXML);
     }
 
     private Point2D getColumnAndRow(Node node) {
