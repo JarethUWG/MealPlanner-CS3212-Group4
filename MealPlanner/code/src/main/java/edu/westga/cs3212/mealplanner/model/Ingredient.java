@@ -1,5 +1,7 @@
 package edu.westga.cs3212.mealplanner.model;
 
+import java.util.Objects;
+
 /**
  * Basic class for Ingredients.
  */
@@ -41,5 +43,22 @@ public class Ingredient {
      */
     public double getCalories() {
         return this.calories;
+    }
+
+    @Override
+    public String toString() {
+        return this.getName() + ", " + this.getCalories() + " calories";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj.getClass() == Ingredient.class)) {
+            return false;
+        }
+        return (Objects.equals(this.name, ((Ingredient) obj).name)
+                && this.calories == ((Ingredient) obj).calories);
     }
 }

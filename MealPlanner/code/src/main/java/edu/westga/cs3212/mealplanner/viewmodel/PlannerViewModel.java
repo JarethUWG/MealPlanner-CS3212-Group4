@@ -1,5 +1,6 @@
 package edu.westga.cs3212.mealplanner.viewmodel;
 
+import edu.westga.cs3212.mealplanner.model.Planner;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDate;
@@ -61,6 +62,15 @@ public class PlannerViewModel {
         String newHeader = month + " " + year;
 
         this.calendarHeaderProperty.set(newHeader);
+    }
+
+    /**
+     * Returns the current month/year being displayed.
+     *
+     * @return The local date of the current month.
+     */
+    public LocalDate getMonth() {
+        return this.displayedMonth;
     }
 
     /**

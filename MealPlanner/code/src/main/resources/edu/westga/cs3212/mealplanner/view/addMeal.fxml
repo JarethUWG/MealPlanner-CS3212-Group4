@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="addMealPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="268.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.mealplanner.view.AddMealCodeBehind">
+    <children>
+        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handlePlannerReturn" text="Return to Planner" />
+        <ComboBox fx:id="ingredientDisplay" layoutX="59.0" layoutY="144.0" prefWidth="150.0" promptText="Select Ingredient" />
+        <Label layoutX="35.0" layoutY="69.0" prefHeight="18.0" prefWidth="66.0" text="Meal Name" />
+        <TextField fx:id="nameField" layoutX="102.0" layoutY="66.0" prefHeight="26.0" prefWidth="140.0" promptText="New Meal" />
+        <TextField fx:id="descField" layoutX="102.0" layoutY="110.0" prefHeight="26.0" prefWidth="140.0" promptText="No further description" />
+        <Label layoutX="11.0" layoutY="115.0" prefHeight="18.0" prefWidth="90.0" text="Meal Description" />
+        <Button layoutX="79.0" layoutY="355.0" mnemonicParsing="false" onAction="#addMealToPlanner" prefHeight="26.0" prefWidth="109.0" text="Add Meal" />
+        <Label fx:id="dateReminder" layoutX="130.0" layoutY="19.0" prefHeight="18.0" prefWidth="135.0" text="Adding to" />
+        <Button fx:id="ingredientButton" layoutX="67.0" layoutY="246.0" mnemonicParsing="false" onAction="#addIngredientToMeal" prefHeight="26.0" prefWidth="134.0" text="Add Ingredient" />
+        <Button layoutX="67.0" layoutY="283.0" mnemonicParsing="false" onAction="#resetIngredients" prefHeight="26.0" prefWidth="134.0" text="Reset Ingredients" />
+        <Label fx:id="mealStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="324.0" prefHeight="18.0" prefWidth="238.0" textAlignment="CENTER" />
+    </children>
+</AnchorPane>

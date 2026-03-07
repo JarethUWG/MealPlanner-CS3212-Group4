@@ -9,7 +9,7 @@ package edu.westga.cs3212.mealplanner.model;
 public class User {
     private String username;
     private String password;
-    // private Planner userPlanner; should go here when implemented.
+    private Planner userPlanner;
     // private List<Meal> customMeals; should go here when implemented
 
     /**
@@ -31,6 +31,7 @@ public class User {
         if (password == null || password.isBlank()) {
             throw new IllegalArgumentException("Please input valid password");
         }
+        this.userPlanner = new Planner();
         this.username = username;
         this.password = password;
     }
@@ -51,5 +52,14 @@ public class User {
      */
     public String getPassword() {
         return this.password;
+    }
+
+    /**
+     * Gets the current user's planner.
+     *
+     * @return The current planner
+     */
+    public Planner getUserPlanner() {
+        return this.userPlanner;
     }
 }
