@@ -19,5 +19,4 @@ class TestConstructor {
 
         assertEquals(expected, actual);
     }
-
 }

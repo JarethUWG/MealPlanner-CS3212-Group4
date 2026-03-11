@@ -2,7 +2,7 @@ package edu.westga.cs3212.mealplanner.model.planner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,13 +29,13 @@ class TestAddMeal {
 
     @Test
     void throwsWhenNullMeal() {
-        assertThrows(IllegalArgumentException.class, () -> this.planner.addMeal(LocalDate.now(), null));
+        assertThrows(IllegalArgumentException.class, () -> this.planner.addMeal(LocalDateTime.now(), null));
     }
 
     @Test
     void testWhenNoMealsPlannedOnDate() {
         var firstMeal = new Meal();
-        this.planner.addMeal(LocalDate.now(), firstMeal);
+        this.planner.addMeal(LocalDateTime.now(), firstMeal);
 
         var expected = new ArrayList<Meal>(List.of(firstMeal));
         var actual = this.planner.getPlannedMeals();
@@ -47,8 +47,8 @@ class TestAddMeal {
     void testWhenOneMealAlreadyPlannedOnDate() {
         var firstMeal = new Meal();
         var secondMeal = new Meal();
-        this.planner.addMeal(LocalDate.now(), firstMeal);
-        this.planner.addMeal(LocalDate.now(), secondMeal);
+        this.planner.addMeal(LocalDateTime.now(), firstMeal);
+        this.planner.addMeal(LocalDateTime.now(), secondMeal);
 
         var expected = new ArrayList<Meal>(Arrays.asList(firstMeal, secondMeal));
         var actual = this.planner.getPlannedMeals();
@@ -61,9 +61,9 @@ class TestAddMeal {
         var firstMeal = new Meal();
         var secondMeal = new Meal();
         var thirdMeal = new Meal();
-        this.planner.addMeal(LocalDate.now(), firstMeal);
-        this.planner.addMeal(LocalDate.now(), secondMeal);
-        this.planner.addMeal(LocalDate.now(), thirdMeal);
+        this.planner.addMeal(LocalDateTime.now(), firstMeal);
+        this.planner.addMeal(LocalDateTime.now(), secondMeal);
+        this.planner.addMeal(LocalDateTime.now(), thirdMeal);
 
         var expected = new ArrayList<Meal>(Arrays.asList(firstMeal, secondMeal, thirdMeal));
         var actual = this.planner.getPlannedMeals();

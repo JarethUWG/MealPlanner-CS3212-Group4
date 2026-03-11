@@ -1,6 +1,6 @@
 package edu.westga.cs3212.mealplanner.viewmodel;
 
-import edu.westga.cs3212.mealplanner.model.Planner;
+import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDate;
@@ -39,7 +39,7 @@ public class PlannerViewModel {
      *
      * @postcondition this.CalendarHeaderProperty.get() == previous "Month Year"
      */
-    public void DisplayPreviousMonth() {
+    public void displayPreviousMonth() {
         this.displayedMonth = this.displayedMonth.minusMonths(1).withDayOfMonth(1);
         this.updateHeader();
     }
@@ -49,7 +49,7 @@ public class PlannerViewModel {
      *
      * @postcondition this.CalendarHeaderProperty.get() == next "Month Year"
      */
-    public void DisplayNextMonth() {
+    public void displayNextMonth() {
         this.displayedMonth = this.displayedMonth.plusMonths(1).withDayOfMonth(1);
         this.updateHeader();
     }
@@ -65,26 +65,35 @@ public class PlannerViewModel {
     }
 
     /**
-     * Returns the current month/year being displayed.
-     *
-     * @return The local date of the current month.
-     */
-    public LocalDate getMonth() {
-        return this.displayedMonth;
-    }
-
-    /**
      * Returns the day of the month associated with column and row or -1 if a day is not associated.
      *
      * @param column The column position
      * @param row The row position
      * @return The day of the month or -1 if day is not in month
      */
-    public int GetDayThisMonth(int column, int row) {
+    public int getDayThisMonth(int column, int row) {
         int day = this.gridPositionToDay(column, row);
         boolean dayIsInMonth = day > 0 && day <= this.displayedMonth.lengthOfMonth();
 
         return dayIsInMonth ? day : -1;
+    }
+
+    /**
+     * Updates the selected date of the planner.
+     * @param column The column the date is in.
+     * @param row The row the date is in.
+     *
+     * @postcondition if selected date is valid SystemInfo.getLogginUser().getUserPlanner() == selected date
+     */
+    public void selectDate(int column, int row) {
+        int dayThisMonth = this.getDayThisMonth(column, row);
+        if (dayThisMonth != -1) {
+            LocalDate newSelectedDate = this.displayedMonth.withDayOfMonth(dayThisMonth);
+            var currentUser = SystemInfo.getLoggedInUser();
+            var userPlanner = currentUser.getUserPlanner();
+
+            userPlanner.setSelectedDate(newSelectedDate.atStartOfDay());
+        }
     }
 
     private int gridPositionToDay(int column, int row) {
