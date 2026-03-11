@@ -1,21 +1,15 @@
 package edu.westga.cs3212.mealplanner.view;
 
 import edu.westga.cs3212.mealplanner.Main;
-import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import edu.westga.cs3212.mealplanner.viewmodel.PlannerViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-
-import java.time.LocalDate;
 
 /**
  * Planner view code-behind.
@@ -57,7 +51,7 @@ public class PlannerCodeBehind {
      */
     @FXML
     public void showPreviousMonth() {
-        this.viewModel.DisplayPreviousMonth();
+        this.viewModel.displayPreviousMonth();
         this.updateEnabledButtons();
     }
 
@@ -66,7 +60,7 @@ public class PlannerCodeBehind {
      */
     @FXML
     public void showNextMonth() {
-        this.viewModel.DisplayNextMonth();
+        this.viewModel.displayNextMonth();
         this.updateEnabledButtons();
     }
 
@@ -74,7 +68,7 @@ public class PlannerCodeBehind {
         for (Node childNode : this.datesGrid.getChildren()) {
             Button buttonNode = (Button) childNode;
             Point2D point = this.getColumnAndRow(childNode);
-            int dayThisMonth = this.viewModel.GetDayThisMonth((int) point.getX(), (int) point.getY());
+            int dayThisMonth = this.viewModel.getDayThisMonth((int) point.getX(), (int) point.getY());
             boolean dayIsInMonth = dayThisMonth != -1;
 
             childNode.setDisable(!dayIsInMonth);
@@ -96,23 +90,17 @@ public class PlannerCodeBehind {
     public void selectDate(ActionEvent event) {
         Button pressedDateButton = (Button) event.getSource();
         Point2D columnAndRow = this.getColumnAndRow(pressedDateButton);
-        LocalDate currentDate = this.viewModel.getMonth().plusDays(
-                this.viewModel.GetDayThisMonth((int) columnAndRow.getX(), (int) columnAndRow.getY()) - 1);
-        try {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource(Main.ADD_MEAL_FXML));
-            Stage stage = Main.getMainStage();
-            stage.setScene(new Scene(loader.load()));
-            stage.setTitle(Main.ADD_MEAL_TITLE);
-            AddMealCodeBehind controller = loader.getController();
-            controller.setDate(currentDate);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
+
+        this.viewModel.selectDate((int) columnAndRow.getX(), (int) columnAndRow.getY());
+        new SwitchScene(this.plannerPane, Main.PLANNED_DATE_FXML, Main.PLANNED_DATE_TITLE);
     }
 
+    /**
+     * Returns the view to the landing page.
+     */
     @FXML
     public void returnToLandingPage() {
-        new SwitchScene(this.plannerPane, Main.LANDING_FXML);
+        new SwitchScene(this.plannerPane, Main.LANDING_FXML, Main.LANDING_TITLE);
     }
 
     private Point2D getColumnAndRow(Node node) {

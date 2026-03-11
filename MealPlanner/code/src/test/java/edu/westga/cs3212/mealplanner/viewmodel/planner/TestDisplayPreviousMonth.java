@@ -24,7 +24,7 @@ class TestDisplayPreviousMonth {
         LocalDate previousDate = this.currentDate.minusMonths(1);
         String month = previousDate.getMonth().toString();
         month = month.substring(0, 1).toUpperCase() + month.substring(1).toLowerCase();
-        this.viewModel.DisplayPreviousMonth();
+        this.viewModel.displayPreviousMonth();
 
         String expected = month + " " + previousDate.getYear();
         String actual = this.viewModel.CalendarHeaderProperty().get();

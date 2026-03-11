@@ -1,9 +1,11 @@
 package edu.westga.cs3212.mealplanner.model;
 
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.List;
+import edu.westga.cs3212.mealplanner.enums.Hour;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 /**
  * Defines a planner object.
@@ -13,13 +15,30 @@ import java.util.List;
  */
 public class Planner {
 
-    private HashMap<Long, ArrayList<Meal>> plannedMeals;
+    private TreeMap<Long, ArrayList<Meal>> plannedMeals;
+    private LocalDateTime selectedDate;
+
+    /**
+     * Sets the currently selected date.
+     * @param newDate The new date to set the planner to
+     */
+    public void setSelectedDate(LocalDateTime newDate) {
+        this.selectedDate = newDate;
+    }
+
+    /**
+     * Returns the currently selected date.
+     * @return The current selected date
+     */
+    public LocalDateTime getSelectedDate() {
+        return this.selectedDate;
+    }
 
     /**
      * Initializes a new Planner.
      */
     public Planner() {
-        this.plannedMeals = new HashMap<>();
+        this.plannedMeals = new TreeMap<>();
     }
 
     /**
@@ -30,7 +49,7 @@ public class Planner {
      * @param date The date to plan the meal for
      * @param newMeal The meal to add
      */
-    public void addMeal(LocalDate date, Meal newMeal) {
+    public void addMeal(LocalDateTime date, Meal newMeal) {
         if (date == null) {
             throw new IllegalArgumentException("Date can't be null");
         }
@@ -38,15 +57,41 @@ public class Planner {
             throw new IllegalArgumentException("Meal can't be null");
         }
 
-        var epochDay = date.toEpochDay();
+        LocalDateTime truncatedDate = date.truncatedTo(ChronoUnit.HOURS);
+        long epochHour = truncatedDate.toEpochSecond(ZoneOffset.UTC);
 
-        if (this.plannedMeals.containsKey(epochDay)) {
-            var alreadyPlannedMeals = this.plannedMeals.get(epochDay);
+        if (this.plannedMeals.containsKey(epochHour)) {
+            var alreadyPlannedMeals = this.plannedMeals.get(epochHour);
             alreadyPlannedMeals.add(newMeal);
         } else {
             var newPlannedMeals = new ArrayList<Meal>(List.of(newMeal));
-            this.plannedMeals.put(epochDay, newPlannedMeals);
+            this.plannedMeals.put(epochHour, newPlannedMeals);
         }
+    }
+
+    /**
+     * Returns a mapping of meals and the hours they are planned for on the currently selected date.
+     * @return An hour and Meal iterable mapping
+     */
+    public Map<Hour, Iterable<Meal>> getSelectedDatePlannedMeals() {
+        if (this.selectedDate == null) {
+            return new HashMap<Hour, Iterable<Meal>>();
+        }
+
+        var hourValues = Hour.values();
+        HashMap<Hour, Iterable<Meal>> convertedMap = new HashMap<>();
+        var startOfDate = this.simplifyDateTime(this.selectedDate);
+        var endOfDate = this.simplifyDateTime(this.selectedDate.plusDays(1));
+
+        for (var entry : this.plannedMeals.subMap(startOfDate, endOfDate).entrySet()) {
+            LocalDateTime associatedDate = LocalDateTime.ofEpochSecond(entry.getKey(), 0, ZoneOffset.UTC);
+            var plannedHour = hourValues[associatedDate.getHour()];
+            var plannedMeals = entry.getValue();
+
+            convertedMap.put(plannedHour, plannedMeals);
+        }
+
+        return convertedMap;
     }
 
     /**
@@ -73,7 +118,7 @@ public class Planner {
      * @param to The end of the date range
      * @return An iterable over the meals planned between from and to
      */
-    public Iterable<Meal> getPlannedMeals(LocalDate from, LocalDate to) {
+    public Iterable<Meal> getPlannedMeals(LocalDateTime from, LocalDateTime to) {
         if (from == null) {
             throw new IllegalArgumentException("Date can't be null");
         }
@@ -82,14 +127,18 @@ public class Planner {
         }
 
         var mealsInPlannedRange = new ArrayList<Meal>();
+        var simpleFrom = this.simplifyDateTime(from);
+        var simpleTo = this.simplifyDateTime(to);
 
-        for (Long dateEpoch = from.toEpochDay(); dateEpoch <= to.toEpochDay(); dateEpoch++) {
-            if (this.plannedMeals.containsKey(dateEpoch)) {
-                var plannedMeals = this.plannedMeals.get(dateEpoch);
-                mealsInPlannedRange.addAll(plannedMeals);
-            }
+        for (var plannedMeals : this.plannedMeals.subMap(simpleFrom, simpleTo + 1).values()) {
+            mealsInPlannedRange.addAll(plannedMeals);
         }
 
         return mealsInPlannedRange;
+    }
+
+    private long simplifyDateTime(LocalDateTime dateToSimplify) {
+        var truncatedToHour = dateToSimplify.truncatedTo(ChronoUnit.HOURS);
+        return truncatedToHour.toEpochSecond(ZoneOffset.UTC);
     }
 }

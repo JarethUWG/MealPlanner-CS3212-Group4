@@ -2,7 +2,6 @@ package edu.westga.cs3212.mealplanner;
 
 import java.io.IOException;
 
-import edu.westga.cs3212.mealplanner.model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -23,8 +22,10 @@ public class Main extends Application {
     public static final String LANDING_FXML = "view/landingPage.fxml";
     public static final String PLANNER_TITLE = "Planner";
     public static final String PLANNER_FXML = "view/plannerPage.fxml";
+    public static final String PLANNED_DATE_TITLE = "Date Plans";
+    public static final String PLANNED_DATE_FXML = "view/plannedDatePage.fxml";
     public static final String ADD_MEAL_TITLE = "Add meal";
-    public static final String ADD_MEAL_FXML = "addMeal.fxml";
+    public static final String ADD_MEAL_FXML = "view/addMeal.fxml";
     public static final String GROCERY_LIST_TITLE = "Grocery List";
     public static final String GROCERY_LIST_FXML = "view/grocery_list.fxml";
     private static Stage mainStage;

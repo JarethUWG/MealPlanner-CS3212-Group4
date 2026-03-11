@@ -3,6 +3,7 @@ package edu.westga.cs3212.mealplanner.view;
 import edu.westga.cs3212.mealplanner.Main;
 import edu.westga.cs3212.mealplanner.model.Database;
 import edu.westga.cs3212.mealplanner.model.Ingredient;
+import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import edu.westga.cs3212.mealplanner.viewmodel.AddMealViewModel;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -57,13 +58,10 @@ public class AddMealCodeBehind {
     void initialize() {
         this.ingredientDisplay.setItems(FXCollections.observableList(Database.getDatabase()));
         this.ingredientButton.disableProperty().bind(this.ingredientDisplay.getSelectionModel().selectedItemProperty().isNull());
+        this.setDate(SystemInfo.getLoggedInUser().getUserPlanner().getSelectedDate().toLocalDate());
     }
 
-    /**
-     * Indicates what date and planner meals should be added to.
-     * @param date The date the meal should be added to.
-     */
-    public void setDate(LocalDate date) {
+    private void setDate(LocalDate date) {
         this.viewModel.setDate(date);
         this.dateReminder.textProperty().set("Adding to " + date);
     }
@@ -100,8 +98,7 @@ public class AddMealCodeBehind {
 
     @FXML
     void handlePlannerReturn() {
-        Main.getMainStage().setTitle("Planner");
-        new SwitchScene(this.addMealPane, "view/plannerPage.fxml");
+        new SwitchScene(this.addMealPane, Main.PLANNED_DATE_FXML, Main.PLANNED_DATE_TITLE);
     }
 
     private void resetInputFields() {

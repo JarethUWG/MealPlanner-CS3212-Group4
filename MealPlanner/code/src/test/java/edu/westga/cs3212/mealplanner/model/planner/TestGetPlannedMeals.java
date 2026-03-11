@@ -5,7 +5,7 @@ import edu.westga.cs3212.mealplanner.model.Planner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +33,7 @@ class TestGetPlannedMeals {
     @Test
     void testParameterlessWhenOnePlannedMeal() {
         var onlyMeal = new Meal();
-        this.planner.addMeal(LocalDate.now(), onlyMeal);
+        this.planner.addMeal(LocalDateTime.now(), onlyMeal);
 
         var expected = new ArrayList<Meal>(List.of(onlyMeal));
         var actual = this.planner.getPlannedMeals();
@@ -46,9 +46,9 @@ class TestGetPlannedMeals {
         var firstMeal = new Meal();
         var middleMeal = new Meal();
         var lastMeal = new Meal();
-        this.planner.addMeal(LocalDate.now(), firstMeal);
-        this.planner.addMeal(LocalDate.now(), middleMeal);
-        this.planner.addMeal(LocalDate.now(), lastMeal);
+        this.planner.addMeal(LocalDateTime.now(), firstMeal);
+        this.planner.addMeal(LocalDateTime.now(), middleMeal);
+        this.planner.addMeal(LocalDateTime.now(), lastMeal);
 
         var expected = new ArrayList<Meal>(Arrays.asList(firstMeal, middleMeal, lastMeal));
         var actual = this.planner.getPlannedMeals();
@@ -58,18 +58,18 @@ class TestGetPlannedMeals {
 
     @Test
     void throwsWhenFromDateIsNull() {
-        assertThrows(IllegalArgumentException.class, () -> this.planner.getPlannedMeals(null, LocalDate.now()));
+        assertThrows(IllegalArgumentException.class, () -> this.planner.getPlannedMeals(null, LocalDateTime.now()));
     }
 
     @Test
     void throwsWhenToDateIsNull() {
-        assertThrows(IllegalArgumentException.class, () -> this.planner.getPlannedMeals(LocalDate.now(), null));
+        assertThrows(IllegalArgumentException.class, () -> this.planner.getPlannedMeals(LocalDateTime.now(), null));
     }
 
     @Test
     void testWhenNoPlannedMealsInDateRange() {
         var plannedMeal = new Meal();
-        var plannedDate = LocalDate.now();
+        var plannedDate = LocalDateTime.now();
         this.planner.addMeal(plannedDate, plannedMeal);
 
         var expected = new ArrayList<Meal>();
@@ -80,7 +80,7 @@ class TestGetPlannedMeals {
 
     @Test
     void testWhenOnePlannedMealInDateRange() {
-        var firstDate = LocalDate.now();
+        var firstDate = LocalDateTime.now();
         var firstMeal = new Meal();
         var secondDate = firstDate.plusDays(5);
         var secondMeal = new Meal();
@@ -95,7 +95,7 @@ class TestGetPlannedMeals {
 
     @Test
     void testWhenMultiplePlannedMealsInDateRange() {
-        var firstDate = LocalDate.now();
+        var firstDate = LocalDateTime.now();
         var firstMeal = new Meal();
         var secondDate = firstDate.plusDays(1);
         var secondMeal = new Meal();
