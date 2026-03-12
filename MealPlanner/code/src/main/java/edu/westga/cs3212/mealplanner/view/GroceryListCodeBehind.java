@@ -23,6 +23,9 @@ public class GroceryListCodeBehind {
 
     private GroceryListViewModel viewModel;
 
+    /**
+     * initializes the grocerylist codebehind.
+     */
     public void intialize() {
         this.viewModel = new GroceryListViewModel();
         this.groceryListView.setItems(this.viewModel.ingredientNamesProperty());
@@ -31,6 +34,9 @@ public class GroceryListCodeBehind {
         this.loadIngredientList();
     }
 
+    /**
+     * Gets the list of ingredients from the viewmodel.
+     */
     public void loadIngredientList() {
         this.viewModel.loadIngredients();
     }

@@ -37,10 +37,16 @@ public class GroceryListViewModel {
         return this.ingredientNames;
     }
 
+    /**
+     * Gets all the meals from the planner object.
+     */
     public void loadMeals() {
         this.allMeals = this.planner.getPlannedMeals();
     }
 
+    /**
+     * Gets all the ingredients from allMeals.
+     */
     public void loadIngredients() {
         var nameList = this.groceryList.getIngredientNames(this.allMeals);
         this.ingredientNames.setAll(nameList);
