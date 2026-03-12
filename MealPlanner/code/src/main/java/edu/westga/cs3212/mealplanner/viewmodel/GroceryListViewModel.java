@@ -1,8 +1,6 @@
 package edu.westga.cs3212.mealplanner.viewmodel;
 
-import edu.westga.cs3212.mealplanner.model.GroceryList;
-import edu.westga.cs3212.mealplanner.model.Meal;
-import edu.westga.cs3212.mealplanner.model.Planner;
+import edu.westga.cs3212.mealplanner.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -24,7 +22,8 @@ public class GroceryListViewModel {
     public GroceryListViewModel() {
         this.groceryList = new GroceryList();
         this.ingredientNames = FXCollections.observableArrayList();
-        this.planner = new Planner();
+        User user = SystemInfo.getLoggedInUser();
+        this.planner = user.getUserPlanner();
         this.allMeals = new ArrayList<>();
     }
 
