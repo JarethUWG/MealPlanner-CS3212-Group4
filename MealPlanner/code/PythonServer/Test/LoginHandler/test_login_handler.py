@@ -2,8 +2,8 @@ import unittest
 
 from Server.LoginHandler import LoginHandler
 
-class MyTestCase(unittest.TestCase):
-    def testConstructor(self):
+class TestLoginHandler(unittest.TestCase):
+    def test_constructor(self):
         handle = LoginHandler()
         self.assertEqual("LOGIN", handle.reqtype)
 

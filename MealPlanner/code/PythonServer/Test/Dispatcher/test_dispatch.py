@@ -3,8 +3,8 @@ from Server.Dispatcher import Dispatcher
 from Server.LoginHandler import LoginHandler
 
 
-class MyTestCase(unittest.TestCase):
-    def testValidDispatch(self):
+class TestDispatch(unittest.TestCase):
+    def test_valid_dispatch(self):
         test_dispatcher = Dispatcher()
         handle = LoginHandler()
         test_dispatcher.add(handle)
@@ -13,7 +13,7 @@ class MyTestCase(unittest.TestCase):
         response = test_dispatcher.dispatch(message)
         self.assertEqual("UNIMPLEMENTED", response["restype"])
 
-    def testInputHasNoReqtype(self):
+    def test_input_has_no_reqtype(self):
         test_dispatcher = Dispatcher()
         handle = LoginHandler()
         test_dispatcher.add(handle)
@@ -22,7 +22,7 @@ class MyTestCase(unittest.TestCase):
         response = test_dispatcher.dispatch(message)
         self.assertEqual("BAD_INPUT", response["restype"])
 
-    def testDispatcherHasHandler(self):
+    def test_dispatcher_has_no_handler(self):
         test_dispatcher = Dispatcher()
         message = dict()
         message["reqtype"] = "PROVIDE_SNACKS"

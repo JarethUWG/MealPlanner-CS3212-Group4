@@ -10,8 +10,8 @@ import javafx.scene.layout.Pane;
 
 /**
  * Main Application class.
- * @author CS 3211
- * @version Fall 2025
+ * @author CS 3212
+ * @version Spring 2026
  */
 public class Main extends Application {
     public static final String LOGIN_TITLE = "Login";

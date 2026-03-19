@@ -2,8 +2,8 @@ import unittest
 
 from Server.LoginHandler import LoginHandler
 
-class MyTestCase(unittest.TestCase):
-    def testHandle(self):
+class TestHandle(unittest.TestCase):
+    def test_handle(self):
         handle = LoginHandler()
         message = dict()
         message["anytype"] = "Message"

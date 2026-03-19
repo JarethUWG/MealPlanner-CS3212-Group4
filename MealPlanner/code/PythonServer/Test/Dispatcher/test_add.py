@@ -3,8 +3,8 @@ from Server.Dispatcher import Dispatcher
 from Server.LoginHandler import LoginHandler
 
 
-class MyTestCase(unittest.TestCase):
-    def testAdd(self):
+class TestAdd(unittest.TestCase):
+    def test_add(self):
         test_dispatcher = Dispatcher()
         handle = LoginHandler()
         test_dispatcher.add(handle)
