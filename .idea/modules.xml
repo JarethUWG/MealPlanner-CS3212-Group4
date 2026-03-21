@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/MealPlanner-CS3212-Group4.iml" filepath="$PROJECT_DIR$/.idea/MealPlanner-CS3212-Group4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MealPlanner/code/PythonServer/PythonServer.iml" filepath="$PROJECT_DIR$/MealPlanner/code/PythonServer/PythonServer.iml" />
     </modules>
   </component>
 </project>
