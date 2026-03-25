@@ -6,8 +6,21 @@ import org.zeromq.ZMQ.Socket;
 import java.util.Map;
 import org.json.JSONObject;
 
+/**
+ * The main point of communication
+ * between the client and server.
+ *
+ * @author Jareth Batty
+ * @version Spring 2026
+ */
 public class Messenger {
-    
+
+    /**
+     * Takes a request in the form of a map and returns
+     * a response map.
+     * @param message The request map to be sent to the server
+     * @return The response from the server
+     */
     public static Map<String, Object> request(Map<String, Object> message) {
         Context context = ZMQ.context(1);
         Socket socket = context.socket(ZMQ.REQ);
