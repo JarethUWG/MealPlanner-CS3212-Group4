@@ -65,6 +65,7 @@ public class AddMealCodeBehind {
         this.ingredientDisplay.setItems(FXCollections.observableList(Database.getDatabase()));
         this.addIngredientButton.disableProperty().bind(this.ingredientDisplay.getSelectionModel().selectedItemProperty().isNull());
         this.removeIngredientButton.disableProperty().bind(this.currentIngredients.focusedProperty().not());
+        this.currentIngredients.setItems(this.viewModel.getPlannedIngredients());
         this.setDate(SystemInfo.getLoggedInUser().getUserPlanner().getSelectedDate().toLocalDate());
     }
 
@@ -89,7 +90,6 @@ public class AddMealCodeBehind {
     void addIngredientToMeal() {
         if (this.viewModel.addIngredient(this.ingredientDisplay.getSelectionModel().getSelectedItem())) {
             this.mealStatus.textProperty().set("Added ingredient " + this.ingredientDisplay.getSelectionModel().getSelectedItem().getName() + " to meal!");
-            this.currentIngredients.setItems(this.viewModel.getPlannedIngredients());
             this.mealStatus.setTextFill(Color.GREEN);
         } else {
             this.mealStatus.textProperty().set("Failed to add ingredient.");
@@ -99,13 +99,22 @@ public class AddMealCodeBehind {
 
     @FXML
     void removeIngredientFromMeal() {
-        //TODO
+        String nameOfRemoved = "";
+        if (this.currentIngredients.getSelectionModel().getSelectedItem() != null) {
+            nameOfRemoved = this.currentIngredients.getSelectionModel().getSelectedItem().getName();
+        }
+        if (this.viewModel.removeIngredient(this.currentIngredients.getSelectionModel().getSelectedItem())) {
+            this.mealStatus.textProperty().set("Removed ingredient " + nameOfRemoved + " from meal.");
+            this.mealStatus.setTextFill(Color.DARKOLIVEGREEN);
+        } else {
+            this.mealStatus.textProperty().set("Could not find ingredient.");
+            this.mealStatus.setTextFill(Color.RED);
+        }
     }
 
     @FXML
     void resetIngredients() {
         this.viewModel.resetIngredients();
-        this.currentIngredients.setItems(null);
         this.mealStatus.textProperty().set("Cleared prepared ingredients.");
         this.mealStatus.setTextFill(Color.DARKOLIVEGREEN);
     }

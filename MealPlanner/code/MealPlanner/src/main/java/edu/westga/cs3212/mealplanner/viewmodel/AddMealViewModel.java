@@ -28,10 +28,10 @@ public class AddMealViewModel {
     }
 
     /**
-     * Queues an ingredient to be added to the next meal.
+     * Adds an ingredient to be added to the next meal.
      *
      * @param toAdd Ingredient to be stored
-     * @post this.plannedIngredients contains toAdd
+     * @post this.plannedIngredients contains toAdd if toAdd is a valid ingredient.
      * @return true if ingredient was added successfully, false if not (if ingredient was null)
      */
     public boolean addIngredient(Ingredient toAdd) {
@@ -43,6 +43,21 @@ public class AddMealViewModel {
         }
     }
 
+    /**
+     * Removes an ingredient from the current pending meal ingredients.
+     *
+     * @param toRemove Ingredient to be removed
+     * @post this.planned ingredients will not contain toRemove.
+     * @return true if ingredient was successfully removed, false if not (if ingredient was null, or not found)
+     */
+    public boolean removeIngredient(Ingredient toRemove) {
+        if (toRemove != null && this.plannedIngredients.contains(toRemove)) {
+            this.plannedIngredients.remove(toRemove);
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * Empties the list of stored ingredients.
      *
