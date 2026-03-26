@@ -1,5 +1,6 @@
 import unittest
 
+from Server.Enums.Communication import Communication
 from Server.GetMealHandler import GetMealHandler
 
 
@@ -15,7 +16,7 @@ class TestHandle(unittest.TestCase):
 
     def test_when_populated_dictionary(self):
         handler = GetMealHandler()
-        message = {"reqtype": "GET MEAL", "other information": None}
+        message = {Communication.REQUEST: "GET MEAL", "other information": None}
 
         expected = NotImplemented
         actual = handler.handle(message)

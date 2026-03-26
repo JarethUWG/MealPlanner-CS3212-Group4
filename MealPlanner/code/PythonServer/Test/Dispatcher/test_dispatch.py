@@ -1,5 +1,6 @@
 import unittest
 from Server.Dispatcher import Dispatcher
+from Server.Enums.Communication import Communication
 from Server.LoginHandler import LoginHandler
 
 
@@ -9,9 +10,9 @@ class TestDispatch(unittest.TestCase):
         handle = LoginHandler()
         test_dispatcher.add(handle)
         message = dict()
-        message["reqtype"] = "LOGIN"
+        message[Communication.REQUEST] = "LOGIN"
         response = test_dispatcher.dispatch(message)
-        self.assertEqual("UNIMPLEMENTED", response["restype"])
+        self.assertEqual("UNIMPLEMENTED", response[Communication.RESPONSE])
 
     def test_input_has_no_reqtype(self):
         test_dispatcher = Dispatcher()
@@ -20,14 +21,14 @@ class TestDispatch(unittest.TestCase):
         message = dict()
         message["randomtype"] = "RANDOM"
         response = test_dispatcher.dispatch(message)
-        self.assertEqual("BAD_INPUT", response["restype"])
+        self.assertEqual("BAD_INPUT", response[Communication.RESPONSE])
 
     def test_dispatcher_has_no_handler(self):
         test_dispatcher = Dispatcher()
         message = dict()
-        message["reqtype"] = "PROVIDE_SNACKS"
+        message[Communication.REQUEST] = "PROVIDE_SNACKS"
         response = test_dispatcher.dispatch(message)
-        self.assertEqual("MISSING_HANDLER", response["restype"])
+        self.assertEqual("MISSING_HANDLER", response[Communication.RESPONSE])
 
 
 if __name__ == '__main__':

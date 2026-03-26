@@ -1,8 +1,11 @@
 import time
+
 import zmq
 import json
 import unittest
 from threading import Thread
+
+from Server.Enums.Communication import Communication
 from Server.main import main
 
 class TestMain(unittest.TestCase):
@@ -21,12 +24,12 @@ class TestMain(unittest.TestCase):
 
     def test_valid_request(self):
         message = dict()
-        message["reqtype"] = "LOGIN"
+        message[Communication.REQUEST] = "LOGIN"
         json_message = json.dumps(message)
         self._socket.send_string(json_message)
         json_response = self._socket.recv_string()
         response = json.loads(json_response)
-        self.assertEqual("UNIMPLEMENTED", response.get("restype"))
+        self.assertEqual("UNIMPLEMENTED", response.get(Communication.RESPONSE))
 
     def test_bad_input(self):
         message = "Wrong type dummy"
@@ -34,7 +37,7 @@ class TestMain(unittest.TestCase):
         self._socket.send_string(json_message)
         json_response = self._socket.recv_string()
         response = json.loads(json_response)
-        self.assertEqual("BAD_INPUT", response.get("restype"))
+        self.assertEqual("BAD_INPUT", response.get(Communication.RESPONSE))
 
 
 if __name__ == '__main__':
