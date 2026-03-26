@@ -3,6 +3,8 @@ package edu.westga.cs3212.mealplanner.viewmodel;
 import edu.westga.cs3212.mealplanner.model.Ingredient;
 import edu.westga.cs3212.mealplanner.model.Meal;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ import java.util.List;
  */
 public class AddMealViewModel {
     private LocalDate currDate;
-    private List<Ingredient> plannedIngredients = new ArrayList<>();
+    private ObservableList<Ingredient> plannedIngredients = FXCollections.observableArrayList(new ArrayList<>());
 
     /**
      * Sets the date meals are to be added to.
@@ -72,7 +74,7 @@ public class AddMealViewModel {
      *
      * @return List of all ingredients slated for the next meal
      */
-    public List<Ingredient> getPlannedIngredients() {
+    public ObservableList<Ingredient> getPlannedIngredients() {
         return this.plannedIngredients;
     }
 }
