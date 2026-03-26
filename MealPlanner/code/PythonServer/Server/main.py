@@ -3,6 +3,7 @@ import time
 import zmq
 import json
 from Server.Dispatcher import Dispatcher
+from Server.GetMealHandler import GetMealHandler
 from Server.LoginHandler import LoginHandler
 
 """
@@ -12,6 +13,7 @@ def main():
     message_dispatcher = Dispatcher()
     login_handler = LoginHandler()
     message_dispatcher.add(login_handler)
+    message_dispatcher.add(GetMealHandler())
     context = zmq.Context()
     socket = context.socket(zmq.REP)
     socket.bind("tcp://127.0.0.1:5555")
