@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Meal adder view model.
@@ -58,6 +57,7 @@ public class AddMealViewModel {
             return false;
         }
     }
+
     /**
      * Empties the list of stored ingredients.
      *
