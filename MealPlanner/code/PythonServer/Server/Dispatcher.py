@@ -1,6 +1,9 @@
 """
 Checks the input messages and calls appropriate handlers
 """
+from Server.Enums.Communication import Communication
+
+
 class Dispatcher:
     """
     Constructor for the Dispatcher object
@@ -30,13 +33,13 @@ class Dispatcher:
     """
     def dispatch(self, message):
         response = dict()
-        if message.get("reqtype") is None:
-            response["restype"] = "BAD_INPUT"
+        if message.get(Communication.REQUEST) is None:
+            response[Communication.RESPONSE] = "BAD_INPUT"
             return response
         else:
-            reqtype = message["reqtype"]
+            reqtype = message[Communication.REQUEST]
             handler = self.handlers.get(reqtype)
             if handler is None:
-                response["restype"] = "MISSING_HANDLER"
+                response[Communication.RESPONSE] = "MISSING_HANDLER"
                 return response
             return handler.handle(message)

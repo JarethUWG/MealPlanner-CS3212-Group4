@@ -1,3 +1,4 @@
+from Server.Enums.Communication import Communication
 from Server.Handler import Handler
 
 class LoginHandler(Handler):
@@ -19,5 +20,5 @@ class LoginHandler(Handler):
     """
     def handle(self, message):
         response = dict()
-        response["restype"] = "UNIMPLEMENTED"
+        response[Communication.RESPONSE] = "UNIMPLEMENTED"
         return response

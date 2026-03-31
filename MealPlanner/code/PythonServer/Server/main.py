@@ -3,6 +3,8 @@ import time
 import zmq
 import json
 from Server.Dispatcher import Dispatcher
+from Server.Enums.Communication import Communication
+from Server.GetMealHandler import GetMealHandler
 from Server.LoginHandler import LoginHandler
 
 """
@@ -12,6 +14,7 @@ def main():
     message_dispatcher = Dispatcher()
     login_handler = LoginHandler()
     message_dispatcher.add(login_handler)
+    message_dispatcher.add(GetMealHandler())
     context = zmq.Context()
     socket = context.socket(zmq.REP)
     socket.bind("tcp://127.0.0.1:5555")
@@ -25,7 +28,7 @@ def main():
             socket.send_string(json_response)
         else:
             response = dict()
-            response["restype"] = "BAD_INPUT"
+            response[Communication.RESPONSE] = "BAD_INPUT"
             json_response = json.dumps(response)
             socket.send_string(json_response)
 
