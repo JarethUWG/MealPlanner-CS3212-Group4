@@ -7,10 +7,7 @@ import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import edu.westga.cs3212.mealplanner.viewmodel.AddMealViewModel;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
@@ -22,7 +19,13 @@ import java.time.LocalDate;
 public class AddMealCodeBehind {
 
     @FXML
-    private Button ingredientButton;
+    private Button addIngredientButton;
+
+    @FXML
+    private Button removeIngredientButton;
+
+    @FXML
+    private ListView<Ingredient> currentIngredients;
 
     @FXML
     private AnchorPane addMealPane;
@@ -57,7 +60,9 @@ public class AddMealCodeBehind {
     @FXML
     void initialize() {
         this.ingredientDisplay.setItems(FXCollections.observableList(Database.getDatabase()));
-        this.ingredientButton.disableProperty().bind(this.ingredientDisplay.getSelectionModel().selectedItemProperty().isNull());
+        this.addIngredientButton.disableProperty().bind(this.ingredientDisplay.getSelectionModel().selectedItemProperty().isNull());
+        this.removeIngredientButton.disableProperty().bind(this.currentIngredients.focusedProperty().not());
+        this.currentIngredients.setItems(this.viewModel.getPlannedIngredients());
         this.setDate(SystemInfo.getLoggedInUser().getUserPlanner().getSelectedDate().toLocalDate());
     }
 
@@ -85,6 +90,21 @@ public class AddMealCodeBehind {
             this.mealStatus.setTextFill(Color.GREEN);
         } else {
             this.mealStatus.textProperty().set("Failed to add ingredient.");
+            this.mealStatus.setTextFill(Color.RED);
+        }
+    }
+
+    @FXML
+    void removeIngredientFromMeal() {
+        String nameOfRemoved = "";
+        if (this.currentIngredients.getSelectionModel().getSelectedItem() != null) {
+            nameOfRemoved = this.currentIngredients.getSelectionModel().getSelectedItem().getName();
+        }
+        if (this.viewModel.removeIngredient(this.currentIngredients.getSelectionModel().getSelectedItem())) {
+            this.mealStatus.textProperty().set("Removed ingredient " + nameOfRemoved + " from meal.");
+            this.mealStatus.setTextFill(Color.DARKOLIVEGREEN);
+        } else {
+            this.mealStatus.textProperty().set("Could not find ingredient.");
             this.mealStatus.setTextFill(Color.RED);
         }
     }

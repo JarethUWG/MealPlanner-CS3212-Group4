@@ -3,17 +3,18 @@ package edu.westga.cs3212.mealplanner.viewmodel;
 import edu.westga.cs3212.mealplanner.model.Ingredient;
 import edu.westga.cs3212.mealplanner.model.Meal;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Meal adder view model.
  */
 public class AddMealViewModel {
     private LocalDate currDate;
-    private List<Ingredient> plannedIngredients = new ArrayList<>();
+    private ObservableList<Ingredient> plannedIngredients = FXCollections.observableArrayList(new ArrayList<>());
 
     /**
      * Sets the date meals are to be added to.
@@ -26,15 +27,31 @@ public class AddMealViewModel {
     }
 
     /**
-     * Queues an ingredient to be added to the next meal.
+     * Adds an ingredient to be added to the next meal.
      *
      * @param toAdd Ingredient to be stored
-     * @post this.plannedIngredients contains toAdd
+     * @post this.plannedIngredients contains toAdd if toAdd is a valid ingredient.
      * @return true if ingredient was added successfully, false if not (if ingredient was null)
      */
     public boolean addIngredient(Ingredient toAdd) {
         if (toAdd != null) {
             this.plannedIngredients.add(toAdd);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Removes an ingredient from the current pending meal ingredients.
+     *
+     * @param toRemove Ingredient to be removed
+     * @post this.planned ingredients will not contain toRemove.
+     * @return true if ingredient was successfully removed, false if not (if ingredient was null, or not found)
+     */
+    public boolean removeIngredient(Ingredient toRemove) {
+        if (toRemove != null && this.plannedIngredients.contains(toRemove)) {
+            this.plannedIngredients.remove(toRemove);
             return true;
         } else {
             return false;
@@ -72,7 +89,7 @@ public class AddMealViewModel {
      *
      * @return List of all ingredients slated for the next meal
      */
-    public List<Ingredient> getPlannedIngredients() {
+    public ObservableList<Ingredient> getPlannedIngredients() {
         return this.plannedIngredients;
     }
 }
