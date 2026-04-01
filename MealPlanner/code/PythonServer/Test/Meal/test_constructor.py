@@ -1,12 +1,13 @@
 import unittest
 
+from Server.Ingredient import Ingredient
 from Server.Meal import Meal
 
 
 class TestConstructor(unittest.TestCase):
 
     def test_when_valid_arguments(self):
-        ingredients = ["ingredient 1", "ingredient 2"]
+        ingredients = [Ingredient("Carrot", 50)]
         name = "Valid Meal"
         description = "I describe a valid meal"
         validMeal = Meal(ingredients, name, description)
@@ -30,7 +31,7 @@ class TestConstructor(unittest.TestCase):
 
         self.assertEqual(ingredients, validMeal.ingredients)
 
-    def test_raises_when_ingredients_contains_nonstring_element(self):
+    def test_raises_when_ingredients_contains_noningredient_element(self):
         invalidIngredients = []
         name = "Valid Meal"
         description = "I describe a valid meal"
@@ -43,8 +44,8 @@ class TestConstructor(unittest.TestCase):
             invalidIngredients = [3, 5, 10]
             with self.assertRaises(TypeError):
                 Meal(invalidIngredients, name, description)
-        with self.subTest("some string some not"):
-            invalidIngredients = ["valid", 20, "hello", "ingredient", 5]
+        with self.subTest("some valid some not"):
+            invalidIngredients = ["valid", 20, Ingredient("Carrot", 50), "hello", Ingredient("Apple", 45), 5]
             with self.assertRaises(TypeError):
                 Meal(invalidIngredients, name, description)
 

@@ -19,7 +19,7 @@ class Ingredient:
         """
         return self._calories
 
-    def __init__(self, name: str, calories: float):
+    def __init__(self, name: str, calories: int | float):
         """
         Initializes a new ingredient
         :param name: The name
