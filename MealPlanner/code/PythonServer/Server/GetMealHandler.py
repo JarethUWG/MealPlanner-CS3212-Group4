@@ -1,5 +1,7 @@
 from typing import Dict
 
+from Server.Enums.Communication import Communication
+from Server.Enums.CommunicationType import CommunicationType
 from Server.Handler import Handler
 
 
@@ -13,11 +15,11 @@ class GetMealHandler(Handler):
         return self._required_type
 
     def __init__(self):
-        self._required_type = "GET MEAL"
+        self._required_type = CommunicationType.GET_MEAL
 
     def handle(self, message):
         """
-        Handles . Note implementation needed.
+        Retrieves a meal based on the request details.
 
         :param message: The message to handle. Must be a dictionary object
         :return: NotImplemented. When implemented it should return A JSON-serialized meal
@@ -25,5 +27,9 @@ class GetMealHandler(Handler):
         """
         if not isinstance(message, Dict):
             raise TypeError("Message must be a dictionary")
+
+        # TODO get meal from stored user-information once implemented and return response
+        gotMeal = None
+        response = {Communication.RESPONSE: CommunicationType.GET_MEAL, Communication.BODY: gotMeal}
 
         return NotImplemented

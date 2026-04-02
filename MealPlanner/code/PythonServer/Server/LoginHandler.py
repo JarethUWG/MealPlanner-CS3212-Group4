@@ -1,4 +1,5 @@
 from Server.Enums.Communication import Communication
+from Server.Enums.CommunicationType import CommunicationType
 from Server.Handler import Handler
 
 class LoginHandler(Handler):
@@ -6,7 +7,7 @@ class LoginHandler(Handler):
     Constructor for the LoginHandler object.
     """
     def __init__(self):
-        self.reqtype = "LOGIN"
+        self.reqtype = CommunicationType.LOGIN
 
     """
     Handles an incoming login request. Note implementation needed.
