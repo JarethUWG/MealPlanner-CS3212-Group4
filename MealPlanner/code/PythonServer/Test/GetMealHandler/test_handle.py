@@ -1,7 +1,7 @@
 import unittest
 
 from Server.Enums.Communication import Communication
-from Server.GetMealHandler import GetMealHandler
+from Server.Handlers.GetMealHandler import GetMealHandler
 
 
 class TestHandle(unittest.TestCase):

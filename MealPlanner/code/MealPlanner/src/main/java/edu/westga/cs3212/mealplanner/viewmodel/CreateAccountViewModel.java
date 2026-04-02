@@ -1,4 +1,5 @@
 package edu.westga.cs3212.mealplanner.viewmodel;
+import edu.westga.cs3212.mealplanner.model.Messenger;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import edu.westga.cs3212.mealplanner.model.User;
 import javafx.beans.property.BooleanProperty;
@@ -7,6 +8,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The CreateAccount ViewModel.
@@ -97,14 +101,12 @@ public class CreateAccountViewModel {
         if (this.passwordProperty == null || this.passwordProperty.get() == null || this.passwordProperty.get().isBlank()) {
             throw new IllegalArgumentException("Password cannot be null or blank.");
         }
-        for (User user : SystemInfo.getAuthenticatedUsers().getUsers()) {
-            if (user.getUsername().equals(this.usernameProperty.get())) {
-                return false;
-            }
-        }
-        User createdUser = new User(this.usernameProperty.get(), this.passwordProperty.get());
-        SystemInfo.getAuthenticatedUsers().addUser(createdUser);
-        return true;
+        HashMap<String, Object> request = new HashMap<>();
+        request.put("username", this.usernameProperty.get());
+        request.put("password", this.passwordProperty.get());
+        request.put("reqtype", "CREATE ACCOUNT");
+        Map<String, Object> response = Messenger.request(request);
+        return response.get("restype").equals("VALID");
     }
 
     private void setCredentialChangeListeners() {

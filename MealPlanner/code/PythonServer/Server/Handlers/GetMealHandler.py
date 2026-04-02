@@ -2,7 +2,7 @@ from typing import Dict
 
 from Server.Enums.Communication import Communication
 from Server.Enums.CommunicationType import CommunicationType
-from Server.Handler import Handler
+from Server.Handlers.Handler import Handler
 
 
 class GetMealHandler(Handler):

@@ -1,4 +1,4 @@
-from Server.Ingredient import Ingredient
+from Server.Data.Ingredient import Ingredient
 
 
 class Meal:

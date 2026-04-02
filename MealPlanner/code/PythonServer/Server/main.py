@@ -4,8 +4,8 @@ import zmq
 import json
 from Server.Dispatcher import Dispatcher
 from Server.Enums.Communication import Communication
-from Server.GetMealHandler import GetMealHandler
-from Server.LoginHandler import LoginHandler
+from Server.Handlers.GetMealHandler import GetMealHandler
+from Server.Handlers.LoginHandler import LoginHandler
 
 """
 Entry point for the python server.

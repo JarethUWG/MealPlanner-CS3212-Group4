@@ -4,7 +4,7 @@ package edu.westga.cs3212.mealplanner.model;
  * Defines a user.
  *
  * @author Jareth Batty
- * @version Spring 2025
+ * @version Spring 2026
  */
 public class User {
     private String username;
