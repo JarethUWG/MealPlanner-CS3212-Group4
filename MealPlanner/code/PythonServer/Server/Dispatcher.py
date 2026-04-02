@@ -13,7 +13,7 @@ class Dispatcher:
     """
     def __init__(self):
         self.handlers = dict()
-        self.authenticated_users = AuthenticatedUsers
+        self.authenticated_users = AuthenticatedUsers()
 
     """
     Adds a handler to the handlers list

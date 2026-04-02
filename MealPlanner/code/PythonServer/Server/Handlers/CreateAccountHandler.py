@@ -9,7 +9,7 @@ class CreateAccountHandler(Handler):
     Constructor for the CreateAccountHandler object.
     """
     def __init__(self):
-        self.reqtype = CommunicationType.GET_MEAL
+        self.reqtype = CommunicationType.CREATE_ACCOUNT
 
     """
     Handles an incoming create request.
@@ -41,11 +41,10 @@ class CreateAccountHandler(Handler):
             return response
         else:
             auth_users = message.get("authUsers")
+        response[Communication.RESPONSE] = "VALID"
         for user in auth_users.getUsers():
             if user.getUsername() == username:
                 response[Communication.RESPONSE] = "INVALID"
-                return response
         added_user = User(username, password)
         auth_users.addUser(added_user)
-        response[Communication.RESPONSE] = "VALID"
         return response

@@ -40,8 +40,8 @@ class LoginHandler(Handler):
             return response
         else:
             auth_users = message.get("authUsers")
+        response[Communication.RESPONSE] = "INVALID"
         for user in auth_users.getUsers():
             if user.getUsername() == username or user.getPassword() == password:
-                response[Communication.RESPONSE] = "INVALID"
-        response[Communication.RESPONSE] = "VALID"
+                response[Communication.RESPONSE] = "VALID"
         return response

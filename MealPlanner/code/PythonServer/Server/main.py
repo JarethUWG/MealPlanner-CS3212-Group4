@@ -4,6 +4,7 @@ import zmq
 import json
 from Server.Dispatcher import Dispatcher
 from Server.Enums.Communication import Communication
+from Server.Handlers.CreateAccountHandler import CreateAccountHandler
 from Server.Handlers.GetMealHandler import GetMealHandler
 from Server.Handlers.LoginHandler import LoginHandler
 
@@ -13,8 +14,10 @@ Entry point for the python server.
 def main():
     message_dispatcher = Dispatcher()
     login_handler = LoginHandler()
+    create_account_handler = CreateAccountHandler()
     message_dispatcher.add(login_handler)
     message_dispatcher.add(GetMealHandler())
+    message_dispatcher.add(create_account_handler)
     context = zmq.Context()
     socket = context.socket(zmq.REP)
     socket.bind("tcp://127.0.0.1:5555")
