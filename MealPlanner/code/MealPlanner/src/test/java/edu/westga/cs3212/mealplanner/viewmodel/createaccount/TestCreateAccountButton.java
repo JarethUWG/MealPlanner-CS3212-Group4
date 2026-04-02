@@ -1,15 +1,11 @@
 package edu.westga.cs3212.mealplanner.viewmodel.createaccount;
 
-import edu.westga.cs3212.mealplanner.model.AuthenticatedUsers;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import edu.westga.cs3212.mealplanner.viewmodel.CreateAccountViewModel;
-import edu.westga.cs3212.mealplanner.viewmodel.LoginViewModel;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +16,6 @@ class TestCreateAccountButton {
     @BeforeEach
     void setUp() {
         SystemInfo.setLoggedInUser(null);
-        SystemInfo.setAuthenticatedUsers(new AuthenticatedUsers());
     }
 
     @Test

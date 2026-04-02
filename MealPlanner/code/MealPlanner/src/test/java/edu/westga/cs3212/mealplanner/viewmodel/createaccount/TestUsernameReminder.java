@@ -1,9 +1,7 @@
 package edu.westga.cs3212.mealplanner.viewmodel.createaccount;
 
-import edu.westga.cs3212.mealplanner.model.AuthenticatedUsers;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import edu.westga.cs3212.mealplanner.viewmodel.CreateAccountViewModel;
-import edu.westga.cs3212.mealplanner.viewmodel.LoginViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,7 +13,6 @@ class TestUsernameReminder {
     @BeforeAll
     static void setUp() {
         SystemInfo.setLoggedInUser(null);
-        SystemInfo.setAuthenticatedUsers(new AuthenticatedUsers());
     }
 
     @Test

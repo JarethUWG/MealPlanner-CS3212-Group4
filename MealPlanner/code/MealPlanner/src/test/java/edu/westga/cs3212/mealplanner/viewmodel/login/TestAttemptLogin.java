@@ -1,10 +1,7 @@
 package edu.westga.cs3212.mealplanner.viewmodel.login;
 
-import edu.westga.cs3212.mealplanner.model.AuthenticatedUsers;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import edu.westga.cs3212.mealplanner.viewmodel.LoginViewModel;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +13,6 @@ class TestAttemptLogin {
     @BeforeEach
     void setUp() {
         SystemInfo.setLoggedInUser(null);
-        SystemInfo.setAuthenticatedUsers(new AuthenticatedUsers());
     }
 
     @Test
