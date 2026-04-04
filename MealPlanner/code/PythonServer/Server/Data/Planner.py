@@ -1,7 +1,8 @@
 from Server.Data.Meal import Meal
+from Server.Data.Serializable import Serializable
 
 
-class Planner:
+class Planner(Serializable):
     """
     Dataclass for storing meal-related information
     """
@@ -40,3 +41,12 @@ class Planner:
             plannedMealsOnDate.append(meal)
 
         self._plannedMeals.update({dateTimeEpoch: plannedMealsOnDate})
+
+    def serialize(self):
+        serialized = {}
+
+        for epoch, mealList in self.plannedMeals.items():
+            serializedMealList = [meal.serialize() for meal in mealList]
+            serialized.update({epoch: serializedMealList})
+
+        return serialized
