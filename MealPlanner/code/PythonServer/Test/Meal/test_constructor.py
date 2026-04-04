@@ -1,7 +1,7 @@
 import unittest
 
-from Server.Ingredient import Ingredient
-from Server.Meal import Meal
+from Server.Data.Ingredient import Ingredient
+from Server.Data.Meal import Meal
 
 
 class TestConstructor(unittest.TestCase):

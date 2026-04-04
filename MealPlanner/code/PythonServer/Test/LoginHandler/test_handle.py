@@ -1,7 +1,7 @@
 import unittest
 
 from Server.Enums.Communication import Communication
-from Server.LoginHandler import LoginHandler
+from Server.Handlers.LoginHandler import LoginHandler
 
 class TestHandle(unittest.TestCase):
     def test_handle(self):

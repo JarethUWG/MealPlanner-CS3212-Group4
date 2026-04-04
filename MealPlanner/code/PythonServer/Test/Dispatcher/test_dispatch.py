@@ -1,7 +1,7 @@
 import unittest
 from Server.Dispatcher import Dispatcher
 from Server.Enums.Communication import Communication
-from Server.LoginHandler import LoginHandler
+from Server.Handlers.LoginHandler import LoginHandler
 
 
 class TestDispatch(unittest.TestCase):

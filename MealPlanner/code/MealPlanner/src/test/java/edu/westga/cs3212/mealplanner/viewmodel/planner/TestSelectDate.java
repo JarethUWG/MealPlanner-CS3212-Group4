@@ -1,6 +1,5 @@
 package edu.westga.cs3212.mealplanner.viewmodel.planner;
 
-import edu.westga.cs3212.mealplanner.model.AuthenticatedUsers;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import edu.westga.cs3212.mealplanner.model.User;
 import edu.westga.cs3212.mealplanner.viewmodel.PlannerViewModel;

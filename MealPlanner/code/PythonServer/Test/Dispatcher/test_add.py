@@ -1,6 +1,6 @@
 import unittest
 from Server.Dispatcher import Dispatcher
-from Server.LoginHandler import LoginHandler
+from Server.Handlers.LoginHandler import LoginHandler
 
 
 class TestAdd(unittest.TestCase):

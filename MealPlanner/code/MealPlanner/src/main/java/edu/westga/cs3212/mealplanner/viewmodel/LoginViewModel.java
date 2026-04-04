@@ -1,7 +1,6 @@
 package edu.westga.cs3212.mealplanner.viewmodel;
 
-import edu.westga.cs3212.mealplanner.model.AuthenticatedUsers;
-import edu.westga.cs3212.mealplanner.model.Planner;
+import edu.westga.cs3212.mealplanner.model.Messenger;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import edu.westga.cs3212.mealplanner.model.User;
 import javafx.beans.property.BooleanProperty;
@@ -10,6 +9,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The Login ViewModel.
@@ -34,9 +36,6 @@ public class LoginViewModel {
         this.passwordReminderProperty = new SimpleStringProperty("");
         this.loginDisabledProperty = new SimpleBooleanProperty(true);
         this.setCredentialChangeListeners();
-        if (SystemInfo.getAuthenticatedUsers() == null) {
-            SystemInfo.setAuthenticatedUsers(new AuthenticatedUsers());
-        }
     }
 
     /**
@@ -102,16 +101,19 @@ public class LoginViewModel {
         if (this.passwordProperty == null || this.passwordProperty.get() == null || this.passwordProperty.get().isBlank()) {
             throw new IllegalArgumentException("Password cannot be null or blank.");
         }
-        for (User user : SystemInfo.getAuthenticatedUsers().getUsers()) {
-            if (user.getUsername().equals(this.usernameProperty.get()) && user.getPassword().equals(this.passwordProperty.get())) {
-                SystemInfo.setLoggedInUser(user);
-                return true;
-            }
+        HashMap<String, Object> request = new HashMap<>();
+        request.put("username", this.usernameProperty.get());
+        request.put("password", this.passwordProperty.get());
+        request.put("reqtype", "LOGIN");
+        Map<String, Object> response = Messenger.request(request);
+        if (!response.get("restype").equals("VALID")) {
+            this.loginDisabledProperty.set(true);
+            this.usernameProperty.set("");
+            this.passwordProperty.set("");
+            return false;
+        } else {
+            return true;
         }
-        this.loginDisabledProperty.set(true);
-        this.usernameProperty.set("");
-        this.passwordProperty.set("");
-        return false;
     }
 
     private void setCredentialChangeListeners() {

@@ -1,6 +1,6 @@
 import unittest
 
-from Server.GetMealHandler import GetMealHandler
+from Server.Handlers.GetMealHandler import GetMealHandler
 
 
 class TestConstructor(unittest.TestCase):

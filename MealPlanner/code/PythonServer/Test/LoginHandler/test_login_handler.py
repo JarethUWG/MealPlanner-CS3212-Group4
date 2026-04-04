@@ -1,6 +1,6 @@
 import unittest
 
-from Server.LoginHandler import LoginHandler
+from Server.Handlers.LoginHandler import LoginHandler
 
 class TestLoginHandler(unittest.TestCase):
     def test_constructor(self):

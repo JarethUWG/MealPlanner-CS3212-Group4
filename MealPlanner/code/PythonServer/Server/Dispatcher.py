@@ -1,7 +1,10 @@
 """
 Checks the input messages and calls appropriate handlers
 """
+from Server.Data.AuthenticatedUsers import AuthenticatedUsers
 from Server.Enums.Communication import Communication
+from Server.Handlers.CreateAccountHandler import CreateAccountHandler
+from Server.Handlers.LoginHandler import LoginHandler
 
 
 class Dispatcher:
@@ -10,6 +13,7 @@ class Dispatcher:
     """
     def __init__(self):
         self.handlers = dict()
+        self.authenticated_users = AuthenticatedUsers()
 
     """
     Adds a handler to the handlers list
@@ -33,6 +37,9 @@ class Dispatcher:
     """
     def dispatch(self, message):
         response = dict()
+        if not isinstance(message, dict):
+            response[Communication.RESPONSE] = "BAD_INPUT"
+            return response
         if message.get(Communication.REQUEST) is None:
             response[Communication.RESPONSE] = "BAD_INPUT"
             return response
@@ -42,4 +49,6 @@ class Dispatcher:
             if handler is None:
                 response[Communication.RESPONSE] = "MISSING_HANDLER"
                 return response
+            if isinstance(handler, LoginHandler) or isinstance(handler, CreateAccountHandler):
+                message["authUsers"] = self.authenticated_users
             return handler.handle(message)
