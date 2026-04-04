@@ -1,6 +1,7 @@
+from Server.Data.Serializable import Serializable
 
 
-class Ingredient:
+class Ingredient(Serializable):
     """
     Dataclass for storing ingredient-related information
     """
@@ -38,3 +39,9 @@ class Ingredient:
 
         self._name = name
         self._calories = calories
+
+    def serialize(self):
+        return {
+            "name": self.name,
+            "calories": self.calories
+        }
