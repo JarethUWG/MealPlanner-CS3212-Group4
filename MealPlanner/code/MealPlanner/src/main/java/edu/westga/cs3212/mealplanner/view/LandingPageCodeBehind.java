@@ -4,7 +4,6 @@ import edu.westga.cs3212.mealplanner.Main;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -20,7 +19,7 @@ public class LandingPageCodeBehind {
 
     @FXML
     void handleLogOut(ActionEvent event) {
-        SystemInfo.setLoggedInUser(null);
+        SystemInfo.setLoggedInUserId(null);
         Main.getMainStage().setTitle(Main.LOGIN_TITLE);
         new SwitchScene(this.landingPane, Main.LOGIN_FXML);
     }

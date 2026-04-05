@@ -314,7 +314,7 @@ public class PlannedDateViewmodel {
     }
 
     private void updateDisplayedDate() {
-        var currentPlanner = SystemInfo.getLoggedInUser().getUserPlanner();
+        var currentPlanner = SystemInfo.getLoggedInUserId().getUserPlanner();
         var selectedDate = currentPlanner.getSelectedDate();
 
         this.dateProperty.set(selectedDate.format(this.dateTimeFormatter));
@@ -322,7 +322,7 @@ public class PlannedDateViewmodel {
 
     private void updateDisplayedPlannedMeals() {
         this.clearPlannedMeals();
-        var currentPlanner = SystemInfo.getLoggedInUser().getUserPlanner();
+        var currentPlanner = SystemInfo.getLoggedInUserId().getUserPlanner();
         var plannedDateMeals = currentPlanner.getSelectedDatePlannedMeals();
 
         for (var entry : plannedDateMeals.entrySet()) {

@@ -2,12 +2,15 @@ package edu.westga.cs3212.mealplanner.viewmodel;
 
 import edu.westga.cs3212.mealplanner.model.Ingredient;
 import edu.westga.cs3212.mealplanner.model.Meal;
+import edu.westga.cs3212.mealplanner.model.Messenger;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Meal adder view model.
@@ -78,7 +81,11 @@ public class AddMealViewModel {
             return null;
         } else {
             var toAdd = new Meal(this.plannedIngredients, name, desc);
-            SystemInfo.getLoggedInUser().getUserPlanner().addMeal(this.currDate.atStartOfDay(), toAdd);
+            HashMap<String, Object> request = new HashMap<>();
+            request.put("id", SystemInfo.getLoggedInUserId());
+            request.put("reqtype", "GET_USER");
+            Map<String, Object> response = Messenger.request(request);
+            SystemInfo.getLoggedInUserId().getUserPlanner().addMeal(this.currDate.atStartOfDay(), toAdd);
             this.resetIngredients();
             return toAdd;
         }

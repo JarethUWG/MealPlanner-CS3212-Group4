@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TestAttemptCreateAccount {
     @BeforeEach
     void setUp() {
-        SystemInfo.setLoggedInUser(null);
+        SystemInfo.setLoggedInUserId(null);
     }
 
     @Test

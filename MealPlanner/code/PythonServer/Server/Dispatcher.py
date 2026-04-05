@@ -3,6 +3,7 @@ Checks the input messages and calls appropriate handlers
 """
 from Server.Data.AuthenticatedUsers import AuthenticatedUsers
 from Server.Enums.Communication import Communication
+from Server.Handlers import LogoutHandler
 from Server.Handlers.CreateAccountHandler import CreateAccountHandler
 from Server.Handlers.LoginHandler import LoginHandler
 
@@ -13,6 +14,7 @@ class Dispatcher:
     """
     def __init__(self):
         self.handlers = dict()
+        self.sessions = dict()
         self.authenticated_users = AuthenticatedUsers()
 
     """
@@ -51,4 +53,6 @@ class Dispatcher:
                 return response
             if isinstance(handler, LoginHandler) or isinstance(handler, CreateAccountHandler):
                 message["authUsers"] = self.authenticated_users
+            if isinstance(handler, LoginHandler) or isinstance(handler, LogoutHandler):
+                message["sessions"] = self.sessions
             return handler.handle(message)

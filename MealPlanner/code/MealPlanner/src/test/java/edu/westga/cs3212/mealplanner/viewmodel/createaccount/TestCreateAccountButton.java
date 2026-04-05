@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TestCreateAccountButton {
     @BeforeEach
     void setUp() {
-        SystemInfo.setLoggedInUser(null);
+        SystemInfo.setLoggedInUserId(null);
     }
 
     @Test

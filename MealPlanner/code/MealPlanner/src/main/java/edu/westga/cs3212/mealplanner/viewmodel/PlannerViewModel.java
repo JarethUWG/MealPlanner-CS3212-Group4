@@ -89,7 +89,7 @@ public class PlannerViewModel {
         int dayThisMonth = this.getDayThisMonth(column, row);
         if (dayThisMonth != -1) {
             LocalDate newSelectedDate = this.displayedMonth.withDayOfMonth(dayThisMonth);
-            var currentUser = SystemInfo.getLoggedInUser();
+            var currentUser = SystemInfo.getLoggedInUserId();
             var userPlanner = currentUser.getUserPlanner();
 
             userPlanner.setSelectedDate(newSelectedDate.atStartOfDay());

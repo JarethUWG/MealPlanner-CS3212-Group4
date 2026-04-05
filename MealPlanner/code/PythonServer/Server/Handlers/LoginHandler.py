@@ -1,3 +1,5 @@
+import random
+
 from Server.Data.AuthenticatedUsers import AuthenticatedUsers
 from Server.Enums.Communication import Communication
 from Server.Enums.CommunicationType import CommunicationType
@@ -15,7 +17,7 @@ class LoginHandler(Handler):
     
     Args:
         self which is currently unused.
-        message which contains a username and password, and authenticated users.
+        message which contains a username and password, authenticated users, and a dict of sessions.
     
     Returns:
         A response appropriate for the message.
@@ -36,12 +38,20 @@ class LoginHandler(Handler):
         else:
             password = message.get("password")
         if not isinstance(message.get("authUsers"), AuthenticatedUsers):
-            response[Communication.RESPONSE] = "BAD_INPUT"
+            response[Communication.RESPONSE] = "SYSTEM_ERROR"
             return response
         else:
             auth_users = message.get("authUsers")
+        if not isinstance(message.get("sessions"), dict):
+            response[Communication.RESPONSE] = "SYSTEM_ERROR"
+            return response
+        else:
+            sessions = message.get("sessions")
         response[Communication.RESPONSE] = "INVALID"
         for user in auth_users.getUsers():
             if user.getUsername() == username or user.getPassword() == password:
                 response[Communication.RESPONSE] = "VALID"
+                generated_id = random.randint(-(2 ** 31), (2 ** 31 - 1))
+                sessions[generated_id] = user
+                response["id"] = generated_id
         return response

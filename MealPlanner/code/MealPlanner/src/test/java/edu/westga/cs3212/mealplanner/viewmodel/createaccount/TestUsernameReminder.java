@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TestUsernameReminder {
     @BeforeAll
     static void setUp() {
-        SystemInfo.setLoggedInUser(null);
+        SystemInfo.setLoggedInUserId(null);
     }
 
     @Test
