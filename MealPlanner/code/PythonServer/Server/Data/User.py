@@ -4,7 +4,18 @@ Defines a user.
 @author Jareth Batty
 @version Spring 2026
 """
+from Server.Data.Planner import Planner
+
+
 class User:
+
+    @property
+    def userPlanner(self):
+        """
+        The planner
+        :return: This user's planner
+        """
+        return self._userPlanner
 
     """
     Initializes a new user.
@@ -26,7 +37,7 @@ class User:
         if not (password.strip()):
             raise ValueError("Please input valid password")
         "Uncomment when planner is added to server"
-        "self._userPlanner = Planner()"
+        self._userPlanner = Planner()
         self._username = username
         self._password = password
 
@@ -45,15 +56,3 @@ class User:
     """
     def getPassword(self):
         return self._password
-
-    """
-    Gets the current user's planner.
-
-    @return The current planner
-    """
-    """
-    Uncomment when planner is added.
-    def getUserPlanner(self) {
-        return this.userPlanner;
-    }
-    """
