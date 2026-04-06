@@ -10,13 +10,13 @@ class TestSerialize(unittest.TestCase):
     def setUp(self):
         self._planner = Planner()
 
-    def test_WhenNoPlannedMeals(self):
+    def test_when_no_planned_meals(self):
         expected = {}
         actual = self._planner.serialize()
 
         self.assertDictEqual(expected, actual)
 
-    def test_WhenOnePlannedMeal(self):
+    def test_when_one_planned_meal(self):
         date = 3200
         meal = Meal([], "Air", "Has no ingredients")
         self._planner.addMeal(date, meal)
@@ -26,7 +26,7 @@ class TestSerialize(unittest.TestCase):
 
         self.assertDictEqual(expected, actual)
 
-    def test_WhenMultiplePlannedMealsInOneDate(self):
+    def test_when_multiple_planned_meals_in_one_date(self):
         date = 1530
         breadIngredient = Ingredient("Bread", 80)
         cheeseIngredient = Ingredient("Cheese", 100)
@@ -40,7 +40,7 @@ class TestSerialize(unittest.TestCase):
 
         self.assertDictEqual(expected, actual)
 
-    def test_WhenMultiplePlannedMealsInDifferentDates(self):
+    def test_when_multiple_planned_meals_in_different_dates(self):
         dateOne = 1530
         dateTwo = 280
         breadIngredient = Ingredient("Bread", 80)
