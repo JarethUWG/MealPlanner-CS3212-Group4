@@ -2,6 +2,7 @@ package edu.westga.cs3212.mealplanner.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Basic class for Meals.
@@ -139,5 +140,13 @@ public class Meal {
             totalCalories += currIngredient.getCalories();
         }
         return totalCalories;
+    }
+
+    public static Meal deserialize(Map<String, Object> serializedInfo) {
+        var newMeal = new Meal();
+
+        // TODO implement deserialiazation of a Meal object
+
+        return newMeal;
     }
 }

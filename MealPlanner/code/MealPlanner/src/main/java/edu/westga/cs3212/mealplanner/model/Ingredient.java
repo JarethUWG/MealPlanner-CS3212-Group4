@@ -1,5 +1,6 @@
 package edu.westga.cs3212.mealplanner.model;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -60,5 +61,13 @@ public class Ingredient {
         }
         return (Objects.equals(this.name, ((Ingredient) obj).name)
                 && this.calories == ((Ingredient) obj).calories);
+    }
+
+    public static Ingredient deserialize(Map<String, Object> serializedInfo) {
+        var newIngredient = new Ingredient("Placeholder", 0);
+
+        // TODO implement deserialiazation of an Ingredient object
+
+        return newIngredient;
     }
 }

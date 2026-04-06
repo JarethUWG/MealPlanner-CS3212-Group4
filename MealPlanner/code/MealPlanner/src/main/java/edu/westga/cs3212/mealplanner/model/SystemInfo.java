@@ -26,7 +26,7 @@ public class SystemInfo {
      *
      * @param loggedInUserId The currently logged in user's id.
      */
-    public static void setLoggedInUserId(int loggedInUserId) {
+    public static void setLoggedInUserId(Integer loggedInUserId) {
         SystemInfo.loggedInUserId = loggedInUserId;
     }
 }

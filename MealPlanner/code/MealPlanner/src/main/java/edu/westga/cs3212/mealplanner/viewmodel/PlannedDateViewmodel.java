@@ -2,6 +2,8 @@ package edu.westga.cs3212.mealplanner.viewmodel;
 
 import edu.westga.cs3212.mealplanner.enums.Hour;
 import edu.westga.cs3212.mealplanner.model.Meal;
+import edu.westga.cs3212.mealplanner.model.Messenger;
+import edu.westga.cs3212.mealplanner.model.Planner;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,6 +13,7 @@ import javafx.collections.ObservableList;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -314,7 +317,7 @@ public class PlannedDateViewmodel {
     }
 
     private void updateDisplayedDate() {
-        var currentPlanner = SystemInfo.getLoggedInUserId().getUserPlanner();
+        var currentPlanner = this.getUserPlanner();
         var selectedDate = currentPlanner.getSelectedDate();
 
         this.dateProperty.set(selectedDate.format(this.dateTimeFormatter));
@@ -322,16 +325,26 @@ public class PlannedDateViewmodel {
 
     private void updateDisplayedPlannedMeals() {
         this.clearPlannedMeals();
-        var currentPlanner = SystemInfo.getLoggedInUserId().getUserPlanner();
+        var currentPlanner = this.getUserPlanner();
         var plannedDateMeals = currentPlanner.getSelectedDatePlannedMeals();
 
         for (var entry : plannedDateMeals.entrySet()) {
             var associatedHour = entry.getKey();
             ObservableList<Meal> newPlannedMeals = FXCollections.observableArrayList();
-            newPlannedMeals.addAll((ArrayList<Meal>)entry.getValue());
+            newPlannedMeals.addAll((ArrayList<Meal>) entry.getValue());
 
             this.plannedMealProperties.get(associatedHour).set(newPlannedMeals);
         }
+    }
+
+    private Planner getUserPlanner() {
+        var activeUserID = SystemInfo.getLoggedInUserId();
+        var request = new HashMap<String, Object>();
+        request.put("id", activeUserID);
+        request.put("reqtype", "GET PLANNER");
+        var response = Messenger.request(request);
+        var plannerInfo = (Map<Long, Object>) response.get("planner");
+        return Planner.deserialize(plannerInfo);
     }
 
     private void clearPlannedMeals() {

@@ -83,9 +83,10 @@ public class AddMealViewModel {
             var toAdd = new Meal(this.plannedIngredients, name, desc);
             HashMap<String, Object> request = new HashMap<>();
             request.put("id", SystemInfo.getLoggedInUserId());
-            request.put("reqtype", "GET_USER");
+            request.put("reqtype", "GET_PLANNER");
             Map<String, Object> response = Messenger.request(request);
-            SystemInfo.getLoggedInUserId().getUserPlanner().addMeal(this.currDate.atStartOfDay(), toAdd);
+            // TODO update implementation once addMeal is implemented server-side
+            // SystemInfo.getLoggedInUserId().getUserPlanner().addMeal(this.currDate.atStartOfDay(), toAdd);
             this.resetIngredients();
             return toAdd;
         }
