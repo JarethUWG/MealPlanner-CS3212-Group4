@@ -3,9 +3,12 @@ Checks the input messages and calls appropriate handlers
 """
 from Server.Data.AuthenticatedUsers import AuthenticatedUsers
 from Server.Enums.Communication import Communication
-from Server.Handlers import LogoutHandler
+from Server.Enums.MessageKey import MessageKey
 from Server.Handlers.CreateAccountHandler import CreateAccountHandler
+from Server.Handlers.GetPlannerHandler import GetPlannerHandler
+from Server.Handlers.Handler import Handler
 from Server.Handlers.LoginHandler import LoginHandler
+from Server.Handlers.LogoutHandler import LogoutHandler
 
 
 class Dispatcher:
@@ -39,20 +42,25 @@ class Dispatcher:
     """
     def dispatch(self, message):
         response = dict()
-        if not isinstance(message, dict):
+        if not isinstance(message, dict) or message.get(Communication.REQUEST) is None:
             response[Communication.RESPONSE] = "BAD_INPUT"
             return response
-        if message.get(Communication.REQUEST) is None:
-            response[Communication.RESPONSE] = "BAD_INPUT"
+        reqtype = message[Communication.REQUEST]
+        handler = self.handlers.get(reqtype)
+        if handler is None:
+            response[Communication.RESPONSE] = "MISSING_HANDLER"
             return response
-        else:
-            reqtype = message[Communication.REQUEST]
-            handler = self.handlers.get(reqtype)
-            if handler is None:
-                response[Communication.RESPONSE] = "MISSING_HANDLER"
-                return response
-            if isinstance(handler, LoginHandler) or isinstance(handler, CreateAccountHandler):
-                message["authUsers"] = self.authenticated_users
-            if isinstance(handler, LoginHandler) or isinstance(handler, LogoutHandler):
-                message["sessions"] = self.sessions
-            return handler.handle(message)
+
+        if Dispatcher._handlerNeedsAuthenticatedUsers(handler):
+            message[MessageKey.AUTHENTICATED_USERS] = self.authenticated_users
+        if Dispatcher._handlerNeedsActiveSessions(handler):
+            message[MessageKey.SESSIONS] = self.sessions
+        return handler.handle(message)
+
+    @staticmethod
+    def _handlerNeedsAuthenticatedUsers(handler: Handler):
+        return isinstance(handler, (LoginHandler, CreateAccountHandler))
+
+    @staticmethod
+    def _handlerNeedsActiveSessions(handler: Handler):
+        return isinstance(handler, (LoginHandler, LogoutHandler, GetPlannerHandler))

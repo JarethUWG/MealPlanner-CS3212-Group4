@@ -6,7 +6,7 @@ import json
 from Server.Dispatcher import Dispatcher
 from Server.Enums.Communication import Communication
 from Server.Handlers.CreateAccountHandler import CreateAccountHandler
-from Server.Handlers.GetMealHandler import GetMealHandler
+from Server.Handlers.GetPlannerHandler import GetPlannerHandler
 from Server.Handlers.LoginHandler import LoginHandler
 from Server.Handlers.LogoutHandler import LogoutHandler
 
@@ -17,7 +17,7 @@ def main():
     message_dispatcher = Dispatcher()
     message_dispatcher.add(LoginHandler())
     message_dispatcher.add(LogoutHandler())
-    message_dispatcher.add(GetMealHandler())
+    message_dispatcher.add(GetPlannerHandler())
     message_dispatcher.add(CreateAccountHandler())
     context = zmq.Context()
     socket = context.socket(zmq.REP)

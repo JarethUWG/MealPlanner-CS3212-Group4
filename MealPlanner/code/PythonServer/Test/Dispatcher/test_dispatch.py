@@ -1,6 +1,7 @@
 import unittest
 from Server.Dispatcher import Dispatcher
 from Server.Enums.Communication import Communication
+from Server.Enums.CommunicationType import CommunicationType
 from Server.Handlers.LoginHandler import LoginHandler
 
 
@@ -10,7 +11,7 @@ class TestDispatch(unittest.TestCase):
         handle = LoginHandler()
         test_dispatcher.add(handle)
         message = dict()
-        message[Communication.REQUEST] = "LOGIN"
+        message[Communication.REQUEST] = CommunicationType.LOGIN
         response = test_dispatcher.dispatch(message)
         self.assertEqual("BAD_INPUT", response[Communication.RESPONSE])
 
