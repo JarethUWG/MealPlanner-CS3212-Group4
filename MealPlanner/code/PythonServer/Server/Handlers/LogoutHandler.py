@@ -25,7 +25,7 @@ class LogoutHandler(Handler):
             response[Communication.RESPONSE] = "BAD_INPUT"
             return response
         if not isinstance(message.get("id"), int):
-            response[Communication.RESPONSE] = "SYSTEM_ERROR"
+            response[Communication.RESPONSE] = "BAD_INPUT"
             return response
         else:
             id = message.get("id")
@@ -35,7 +35,7 @@ class LogoutHandler(Handler):
         else:
             sessions = message.get("sessions")
         response[Communication.RESPONSE] = "INVALID"
-        if not isinstance(sessions[id], None):
+        if id in sessions:
             response[Communication.RESPONSE] = "VALID"
             sessions.pop(id)
         return response

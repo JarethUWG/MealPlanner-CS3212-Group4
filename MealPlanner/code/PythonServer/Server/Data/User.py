@@ -7,7 +7,7 @@ Defines a user.
 from Server.Data.Planner import Planner
 
 
-class User:
+class User():
 
     @property
     def userPlanner(self):
@@ -36,7 +36,6 @@ class User:
             raise ValueError("Please input valid password")
         if not (password.strip()):
             raise ValueError("Please input valid password")
-        "Uncomment when planner is added to server"
         self._userPlanner = Planner()
         self._username = username
         self._password = password
@@ -56,3 +55,11 @@ class User:
     """
     def getPassword(self):
         return self._password
+
+    """
+    Gets the current value of user planner.
+    
+    @return The current value of user planner.
+    """
+    def getUserPlanner(self):
+        return self._userPlanner

@@ -29,7 +29,7 @@ class TestMain(unittest.TestCase):
         self._socket.send_string(json_message)
         json_response = self._socket.recv_string()
         response = json.loads(json_response)
-        self.assertEqual("UNIMPLEMENTED", response.get(Communication.RESPONSE))
+        self.assertEqual("BAD_INPUT", response.get(Communication.RESPONSE))
 
     def test_bad_input(self):
         message = "Wrong type dummy"

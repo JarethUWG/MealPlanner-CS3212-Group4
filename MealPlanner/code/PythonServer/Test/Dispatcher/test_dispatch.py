@@ -12,7 +12,7 @@ class TestDispatch(unittest.TestCase):
         message = dict()
         message[Communication.REQUEST] = "LOGIN"
         response = test_dispatcher.dispatch(message)
-        self.assertEqual("UNIMPLEMENTED", response[Communication.RESPONSE])
+        self.assertEqual("BAD_INPUT", response[Communication.RESPONSE])
 
     def test_input_has_no_reqtype(self):
         test_dispatcher = Dispatcher()

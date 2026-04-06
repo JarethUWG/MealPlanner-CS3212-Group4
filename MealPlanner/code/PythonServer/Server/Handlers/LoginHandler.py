@@ -46,10 +46,10 @@ class LoginHandler(Handler):
             response[Communication.RESPONSE] = "SYSTEM_ERROR"
             return response
         else:
-            sessions = message.get("sessions")
+            sessions = message["sessions"]
         response[Communication.RESPONSE] = "INVALID"
         for user in auth_users.getUsers():
-            if user.getUsername() == username or user.getPassword() == password:
+            if user.getUsername() == username and user.getPassword() == password:
                 response[Communication.RESPONSE] = "VALID"
                 generated_id = random.randint(-(2 ** 31), (2 ** 31 - 1))
                 sessions[generated_id] = user
