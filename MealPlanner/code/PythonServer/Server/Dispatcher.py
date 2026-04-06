@@ -4,6 +4,7 @@ Checks the input messages and calls appropriate handlers
 from Server.Data.AuthenticatedUsers import AuthenticatedUsers
 from Server.Enums.Communication import Communication
 from Server.Enums.MessageKey import MessageKey
+from Server.Enums.ResponseType import ResponseType
 from Server.Handlers.CreateAccountHandler import CreateAccountHandler
 from Server.Handlers.GetPlannerHandler import GetPlannerHandler
 from Server.Handlers.Handler import Handler
@@ -43,12 +44,12 @@ class Dispatcher:
     def dispatch(self, message):
         response = dict()
         if not isinstance(message, dict) or message.get(Communication.REQUEST) is None:
-            response[Communication.RESPONSE] = "BAD_INPUT"
+            response[Communication.RESPONSE] = ResponseType.BAD_INPUT
             return response
         reqtype = message[Communication.REQUEST]
         handler = self.handlers.get(reqtype)
         if handler is None:
-            response[Communication.RESPONSE] = "MISSING_HANDLER"
+            response[Communication.RESPONSE] = ResponseType.MISSING_HANDLER
             return response
 
         if Dispatcher._handlerNeedsAuthenticatedUsers(handler):

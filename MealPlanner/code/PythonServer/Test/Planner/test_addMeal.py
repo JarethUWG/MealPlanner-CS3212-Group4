@@ -10,7 +10,7 @@ class TestAddMeal(unittest.TestCase):
     def setUp(self):
         self._planner = Planner()
 
-    def test_whenValidArguments(self):
+    def test_when_valid_arguments(self):
         time = 0
         meal = Meal([], "Basic meal", "No ingredients")
         self._planner.addMeal(time, meal)
@@ -20,7 +20,7 @@ class TestAddMeal(unittest.TestCase):
 
         self.assertDictEqual(expected, actual)
 
-    def test_WhenMealAlreadyPlannedAtGivenDateTime(self):
+    def test_When_meal_already_planned_at_given_date_time(self):
         time = 0
         firstMeal = Meal([], "Basic meal", "No ingredients")
         secondMeal = Meal([], "Another basic meal", "Also no ingredients")
@@ -32,7 +32,7 @@ class TestAddMeal(unittest.TestCase):
 
         self.assertDictEqual(expected, actual)
 
-    def test_throwsWhenDateTimeEpochIsNotAnInteger(self):
+    def test_throws_when_date_time_epoch_is_not_an_integer(self):
         validMeal = Meal([], "Basic meal", "No ingredients")
 
         with self.subTest("none"):
@@ -45,7 +45,7 @@ class TestAddMeal(unittest.TestCase):
             with self.assertRaises(TypeError):
                 self._planner.addMeal("2", validMeal)
 
-    def test_throwsMealIsNotAMeal(self):
+    def test_throws_when_meal_is_not_a_meal(self):
         validTime = 100
 
         with self.subTest("none"):

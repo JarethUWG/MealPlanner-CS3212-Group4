@@ -4,6 +4,7 @@ from Server.Data.AuthenticatedUsers import AuthenticatedUsers
 from Server.Data.User import User
 from Server.Enums.Communication import Communication
 from Server.Enums.MessageKey import MessageKey
+from Server.Enums.ResponseType import ResponseType
 from Server.Handlers.LoginHandler import LoginHandler
 
 class TestHandle(unittest.TestCase):
@@ -11,7 +12,7 @@ class TestHandle(unittest.TestCase):
         handle = LoginHandler()
         message = "wrong data"
         response = handle.handle(message)
-        self.assertEqual("BAD_INPUT", response[Communication.RESPONSE])
+        self.assertEqual(ResponseType.BAD_INPUT, response[Communication.RESPONSE])
 
     def test_message_lacks_password(self):
         handle = LoginHandler()
@@ -20,7 +21,7 @@ class TestHandle(unittest.TestCase):
         message[MessageKey.AUTHENTICATED_USERS] = AuthenticatedUsers()
         message[MessageKey.SESSIONS] = dict()
         response = handle.handle(message)
-        self.assertEqual("BAD_INPUT", response[Communication.RESPONSE])
+        self.assertEqual(ResponseType.BAD_INPUT, response[Communication.RESPONSE])
 
     def test_message_lacks_username(self):
         handle = LoginHandler()
@@ -29,7 +30,7 @@ class TestHandle(unittest.TestCase):
         message[MessageKey.AUTHENTICATED_USERS] = AuthenticatedUsers()
         message[MessageKey.SESSIONS] = dict()
         response = handle.handle(message)
-        self.assertEqual("BAD_INPUT", response[Communication.RESPONSE])
+        self.assertEqual(ResponseType.BAD_INPUT, response[Communication.RESPONSE])
 
     def test_message_lacks_auth_users(self):
         handle = LoginHandler()
@@ -38,7 +39,7 @@ class TestHandle(unittest.TestCase):
         message[MessageKey.PASSWORD] = "password"
         message[MessageKey.SESSIONS] = dict()
         response = handle.handle(message)
-        self.assertEqual("SYSTEM_ERROR", response[Communication.RESPONSE])
+        self.assertEqual(ResponseType.SYSTEM_ERROR, response[Communication.RESPONSE])
 
     def test_message_lacks_sessions(self):
         handle = LoginHandler()
@@ -47,7 +48,7 @@ class TestHandle(unittest.TestCase):
         message[MessageKey.PASSWORD] = "password"
         message[MessageKey.AUTHENTICATED_USERS] = AuthenticatedUsers()
         response = handle.handle(message)
-        self.assertEqual("SYSTEM_ERROR", response[Communication.RESPONSE])
+        self.assertEqual(ResponseType.SYSTEM_ERROR, response[Communication.RESPONSE])
 
     def test_password_doesnt_match(self):
         handle = LoginHandler()
@@ -60,7 +61,7 @@ class TestHandle(unittest.TestCase):
         message[MessageKey.AUTHENTICATED_USERS] = authUsers
         message[MessageKey.SESSIONS] = dict()
         response = handle.handle(message)
-        self.assertEqual("INVALID", response[Communication.RESPONSE])
+        self.assertEqual(ResponseType.INVALID, response[Communication.RESPONSE])
 
     def test_username_doesnt_match(self):
         handle = LoginHandler()
@@ -73,7 +74,7 @@ class TestHandle(unittest.TestCase):
         message[MessageKey.AUTHENTICATED_USERS] = authUsers
         message[MessageKey.SESSIONS] = dict()
         response = handle.handle(message)
-        self.assertEqual("INVALID", response[Communication.RESPONSE])
+        self.assertEqual(ResponseType.INVALID, response[Communication.RESPONSE])
 
     def test_correct_input(self):
         handle = LoginHandler()
@@ -89,7 +90,7 @@ class TestHandle(unittest.TestCase):
         id = response[MessageKey.ID]
         res_sessions = message[MessageKey.SESSIONS]
         output_user = res_sessions[id]
-        self.assertEqual("VALID", response[Communication.RESPONSE])
+        self.assertEqual(ResponseType.VALID, response[Communication.RESPONSE])
         self.assertTrue(isinstance(id, int))
         self.assertEqual("username", output_user.getUsername())
         self.assertEqual("password", output_user.getPassword())

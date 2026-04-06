@@ -45,7 +45,7 @@ class TestConstructor(unittest.TestCase):
             with self.assertRaises(TypeError):
                 Meal(invalidIngredients, name, description)
         with self.subTest("some valid some not"):
-            invalidIngredients = ["valid", 20, Ingredient("Carrot", 50), "hello", Ingredient("Apple", 45), 5]
+            invalidIngredients = ["not valid", 20, Ingredient("Carrot", 50), "hello", Ingredient("Apple", 45), 5]
             with self.assertRaises(TypeError):
                 Meal(invalidIngredients, name, description)
 

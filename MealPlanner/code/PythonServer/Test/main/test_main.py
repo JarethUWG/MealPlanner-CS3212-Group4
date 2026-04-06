@@ -7,6 +7,7 @@ from threading import Thread
 
 from Server.Enums.Communication import Communication
 from Server.Enums.CommunicationType import CommunicationType
+from Server.Enums.ResponseType import ResponseType
 from Server.main import main
 
 class TestMain(unittest.TestCase):
@@ -30,7 +31,7 @@ class TestMain(unittest.TestCase):
         self._socket.send_string(json_message)
         json_response = self._socket.recv_string()
         response = json.loads(json_response)
-        self.assertEqual("BAD_INPUT", response.get(Communication.RESPONSE))
+        self.assertEqual(ResponseType.BAD_INPUT, response.get(Communication.RESPONSE))
 
     def test_bad_input(self):
         message = "Wrong type dummy"
@@ -38,7 +39,7 @@ class TestMain(unittest.TestCase):
         self._socket.send_string(json_message)
         json_response = self._socket.recv_string()
         response = json.loads(json_response)
-        self.assertEqual("BAD_INPUT", response.get(Communication.RESPONSE))
+        self.assertEqual(ResponseType.BAD_INPUT, response.get(Communication.RESPONSE))
 
 
 if __name__ == '__main__':

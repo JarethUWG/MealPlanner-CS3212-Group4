@@ -5,6 +5,7 @@ import json
 
 from Server.Dispatcher import Dispatcher
 from Server.Enums.Communication import Communication
+from Server.Enums.ResponseType import ResponseType
 from Server.Handlers.CreateAccountHandler import CreateAccountHandler
 from Server.Handlers.GetPlannerHandler import GetPlannerHandler
 from Server.Handlers.LoginHandler import LoginHandler
@@ -32,7 +33,7 @@ def main():
             socket.send_string(json_response)
         else:
             response = dict()
-            response[Communication.RESPONSE] = "BAD_INPUT"
+            response[Communication.RESPONSE] = ResponseType.BAD_INPUT
             json_response = json.dumps(response)
             socket.send_string(json_response)
 
