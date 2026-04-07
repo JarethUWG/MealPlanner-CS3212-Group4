@@ -18,7 +18,7 @@ class TestAddMeal {
     @BeforeEach
     void setup() {
         this.viewModel = new AddMealViewModel();
-        SystemInfo.setLoggedInUser(new User("Test User", "Test Password"));
+        SystemInfo.setLoggedInUserId(new User("Test User", "Test Password"));
     }
 
     @Test
@@ -33,7 +33,7 @@ class TestAddMeal {
         this.viewModel.setDate(time);
         var mealAdded = this.viewModel.addMeal("meal", "");
         var mealMade = new ArrayList<Meal>(Collections.singletonList(mealAdded));
-        var storedMeals = SystemInfo.getLoggedInUser().getUserPlanner().getPlannedMeals();
+        var storedMeals = SystemInfo.getLoggedInUserId().getUserPlanner().getPlannedMeals();
         assertEquals(mealMade, storedMeals);
     }
 
@@ -53,7 +53,7 @@ class TestAddMeal {
         this.viewModel.setDate(time);
         var mealC = this.viewModel.addMeal("C", "");
         var mealsMade = new ArrayList<Meal>(Arrays.asList(mealA, mealB, mealC));
-        var storedMeals = SystemInfo.getLoggedInUser().getUserPlanner().getPlannedMeals();
+        var storedMeals = SystemInfo.getLoggedInUserId().getUserPlanner().getPlannedMeals();
         assertEquals(mealsMade, storedMeals);
     }
 }

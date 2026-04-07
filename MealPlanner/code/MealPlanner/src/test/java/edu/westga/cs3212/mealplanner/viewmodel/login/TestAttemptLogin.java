@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TestAttemptLogin {
     @BeforeEach
     void setUp() {
-        SystemInfo.setLoggedInUser(null);
+        SystemInfo.setLoggedInUserId(null);
     }
 
     @Test
@@ -69,6 +69,6 @@ class TestAttemptLogin {
         passwordProperty.set("Password");
 
         assertTrue(testViewModel.attemptLogin());
-        assertNotNull(SystemInfo.getLoggedInUser());
+        assertNotNull(SystemInfo.getLoggedInUserId());
     }
 }

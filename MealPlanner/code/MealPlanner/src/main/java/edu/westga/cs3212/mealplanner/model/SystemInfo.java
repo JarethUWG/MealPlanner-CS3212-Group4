@@ -9,24 +9,24 @@ package edu.westga.cs3212.mealplanner.model;
  * @version Spring 2026
  */
 public class SystemInfo {
-    private static User loggedInUser;
+    private static int loggedInUserId;
     private static Planner currentPlanner;
 
     /**
-     * Gets the currently logged in user.
+     * Gets the currently logged in user's id.
      *
-     * @return The currently logged in user
+     * @return The currently logged in user's id.
      */
-    public static User getLoggedInUser() {
-        return loggedInUser;
+    public static int getLoggedInUserId() {
+        return loggedInUserId;
     }
 
     /**
-     * Sets the currently logged in user.
+     * Sets the currently logged in user's id.
      *
-     * @param loggedInUser The currently logged in user
+     * @param loggedInUserId The currently logged in user's id.
      */
-    public static void setLoggedInUser(User loggedInUser) {
-        SystemInfo.loggedInUser = loggedInUser;
+    public static void setLoggedInUserId(Integer loggedInUserId) {
+        SystemInfo.loggedInUserId = loggedInUserId;
     }
 }

@@ -20,7 +20,7 @@ public class Planner {
 
     /**
      * Sets the currently selected date.
-     * @param newDate The new date to set the planner to
+     * @param newDate The new date to set the planner to.
      */
     public void setSelectedDate(LocalDateTime newDate) {
         this.selectedDate = newDate;
@@ -135,6 +135,24 @@ public class Planner {
         }
 
         return mealsInPlannedRange;
+    }
+
+    /**
+     * Returns a new Planner object from the given info.
+     * @param serializedInfo The serialized information to deserialize from.
+     * @return The newly instantiated Planner
+     */
+    public static Planner deserialize(Map<Long, Object> serializedInfo) {
+        var newPlanner = new Planner();
+
+        for (var keyVar : serializedInfo.entrySet()) {
+            var timeEpoch = LocalDateTime.ofEpochSecond(keyVar.getKey(), 0, ZoneOffset.UTC);
+            var mealInformation = (Map<String, Object>) keyVar.getValue();
+
+            newPlanner.addMeal(timeEpoch, Meal.deserialize(mealInformation));
+        }
+
+        return newPlanner;
     }
 
     private long simplifyDateTime(LocalDateTime dateToSimplify) {

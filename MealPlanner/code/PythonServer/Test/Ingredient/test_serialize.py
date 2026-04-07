@@ -5,7 +5,7 @@ from Server.Data.Ingredient import Ingredient
 
 class TestSerialize(unittest.TestCase):
 
-    def test_Serialization(self):
+    def test_serialization(self):
         ingredient = Ingredient("Carrot", 50)
 
         expected = {"name": ingredient.name, "calories": ingredient.calories}

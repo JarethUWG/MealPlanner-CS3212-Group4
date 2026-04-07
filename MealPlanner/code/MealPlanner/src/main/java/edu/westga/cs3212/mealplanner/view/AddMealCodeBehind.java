@@ -63,7 +63,7 @@ public class AddMealCodeBehind {
         this.addIngredientButton.disableProperty().bind(this.ingredientDisplay.getSelectionModel().selectedItemProperty().isNull());
         this.removeIngredientButton.disableProperty().bind(this.currentIngredients.focusedProperty().not());
         this.currentIngredients.setItems(this.viewModel.getPlannedIngredients());
-        this.setDate(SystemInfo.getLoggedInUser().getUserPlanner().getSelectedDate().toLocalDate());
+        this.setDate(SystemInfo.getLoggedInUserId().getUserPlanner().getSelectedDate().toLocalDate());
     }
 
     private void setDate(LocalDate date) {

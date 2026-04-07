@@ -1,9 +1,13 @@
 package edu.westga.cs3212.mealplanner.viewmodel;
 
+import edu.westga.cs3212.mealplanner.model.Messenger;
+import edu.westga.cs3212.mealplanner.model.Planner;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Planner viewmodel.
@@ -89,8 +93,7 @@ public class PlannerViewModel {
         int dayThisMonth = this.getDayThisMonth(column, row);
         if (dayThisMonth != -1) {
             LocalDate newSelectedDate = this.displayedMonth.withDayOfMonth(dayThisMonth);
-            var currentUser = SystemInfo.getLoggedInUser();
-            var userPlanner = currentUser.getUserPlanner();
+            var userPlanner = this.getUserPlanner();
 
             userPlanner.setSelectedDate(newSelectedDate.atStartOfDay());
         }
@@ -102,5 +105,15 @@ public class PlannerViewModel {
         column++;
 
         return (row * DAYS_IN_WEEK) + column - columnOffset;
+    }
+
+    private Planner getUserPlanner() {
+        var activeUserID = SystemInfo.getLoggedInUserId();
+        var request = new HashMap<String, Object>();
+        request.put("id", activeUserID);
+        request.put("reqtype", "GET PLANNER");
+        var response = Messenger.request(request);
+        var plannerInfo = (Map<Long, Object>) response.get("planner");
+        return Planner.deserialize(plannerInfo);
     }
 }

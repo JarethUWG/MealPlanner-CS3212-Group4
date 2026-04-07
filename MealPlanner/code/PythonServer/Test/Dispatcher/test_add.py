@@ -1,5 +1,6 @@
 import unittest
 from Server.Dispatcher import Dispatcher
+from Server.Enums.CommunicationType import CommunicationType
 from Server.Handlers.LoginHandler import LoginHandler
 
 
@@ -8,7 +9,7 @@ class TestAdd(unittest.TestCase):
         test_dispatcher = Dispatcher()
         handle = LoginHandler()
         test_dispatcher.add(handle)
-        self.assertEqual(handle, test_dispatcher.handlers.get("LOGIN"))
+        self.assertEqual(handle, test_dispatcher.handlers.get(CommunicationType.LOGIN))
 
 
 if __name__ == '__main__':

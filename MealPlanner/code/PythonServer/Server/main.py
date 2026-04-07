@@ -2,22 +2,26 @@ import time
 
 import zmq
 import json
+
 from Server.Dispatcher import Dispatcher
 from Server.Enums.Communication import Communication
+from Server.Enums.ResponseType import ResponseType
 from Server.Handlers.CreateAccountHandler import CreateAccountHandler
-from Server.Handlers.GetMealHandler import GetMealHandler
+from Server.Handlers.GetPlannerHandler import GetPlannerHandler
 from Server.Handlers.LoginHandler import LoginHandler
+from Server.Handlers.LogoutHandler import LogoutHandler
+from Server.Handlers.AddMealHandler import AddMealHandler
 
 """
 Entry point for the python server.
 """
 def main():
     message_dispatcher = Dispatcher()
-    login_handler = LoginHandler()
-    create_account_handler = CreateAccountHandler()
-    message_dispatcher.add(login_handler)
-    message_dispatcher.add(GetMealHandler())
-    message_dispatcher.add(create_account_handler)
+    message_dispatcher.add(LoginHandler())
+    message_dispatcher.add(LogoutHandler())
+    message_dispatcher.add(GetPlannerHandler())
+    message_dispatcher.add(CreateAccountHandler())
+    message_dispatcher.add(AddMealHandler())
     context = zmq.Context()
     socket = context.socket(zmq.REP)
     socket.bind("tcp://127.0.0.1:5555")
@@ -31,7 +35,7 @@ def main():
             socket.send_string(json_response)
         else:
             response = dict()
-            response[Communication.RESPONSE] = "BAD_INPUT"
+            response[Communication.RESPONSE] = ResponseType.BAD_INPUT
             json_response = json.dumps(response)
             socket.send_string(json_response)
 
