@@ -10,6 +10,7 @@ from Server.Handlers.CreateAccountHandler import CreateAccountHandler
 from Server.Handlers.GetPlannerHandler import GetPlannerHandler
 from Server.Handlers.LoginHandler import LoginHandler
 from Server.Handlers.LogoutHandler import LogoutHandler
+from Server.Handlers.AddMealHandler import AddMealHandler
 
 """
 Entry point for the python server.
@@ -20,6 +21,7 @@ def main():
     message_dispatcher.add(LogoutHandler())
     message_dispatcher.add(GetPlannerHandler())
     message_dispatcher.add(CreateAccountHandler())
+    message_dispatcher.add(AddMealHandler())
     context = zmq.Context()
     socket = context.socket(zmq.REP)
     socket.bind("tcp://127.0.0.1:5555")

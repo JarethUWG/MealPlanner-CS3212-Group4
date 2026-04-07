@@ -7,3 +7,8 @@ class MessageKey(str, Enum):
     AUTHENTICATED_USERS = "authUsers"
     SESSIONS = "sessions"
     PLANNER = "planner"
+    DATE = "date"
+    NAME = "name"
+    DESCRIPTION = "description"
+    INGREDIENTS = "ingredients"
+    CALORIES = "calories"
