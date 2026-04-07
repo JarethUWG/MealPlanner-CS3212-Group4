@@ -7,9 +7,11 @@ import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -83,9 +85,19 @@ public class AddMealViewModel {
             var toAdd = new Meal(this.plannedIngredients, name, desc);
             HashMap<String, Object> request = new HashMap<>();
             request.put("id", SystemInfo.getLoggedInUserId());
-            request.put("reqtype", "GET_PLANNER");
+            request.put("reqtype", "ADD MEAL");
+            request.put("name", name);
+            request.put("description", desc);
+            request.put("date", this.currDate);
+            List<Map<String, Object>> ingredients = new ArrayList<Map<String, Object>>();
+            for (Ingredient currIng : this.plannedIngredients) {
+                Map<String, Object> ingData = new HashMap<>();
+                ingData.put("name", currIng.getName());
+                ingData.put("calories", currIng.getCalories());
+                ingredients.add(ingData);
+            }
+            request.put("ingredients", ingredients);
             Map<String, Object> response = Messenger.request(request);
-            // TODO update implementation once addMeal is implemented server-side
             // SystemInfo.getLoggedInUserId().getUserPlanner().addMeal(this.currDate.atStartOfDay(), toAdd);
             this.resetIngredients();
             return toAdd;
