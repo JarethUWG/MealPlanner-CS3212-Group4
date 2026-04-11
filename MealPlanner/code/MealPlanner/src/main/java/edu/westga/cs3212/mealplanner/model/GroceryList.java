@@ -10,32 +10,33 @@ import java.util.List;
 public class GroceryList {
 
     /**
-     * The shopping list
+     * The shopping list.
      */
     List<String> shoppingList = new ArrayList<>();
 
     /**
      * Takes in a day parameter and returns all ingredients of the meals from that day.
-     * @param map
-     *          the hashmap of meals
-     * @param day
-     *          the selected day
+     * @param allMeals
+     *          an iterable list of all meals
+     *
      * @return
      *          a list of Strings of ingredient names
      */
-    public List<String> getNamesForDay(HashMap<String, Object> map, int day) {
+    public List<String> getIngredientNames(Iterable<Meal> allMeals) {
 
+        ArrayList<Ingredient> result = new ArrayList<>();
 
-        //TODO: Plug in meal object when implemented
-//        for (Object currentMeal : map.values()) {
-//            if (currentMeal.getDay() == day) {
-//                result.add(currentMeal.getIngredient());
-//            }
-//        }
+        for (Meal currentMeal : allMeals) {
+            result.addAll(currentMeal.getIngredients());
+        }
 
-        return shoppingList;
+        ArrayList<String> ingredientNames = new ArrayList<>();
+        for (Ingredient currIngredient : result) {
+            ingredientNames.add(currIngredient.getName());
+        }
+        return ingredientNames;
+
     }
-
 
     /**
      * Builds a string builder format for the shopping list.
@@ -44,11 +45,11 @@ public class GroceryList {
      */
     public StringBuilder outputShoppingList() {
         StringBuilder builder = new StringBuilder();
-        for (Object foodItem: this.shoppingList) {
+        for (Object foodItem : this.shoppingList) {
             builder.append(foodItem);
             builder.append("\n");
         }
-        return  builder;
+        return builder;
 
     }
 
