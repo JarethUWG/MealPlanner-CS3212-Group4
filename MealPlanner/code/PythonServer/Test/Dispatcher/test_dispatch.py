@@ -2,6 +2,7 @@ import unittest
 from Server.Dispatcher import Dispatcher
 from Server.Enums.Communication import Communication
 from Server.Handlers.LoginHandler import LoginHandler
+from Server.Enums.CommunicationType import CommunicationType
 
 
 class TestDispatch(unittest.TestCase):
@@ -10,9 +11,9 @@ class TestDispatch(unittest.TestCase):
         handle = LoginHandler()
         test_dispatcher.add(handle)
         message = dict()
-        message[Communication.REQUEST] = "LOGIN"
+        message[Communication.REQUEST] = CommunicationType.LOGIN
         response = test_dispatcher.dispatch(message)
-        self.assertEqual("UNIMPLEMENTED", response[Communication.RESPONSE])
+        self.assertEqual("BAD_INPUT", response[Communication.RESPONSE])
 
     def test_input_has_no_reqtype(self):
         test_dispatcher = Dispatcher()
