@@ -36,7 +36,7 @@ public class Meal {
      * rather than a null list in itself.
      */
     public Meal(List<Ingredient> ingredients, String name, String description) {
-        this.ingredients = new ArrayList<>(ingredients);
+        this.ingredients = ingredients;
         this.name = name;
         this.description = description;
         if (ingredients == null) {
@@ -139,5 +139,19 @@ public class Meal {
             totalCalories += currIngredient.getCalories();
         }
         return totalCalories;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder mealString = new StringBuilder(this.getName() + ": " + this.getDescription() + "\n"
+                + "Ingredients:\n");
+        if (this.getIngredients().isEmpty()) {
+            mealString.append("- No ingredients\n");
+        } else {
+            for (Ingredient currIng : this.getIngredients()) {
+                mealString.append("- ").append(currIng.toString()).append("\n");
+            }
+        }
+        return mealString.toString();
     }
 }
