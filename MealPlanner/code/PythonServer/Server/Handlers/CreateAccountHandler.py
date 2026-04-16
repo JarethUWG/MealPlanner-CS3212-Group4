@@ -2,7 +2,6 @@ from Server.Data.AuthenticatedUsers import AuthenticatedUsers
 from Server.Data.User import User
 from Server.Enums.Communication import Communication
 from Server.Enums.CommunicationType import CommunicationType
-from Server.Enums.MessageKey import MessageKey
 from Server.Handlers.Handler import Handler
 
 class CreateAccountHandler(Handler):
@@ -27,21 +26,21 @@ class CreateAccountHandler(Handler):
         if not isinstance(message, dict):
             response[Communication.RESPONSE] = "BAD_INPUT"
             return response
-        if not isinstance(message.get(MessageKey.USERNAME), str):
+        if not isinstance(message.get("username"), str):
             response[Communication.RESPONSE] = "BAD_INPUT"
             return response
         else:
-            username = message.get(MessageKey.USERNAME)
-        if not isinstance(message.get(MessageKey.PASSWORD), str):
+            username = message.get("username")
+        if not isinstance(message.get("password"), str):
             response[Communication.RESPONSE] = "BAD_INPUT"
             return response
         else:
-            password = message.get(MessageKey.PASSWORD)
-        if not isinstance(message.get(MessageKey.AUTHENTICATED_USERS), AuthenticatedUsers):
+            password = message.get("password")
+        if not isinstance(message.get("authUsers"), AuthenticatedUsers):
             response[Communication.RESPONSE] = "BAD_INPUT"
             return response
         else:
-            auth_users = message.get(MessageKey.AUTHENTICATED_USERS)
+            auth_users = message.get("authUsers")
         response[Communication.RESPONSE] = "VALID"
         for user in auth_users.getUsers():
             if user.getUsername() == username:

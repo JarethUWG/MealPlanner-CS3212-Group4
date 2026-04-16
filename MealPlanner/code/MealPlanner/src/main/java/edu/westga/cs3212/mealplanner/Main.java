@@ -27,7 +27,7 @@ public class Main extends Application {
     public static final String ADD_MEAL_TITLE = "Add meal";
     public static final String ADD_MEAL_FXML = "view/addMeal.fxml";
     public static final String GROCERY_LIST_TITLE = "Grocery List";
-    public static final String GROCERY_LIST_FXML = "view/grocerylist.fxml";
+    public static final String GROCERY_LIST_FXML = "view/grocery_list.fxml";
     private static Stage mainStage;
 
     @Override

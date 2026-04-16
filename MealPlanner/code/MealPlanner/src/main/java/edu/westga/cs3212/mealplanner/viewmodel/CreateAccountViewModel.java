@@ -140,7 +140,7 @@ public class CreateAccountViewModel {
             this.usernameReminderProperty.set("");
         }
         if ((this.passwordProperty.get().isBlank() || this.passwordProperty.get().length() < 5) && !this.usernameProperty.get().isBlank()) {
-            this.passwordReminderProperty.set("Password must be at least 5 characters");
+            this.passwordReminderProperty.set("Must Password must be at least 5 characters");
         } else {
             this.passwordReminderProperty.set("");
         }

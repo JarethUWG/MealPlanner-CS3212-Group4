@@ -9,7 +9,7 @@ class TestHandle(unittest.TestCase):
         message = dict()
         message["anytype"] = "Message"
         response = handle.handle(message)
-        self.assertEqual("BAD_INPUT", response[Communication.RESPONSE])
+        self.assertEqual("UNIMPLEMENTED", response[Communication.RESPONSE])
 
 
 if __name__ == '__main__':
