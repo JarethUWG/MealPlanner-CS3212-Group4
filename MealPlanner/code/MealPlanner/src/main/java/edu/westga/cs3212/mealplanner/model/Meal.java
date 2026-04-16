@@ -140,4 +140,18 @@ public class Meal {
         }
         return totalCalories;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder mealString = new StringBuilder(this.getName() + ": " + this.getDescription() + "\n"
+                + "Ingredients:\n");
+        if (this.getIngredients().isEmpty()) {
+            mealString.append("- No ingredients\n");
+        } else {
+            for (Ingredient currIng : this.getIngredients()) {
+                mealString.append("- ").append(currIng.toString()).append("\n");
+            }
+        }
+        return mealString.toString();
+    }
 }
