@@ -3,7 +3,6 @@ package edu.westga.cs3212.mealplanner.model.grocerylist;
 import edu.westga.cs3212.mealplanner.model.GroceryList;
 import edu.westga.cs3212.mealplanner.model.Ingredient;
 import edu.westga.cs3212.mealplanner.model.Meal;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
