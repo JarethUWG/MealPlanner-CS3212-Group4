@@ -39,9 +39,6 @@ public class Meal {
         this.ingredients = new ArrayList<>(ingredients);
         this.name = name;
         this.description = description;
-        if (ingredients == null) {
-            this.ingredients = new ArrayList<>();
-        }
         if (name == null || name.isBlank()) {
             this.name = "New Meal";
         }
@@ -139,5 +136,19 @@ public class Meal {
             totalCalories += currIngredient.getCalories();
         }
         return totalCalories;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder mealString = new StringBuilder(this.getName() + ": " + this.getDescription() + "\n"
+                + "Ingredients:\n");
+        if (this.getIngredients().isEmpty()) {
+            mealString.append("- No ingredients\n");
+        } else {
+            for (Ingredient currIng : this.getIngredients()) {
+                mealString.append("- ").append(currIng.toString()).append("\n");
+            }
+        }
+        return mealString.toString();
     }
 }
