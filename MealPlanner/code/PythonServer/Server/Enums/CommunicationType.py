@@ -5,4 +5,4 @@ class CommunicationType(str, Enum):
     LOGOUT = "LOGOUT"
     GET_USER = "GET USER"
     CREATE_ACCOUNT = "CREATE ACCOUNT"
-    GET_MEAL = "GET MEAL"
+    GET_PLANNER = "GET PLANNER"
