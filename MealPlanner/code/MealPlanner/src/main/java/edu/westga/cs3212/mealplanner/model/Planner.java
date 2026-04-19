@@ -1,6 +1,6 @@
 package edu.westga.cs3212.mealplanner.model;
 
-import edu.westga.cs3212.mealplanner.enums.Hour;
+import edu.westga.cs3212.mealplanner.enums.MealType;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -73,22 +73,22 @@ public class Planner {
      * Returns a mapping of meals and the hours they are planned for on the currently selected date.
      * @return An hour and Meal iterable mapping
      */
-    public Map<Hour, Iterable<Meal>> getSelectedDatePlannedMeals() {
+    public Map<MealType, Iterable<Meal>> getSelectedDatePlannedMeals() {
         if (this.selectedDate == null) {
-            return new HashMap<Hour, Iterable<Meal>>();
+            return new HashMap<MealType, Iterable<Meal>>();
         }
 
-        var hourValues = Hour.values();
-        HashMap<Hour, Iterable<Meal>> convertedMap = new HashMap<>();
+        var mealTypeValues = MealType.values();
+        HashMap<MealType, Iterable<Meal>> convertedMap = new HashMap<>();
         var startOfDate = this.simplifyDateTime(this.selectedDate);
         var endOfDate = this.simplifyDateTime(this.selectedDate.plusDays(1));
 
         for (var entry : this.plannedMeals.subMap(startOfDate, endOfDate).entrySet()) {
             LocalDateTime associatedDate = LocalDateTime.ofEpochSecond(entry.getKey(), 0, ZoneOffset.UTC);
-            var plannedHour = hourValues[associatedDate.getHour()];
+            var plannedMealType = mealTypeValues[associatedDate.getHour()];
             var plannedMeals = entry.getValue();
 
-            convertedMap.put(plannedHour, plannedMeals);
+            convertedMap.put(plannedMealType, plannedMeals);
         }
 
         return convertedMap;
