@@ -6,17 +6,18 @@
 <AnchorPane fx:id="addMealPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="268.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.mealplanner.view.AddMealCodeBehind">
     <children>
         <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handlePlannerReturn" text="Return to Planner" />
-        <ComboBox fx:id="ingredientDisplay" layoutX="59.0" layoutY="144.0" prefWidth="150.0" promptText="Select Ingredient" />
-        <Label layoutX="35.0" layoutY="69.0" prefHeight="18.0" prefWidth="66.0" text="Meal Name" />
-        <TextField fx:id="nameField" layoutX="102.0" layoutY="66.0" prefHeight="26.0" prefWidth="140.0" promptText="New Meal" />
-        <TextField fx:id="descField" layoutX="102.0" layoutY="110.0" prefHeight="26.0" prefWidth="140.0" promptText="No further description" />
-        <Label layoutX="11.0" layoutY="115.0" prefHeight="18.0" prefWidth="90.0" text="Meal Description" />
+        <ComboBox fx:id="ingredientDisplay" layoutX="59.0" layoutY="164.0" prefWidth="150.0" promptText="Select Ingredient" />
+        <Label layoutX="31.0" layoutY="94.0" prefHeight="18.0" prefWidth="66.0" text="Meal Name" />
+        <TextField fx:id="nameField" layoutX="98.0" layoutY="91.0" prefHeight="26.0" prefWidth="140.0" promptText="New Meal" />
+        <TextField fx:id="descField" layoutX="102.0" layoutY="130.0" prefHeight="26.0" prefWidth="140.0" promptText="No further description" />
+        <Label layoutX="11.0" layoutY="135.0" prefHeight="18.0" prefWidth="90.0" text="Meal Description" />
         <Button layoutX="13.0" layoutY="355.0" mnemonicParsing="false" onAction="#addMealToPlanner" prefHeight="26.0" prefWidth="171.0" text="Add Meal" />
         <Label fx:id="dateReminder" layoutX="130.0" layoutY="19.0" prefHeight="18.0" prefWidth="135.0" text="Adding to" />
-        <Button fx:id="addIngredientButton" layoutX="8.0" layoutY="283.0" mnemonicParsing="false" onAction="#addIngredientToMeal" prefHeight="26.0" prefWidth="118.0" text="Add Ingredient" />
+        <Button fx:id="addIngredientButton" layoutX="8.0" layoutY="303.0" mnemonicParsing="false" onAction="#addIngredientToMeal" prefHeight="26.0" prefWidth="118.0" text="Add Ingredient" />
         <Button layoutX="198.0" layoutY="355.0" mnemonicParsing="false" onAction="#resetIngredients" prefHeight="26.0" prefWidth="50.0" text="Reset" />
-        <Label fx:id="mealStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="320.0" prefHeight="18.0" prefWidth="238.0" textAlignment="CENTER" />
-      <Button fx:id="removeIngredientButton" layoutX="135.0" layoutY="283.0" mnemonicParsing="false" onAction="#removeIngredientFromMeal" prefHeight="26.0" prefWidth="126.0" text="Remove Ingredient" />
-      <ListView fx:id="currentIngredients" layoutX="25.0" layoutY="176.0" prefHeight="98.0" prefWidth="212.0" />
+        <Label fx:id="mealStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="332.0" prefHeight="18.0" prefWidth="238.0" textAlignment="CENTER" />
+      <Button fx:id="removeIngredientButton" layoutX="135.0" layoutY="303.0" mnemonicParsing="false" onAction="#removeIngredientFromMeal" prefHeight="26.0" prefWidth="126.0" text="Remove Ingredient" />
+      <ListView fx:id="currentIngredients" layoutX="25.0" layoutY="196.0" prefHeight="98.0" prefWidth="212.0" />
+      <ComboBox fx:id="mealType" layoutX="56.0" layoutY="55.0" prefWidth="150.0" promptText="Breakfast" />
     </children>
 </AnchorPane>

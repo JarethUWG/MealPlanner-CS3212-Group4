@@ -103,16 +103,17 @@ public class AddMealViewModel {
             return null;
         } else {
             var toAdd = new Meal(this.plannedIngredients, name, desc);
-            SystemInfo.getLoggedInUser().getUserPlanner().addMeal(this.currDate.atStartOfDay(), toAdd);
-            String serializedMeal = toAdd.serialize();
-            HashMap<String, Object> message = new HashMap<>();
-            message.put("reqtype", "ADD_MEAL");
-            message.put("meal", serializedMeal);
-            Messenger.request(message);
             var selectedMealType = this.selectedMealType.get();
             var mealHour = new ArrayList<MealType>(List.of(MealType.values())).indexOf(selectedMealType);
             var plannedTime = this.currDate.atTime(mealHour, 0);
             SystemInfo.getLoggedInUser().getUserPlanner().addMeal(plannedTime, toAdd);
+            String serializedMeal = toAdd.serialize();
+            HashMap<String, Object> message = new HashMap<>();
+            message.put("reqtype", "ADD_MEAL");
+            message.put("meal", serializedMeal);
+            message.put("time", plannedTime);
+            message.put("mealtype", selectedMealType);
+            Messenger.request(message);
             this.resetIngredients();
             return toAdd;
         }
