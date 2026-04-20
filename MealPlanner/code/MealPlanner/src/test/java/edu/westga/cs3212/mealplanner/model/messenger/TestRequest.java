@@ -1,20 +1,15 @@
 package edu.westga.cs3212.mealplanner.model.messenger;
 
-import edu.westga.cs3212.mealplanner.model.Ingredient;
-import edu.westga.cs3212.mealplanner.model.Meal;
 import edu.westga.cs3212.mealplanner.model.Messenger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.zeromq.ZMQ;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestRequest {
     private static ZMQ.Context context;
