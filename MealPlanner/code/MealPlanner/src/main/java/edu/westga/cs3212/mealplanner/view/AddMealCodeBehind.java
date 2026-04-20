@@ -1,6 +1,7 @@
 package edu.westga.cs3212.mealplanner.view;
 
 import edu.westga.cs3212.mealplanner.Main;
+import edu.westga.cs3212.mealplanner.enums.MealType;
 import edu.westga.cs3212.mealplanner.model.Database;
 import edu.westga.cs3212.mealplanner.model.Ingredient;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
@@ -34,6 +35,9 @@ public class AddMealCodeBehind {
     private ComboBox<Ingredient> ingredientDisplay;
 
     @FXML
+    private ComboBox<MealType> mealType;
+
+    @FXML
     private TextField nameField;
 
     @FXML
@@ -59,6 +63,9 @@ public class AddMealCodeBehind {
 
     @FXML
     void initialize() {
+        this.viewModel.SelectedMealType().bindBidirectional(this.mealType.valueProperty());
+        this.mealType.setItems(this.viewModel.MealTypes());
+        this.mealType.setValue(this.viewModel.MealTypes().getFirst());
         this.ingredientDisplay.setItems(FXCollections.observableList(Database.getDatabase()));
         this.addIngredientButton.disableProperty().bind(this.ingredientDisplay.getSelectionModel().selectedItemProperty().isNull());
         this.removeIngredientButton.disableProperty().bind(this.currentIngredients.focusedProperty().not());
