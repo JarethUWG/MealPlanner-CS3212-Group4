@@ -27,99 +27,15 @@ public class PlannedDateCodeBehind {
     /**
      * The listview for 12am (0:00).
      */
-    public ListView<Meal> listview0;
+    public ListView<Meal> breakfastListview;
     /**
      * The listview for 1am (1:00).
      */
-    public ListView<Meal> listview1;
+    public ListView<Meal> lunchListview;
     /**
      * The listview for 2am (2:00).
      */
-    public ListView<Meal> listview2;
-    /**
-     * The listview for 3am (3:00).
-     */
-    public ListView<Meal> listview3;
-    /**
-     * The listview for 4am (4:00).
-     */
-    public ListView<Meal> listview4;
-    /**
-     * The listview for 5am (5:00).
-     */
-    public ListView<Meal> listview5;
-    /**
-     * The listview for 6am (6:00).
-     */
-    public ListView<Meal> listview6;
-    /**
-     * The listview for 7am (7:00).
-     */
-    public ListView<Meal> listview7;
-    /**
-     * The listview for 8am (8:00).
-     */
-    public ListView<Meal> listview8;
-    /**
-     * The listview for 9am (9:00).
-     */
-    public ListView<Meal> listview9;
-    /**
-     * The listview for 10am (10:00).
-     */
-    public ListView<Meal> listview10;
-    /**
-     * The listview for 11am (11:00).
-     */
-    public ListView<Meal> listview11;
-    /**
-     * The listview for 12pm (12:00).
-     */
-    public ListView<Meal> listview12;
-    /**
-     * The listview for 1pm (13:00).
-     */
-    public ListView<Meal> listview13;
-    /**
-     * The listview for 2pm (14:00).
-     */
-    public ListView<Meal> listview14;
-    /**
-     * The listview for 3pm (15:00).
-     */
-    public ListView<Meal> listview15;
-    /**
-     * The listview for 4pm (16:00).
-     */
-    public ListView<Meal> listview16;
-    /**
-     * The listview for 5pm (17:00).
-     */
-    public ListView<Meal> listview17;
-    /**
-     * The listview for 6pm (18:00).
-     */
-    public ListView<Meal> listview18;
-    /**
-     * The listview for 7pm (19:00).
-     */
-    public ListView<Meal> listview19;
-    /**
-     * The listview for 8pm (20:00).
-     */
-    public ListView<Meal> listview20;
-    /**
-     * The listview for 9pm (21:00).
-     */
-    public ListView<Meal> listview21;
-    /**
-     * The listview for 10pm (22:00).
-     */
-    public ListView<Meal> listview22;
-    /**
-     * The listview for 11pm (23:00).
-     */
-    public ListView<Meal> listview23;
+    public ListView<Meal> dinnerListview;
 
     private PlannedDateViewmodel viewModel;
 
@@ -137,7 +53,9 @@ public class PlannedDateCodeBehind {
 
     private void bindToViewmodel() {
         this.dateHeader.textProperty().bind(this.viewModel.DateProperty());
-        this.listview0.itemsProperty().bind(this.viewModel.PlannedMeals0Property());
+        this.breakfastListview.itemsProperty().bind(this.viewModel.PlannedBreakfastsProperty());
+        this.lunchListview.itemsProperty().bind(this.viewModel.PlannedLunchesProperty());
+        this.dinnerListview.itemsProperty().bind(this.viewModel.PlannedDinnersProperty());
     }
 
     /**

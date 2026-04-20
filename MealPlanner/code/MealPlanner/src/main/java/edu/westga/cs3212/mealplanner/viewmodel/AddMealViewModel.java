@@ -1,20 +1,43 @@
 package edu.westga.cs3212.mealplanner.viewmodel;
 
+import edu.westga.cs3212.mealplanner.enums.MealType;
 import edu.westga.cs3212.mealplanner.model.Ingredient;
 import edu.westga.cs3212.mealplanner.model.Meal;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.SingleSelectionModel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Meal adder view model.
  */
 public class AddMealViewModel {
     private LocalDate currDate;
+    private ObjectProperty<MealType> selectedMealType = new SimpleObjectProperty<>(MealType.BREAKFAST);
+    private ObservableList<MealType> mealTypes = FXCollections.observableArrayList(MealType.values());
     private ObservableList<Ingredient> plannedIngredients = FXCollections.observableArrayList(new ArrayList<>());
+
+    /**
+     * The selected meal type.
+     * @return The selected meal types.
+     */
+    public ObjectProperty<MealType> SelectedMealType() {
+        return this.selectedMealType;
+    }
+
+    /**
+     * The possible meal types.
+     * @return The possible meal types.
+     */
+    public ObservableList<MealType> MealTypes() {
+        return this.mealTypes;
+    }
 
     /**
      * Sets the date meals are to be added to.
@@ -78,7 +101,10 @@ public class AddMealViewModel {
             return null;
         } else {
             var toAdd = new Meal(this.plannedIngredients, name, desc);
-            SystemInfo.getLoggedInUser().getUserPlanner().addMeal(this.currDate.atStartOfDay(), toAdd);
+            var selectedMealType = this.selectedMealType.get();
+            var mealHour = new ArrayList<MealType>(List.of(MealType.values())).indexOf(selectedMealType);
+            var plannedTime = this.currDate.atTime(mealHour, 0);
+            SystemInfo.getLoggedInUser().getUserPlanner().addMeal(plannedTime, toAdd);
             this.resetIngredients();
             return toAdd;
         }

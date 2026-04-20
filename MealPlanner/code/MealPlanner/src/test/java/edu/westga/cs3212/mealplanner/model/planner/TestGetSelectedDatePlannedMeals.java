@@ -1,6 +1,6 @@
 package edu.westga.cs3212.mealplanner.model.planner;
 
-import edu.westga.cs3212.mealplanner.enums.Hour;
+import edu.westga.cs3212.mealplanner.enums.MealType;
 import edu.westga.cs3212.mealplanner.model.Meal;
 import edu.westga.cs3212.mealplanner.model.Planner;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +18,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class TestGetSelectedDatePlannedMeals {
 
     private Planner planner;
+    private int breakfastHour = MealType.BREAKFAST.ordinal();
+    private int lunchHour = MealType.LUNCH.ordinal();
+    private int dinnerHour = MealType.DINNER.ordinal();
 
     @BeforeEach
     void setUp() throws Exception {
@@ -28,7 +31,7 @@ class TestGetSelectedDatePlannedMeals {
     @Test
     void testWhenSelectedDateIsNull() {
         this.planner.setSelectedDate(null);
-        var expected = new HashMap<Hour, Iterable<Meal>>();
+        var expected = new HashMap<MealType, Iterable<Meal>>();
         var actual = this.planner.getSelectedDatePlannedMeals();
 
         assertEquals(expected, actual);
@@ -36,7 +39,7 @@ class TestGetSelectedDatePlannedMeals {
 
     @Test
     void testWhenNoPlannedMeals() {
-        var expected = new HashMap<Hour, Iterable<Meal>>();
+        var expected = new HashMap<MealType, Iterable<Meal>>();
         var actual = this.planner.getSelectedDatePlannedMeals();
 
         assertEquals(expected, actual);
@@ -45,10 +48,10 @@ class TestGetSelectedDatePlannedMeals {
     @Test
     void testWhenOnePlannedMeal() {
         var onlyMeal = new Meal();
-        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(12), onlyMeal);
+        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(this.breakfastHour), onlyMeal);
 
-        var expected = new HashMap<Hour, Iterable<Meal>>();
-        expected.put(Hour.TWELVE, new ArrayList<Meal>(List.of(onlyMeal)));
+        var expected = new HashMap<MealType, Iterable<Meal>>();
+        expected.put(MealType.BREAKFAST, new ArrayList<Meal>(List.of(onlyMeal)));
         var actual = this.planner.getSelectedDatePlannedMeals();
 
         assertEquals(expected, actual);
@@ -59,12 +62,12 @@ class TestGetSelectedDatePlannedMeals {
         var firstMeal = new Meal();
         var middleMeal = new Meal();
         var lastMeal = new Meal();
-        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(11), firstMeal);
-        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(11), middleMeal);
-        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(11), lastMeal);
+        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(this.lunchHour), firstMeal);
+        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(this.lunchHour), middleMeal);
+        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(this.lunchHour), lastMeal);
 
-        var expected = new HashMap<Hour, Iterable<Meal>>();
-        expected.put(Hour.ELEVEN, new ArrayList<Meal>(Arrays.asList(firstMeal, middleMeal, lastMeal)));
+        var expected = new HashMap<MealType, Iterable<Meal>>();
+        expected.put(MealType.LUNCH, new ArrayList<Meal>(Arrays.asList(firstMeal, middleMeal, lastMeal)));
         var actual = this.planner.getSelectedDatePlannedMeals();
 
         assertEquals(expected, actual);
@@ -76,15 +79,15 @@ class TestGetSelectedDatePlannedMeals {
         var middleMeal = new Meal();
         var anotherMiddleMeal = new Meal();
         var lastMeal = new Meal();
-        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(10), firstMeal);
-        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(11), middleMeal);
-        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(11), anotherMiddleMeal);
-        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(17), lastMeal);
+        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(this.breakfastHour), firstMeal);
+        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(this.lunchHour), middleMeal);
+        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(this.lunchHour), anotherMiddleMeal);
+        this.planner.addMeal(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(this.dinnerHour), lastMeal);
 
-        var expected = new HashMap<Hour, Iterable<Meal>>();
-        expected.put(Hour.TEN, new ArrayList<Meal>(List.of(firstMeal)));
-        expected.put(Hour.ELEVEN, new ArrayList<Meal>(Arrays.asList(middleMeal, anotherMiddleMeal)));
-        expected.put(Hour.SEVENTEEN, new ArrayList<Meal>(List.of(lastMeal)));
+        var expected = new HashMap<MealType, Iterable<Meal>>();
+        expected.put(MealType.BREAKFAST, new ArrayList<Meal>(List.of(firstMeal)));
+        expected.put(MealType.LUNCH, new ArrayList<Meal>(Arrays.asList(middleMeal, anotherMiddleMeal)));
+        expected.put(MealType.DINNER, new ArrayList<Meal>(List.of(lastMeal)));
         var actual = this.planner.getSelectedDatePlannedMeals();
 
         assertEquals(expected, actual);
