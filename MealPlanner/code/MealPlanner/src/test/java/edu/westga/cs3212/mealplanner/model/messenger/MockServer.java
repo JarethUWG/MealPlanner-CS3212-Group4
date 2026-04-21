@@ -24,7 +24,7 @@ public class MockServer implements Runnable {
             String message = new String(reply, ZMQ.CHARSET);
             JSONObject jsonConvert = new JSONObject(message);
             Map<String, String> responseMap = new HashMap<String, String>();
-            Map<String, Object> processedMessage = new HashMap<String, Object>();
+            Map<String, Object> processedMessage;
             processedMessage = jsonConvert.toMap();
             if (processedMessage.get("reqtype") == null) {
                 responseMap.put("restype", "no request");

@@ -1,5 +1,7 @@
 package edu.westga.cs3212.mealplanner.model;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,5 +152,9 @@ public class Meal {
             }
         }
         return mealString.toString();
+    }
+
+    public String serialize() {
+        return new Gson().toJson(this);
     }
 }

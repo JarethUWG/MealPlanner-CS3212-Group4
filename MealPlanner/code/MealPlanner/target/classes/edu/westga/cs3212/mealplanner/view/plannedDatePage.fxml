@@ -59,196 +59,30 @@
                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                  </rowConstraints>
                   <children>
-                     <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="12:00AM" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                     <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Breakfast" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
                         <padding>
                            <Insets left="20.0" right="20.0" />
                         </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="1:00AM" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
+                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Lunch" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
                         <padding>
                            <Insets left="20.0" right="20.0" />
                         </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="2:00AM" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS">
+                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Dinner" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS">
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
                         <padding>
                            <Insets left="20.0" right="20.0" />
                         </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="257.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="3:00AM" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="257.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="4:00AM" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="210.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="5:00AM" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="6:00AM" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="7:00AM" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="210.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="8:00AM" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="257.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="9:00AM" textAlignment="CENTER" GridPane.columnIndex="9" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="10:00AM" textAlignment="CENTER" GridPane.columnIndex="10" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="11:00AM" textAlignment="CENTER" GridPane.columnIndex="11" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="12:00PM" textAlignment="CENTER" GridPane.columnIndex="12" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="1:00PM" textAlignment="CENTER" GridPane.columnIndex="13" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="2:00PM" textAlignment="CENTER" GridPane.columnIndex="14" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="3:00PM" textAlignment="CENTER" GridPane.columnIndex="15" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="4:00PM" textAlignment="CENTER" GridPane.columnIndex="16" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="5:00PM" textAlignment="CENTER" GridPane.columnIndex="17" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="6:00PM" textAlignment="CENTER" GridPane.columnIndex="18" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="7:00PM" textAlignment="CENTER" GridPane.columnIndex="19" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="8:00PM" textAlignment="CENTER" GridPane.columnIndex="20" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="9:00PM" textAlignment="CENTER" GridPane.columnIndex="21" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="10:00PM" textAlignment="CENTER" GridPane.columnIndex="22" GridPane.hgrow="ALWAYS">
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding></Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1806.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="11:00PM" textAlignment="CENTER" GridPane.columnIndex="23">
-                        <padding>
-                           <Insets left="20.0" right="20.0" />
-                        </padding>
-                     </Label>
-                     <ListView fx:id="listview0" layoutX="10.0" layoutY="40.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview1" layoutX="10.0" layoutY="40.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview2" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview3" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview4" layoutX="10.0" layoutY="40.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview5" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview6" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview7" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview8" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview9" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview10" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="10" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview11" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="11" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview12" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="12" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview13" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="13" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview14" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="14" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview15" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="15" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview16" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="16" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview17" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="17" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview18" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="18" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview19" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="19" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview20" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="20" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview21" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="21" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview22" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="22" GridPane.rowIndex="1" />
-                     <ListView fx:id="listview23" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="23" GridPane.rowIndex="1" />
+                     <ListView fx:id="breakfastListview" layoutX="10.0" layoutY="40.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                     <ListView fx:id="lunchListview" layoutX="10.0" layoutY="40.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     <ListView fx:id="dinnerListview" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minHeight="1.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   </children>
                </GridPane>
             </children>

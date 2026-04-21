@@ -3,6 +3,7 @@ package edu.westga.cs3212.mealplanner.viewmodel;
 import edu.westga.cs3212.mealplanner.enums.MealType;
 import edu.westga.cs3212.mealplanner.model.Ingredient;
 import edu.westga.cs3212.mealplanner.model.Meal;
+import edu.westga.cs3212.mealplanner.model.Messenger;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -12,6 +13,7 @@ import javafx.scene.control.SingleSelectionModel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -105,6 +107,13 @@ public class AddMealViewModel {
             var mealHour = new ArrayList<MealType>(List.of(MealType.values())).indexOf(selectedMealType);
             var plannedTime = this.currDate.atTime(mealHour, 0);
             SystemInfo.getLoggedInUser().getUserPlanner().addMeal(plannedTime, toAdd);
+            String serializedMeal = toAdd.serialize();
+            HashMap<String, Object> message = new HashMap<>();
+            message.put("reqtype", "ADD_MEAL");
+            message.put("meal", serializedMeal);
+            message.put("time", plannedTime);
+            message.put("mealtype", selectedMealType);
+            Messenger.request(message);
             this.resetIngredients();
             return toAdd;
         }
