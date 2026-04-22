@@ -99,7 +99,8 @@ public class AddMealViewModel {
      * Creates a meal using the stored ingredients, and a given name/description, and adds it to the current planner.
      * @param name Name of the new meal (if given)
      * @param desc Description of the new meal (if given)
-     * @return The meal that was created, or null if the meal was failed to be added (no ingredients were provided)
+     * @return The meal that was created, or null if the meal was failed to be added.
+     * Fails on either making a meal with no ingredients, or if an error occurs when passing to the server.
      */
     public Meal addMeal(String name, String desc) {
         if (this.plannedIngredients.isEmpty()) {
@@ -111,19 +112,21 @@ public class AddMealViewModel {
             var plannedTime = this.currDate.atTime(mealHour, 0);
             LocalDateTime truncatedDate = plannedTime.truncatedTo(ChronoUnit.HOURS);
             long epochHour = truncatedDate.toEpochSecond(ZoneOffset.UTC);
-            SystemInfo.getLoggedInUser().getUserPlanner().addMeal(plannedTime, toAdd);
+
             String serializedMeal = toAdd.serialize();
             HashMap<String, Object> message = new HashMap<>();
             message.put("reqtype", "ADD MEAL");
             message.put("meal", serializedMeal);
             message.put("time", epochHour);
             message.put("id", SystemInfo.getId());
+            System.out.println(serializedMeal);
             Map<String, Object> response = Messenger.request(message);
-            if (!response.get("restype").equals("VALID")) {
-                System.out.println(response.get("restype"));
+            if (response.get("restype").equals("VALID")) {
+                SystemInfo.getLoggedInUser().getUserPlanner().addMeal(plannedTime, toAdd);
+                this.resetIngredients();
+                return toAdd;
             }
-            this.resetIngredients();
-            return toAdd;
+            return null;
         }
     }
 

@@ -12,6 +12,7 @@ class AddMealHandler(Handler):
     """
     Handler for adding a meal to a given planner.
     """
+
     def __init__(self):
         self.reqtype = CommunicationType.ADD_MEAL
 
@@ -20,7 +21,7 @@ class AddMealHandler(Handler):
         Adds a meal to a planner, based on the request details.
 
         :param message: The message to handle.
-        Should contain a serialized Meal, an epoch time to add it to, and the planner ID
+        Should contain a serialized Meal, an epoch time to add it to (converted to an int), and the planner ID
         to add to.
         :return: Response indicating if the request passed through correctly.
         """
@@ -31,14 +32,14 @@ class AddMealHandler(Handler):
         if MessageKey.SESSIONS not in message:
             response[Communication.RESPONSE] = "SYSTEM_ERROR"
             return response
-        if MessageKey.ID not in message:
-            response[Communication.RESPONSE] = "BAD INPUT"
+        if MessageKey.ID not in message or not isinstance(message.get(MessageKey.ID), int):
+            response[Communication.RESPONSE] = "BAD_INPUT"
             return response
-        if MessageKey.TIME not in message:
-            response[Communication.RESPONSE] = "BAD INPUT"
+        if MessageKey.TIME not in message or not isinstance(message.get(MessageKey.TIME), int):
+            response[Communication.RESPONSE] = "BAD_INPUT"
             return response
         if MessageKey.MEAL not in message:
-            response[Communication.RESPONSE] = "BAD INPUT"
+            response[Communication.RESPONSE] = "BAD_INPUT"
             return response
         response[Communication.RESPONSE] = "INVALID"
         activeSessions: dict[int, object] = message.get(MessageKey.SESSIONS)
