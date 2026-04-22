@@ -6,3 +6,5 @@ class MessageKey(str, Enum):
     ID = "id"
     AUTHENTICATED_USERS = "authUsers"
     SESSIONS = "sessions"
+    MEAL = "meal"
+    TIME = "time"

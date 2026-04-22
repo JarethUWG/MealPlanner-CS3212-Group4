@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Meal adder view model.
@@ -109,11 +110,14 @@ public class AddMealViewModel {
             SystemInfo.getLoggedInUser().getUserPlanner().addMeal(plannedTime, toAdd);
             String serializedMeal = toAdd.serialize();
             HashMap<String, Object> message = new HashMap<>();
-            message.put("reqtype", "ADD_MEAL");
+            message.put("reqtype", "ADD MEAL");
             message.put("meal", serializedMeal);
             message.put("time", plannedTime);
-            message.put("mealtype", selectedMealType);
-            Messenger.request(message);
+            message.put("id", SystemInfo.getId());
+            Map<String, Object> response = Messenger.request(message);
+            if (!response.get("restype").equals("VALID")) {
+                System.out.println(response.get("restype"));
+            }
             this.resetIngredients();
             return toAdd;
         }
