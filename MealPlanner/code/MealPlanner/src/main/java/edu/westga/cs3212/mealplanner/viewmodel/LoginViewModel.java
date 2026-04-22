@@ -114,6 +114,7 @@ public class LoginViewModel {
         } else {
             User loggedInUser = new User(this.usernameProperty.get(), this.passwordProperty.get());
             SystemInfo.setLoggedInUser(loggedInUser);
+            SystemInfo.setId((Integer) response.get("id"));
             return true;
         }
     }
