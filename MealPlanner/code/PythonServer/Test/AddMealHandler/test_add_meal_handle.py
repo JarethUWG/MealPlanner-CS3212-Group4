@@ -1,11 +1,8 @@
 import unittest
 import json
-from Server.Data.Ingredient import Ingredient
-from Server.Data.Meal import Meal
 from Server.Data.User import User
 from Server.Enums.Communication import Communication
 from Server.Handlers.AddMealHandler import AddMealHandler
-from Server.Handlers.LogoutHandler import LogoutHandler
 
 class TestHandle(unittest.TestCase):
     def test_message_not_dict(self):

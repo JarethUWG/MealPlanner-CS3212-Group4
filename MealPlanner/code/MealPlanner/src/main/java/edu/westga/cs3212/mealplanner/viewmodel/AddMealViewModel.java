@@ -119,7 +119,6 @@ public class AddMealViewModel {
             message.put("meal", serializedMeal);
             message.put("time", epochHour);
             message.put("id", SystemInfo.getId());
-            System.out.println(serializedMeal);
             Map<String, Object> response = Messenger.request(message);
             if (response.get("restype").equals("VALID")) {
                 SystemInfo.getLoggedInUser().getUserPlanner().addMeal(plannedTime, toAdd);
