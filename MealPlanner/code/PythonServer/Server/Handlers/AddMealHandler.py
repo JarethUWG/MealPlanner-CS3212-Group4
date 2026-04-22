@@ -1,10 +1,12 @@
 from typing import Dict
 
+from Server.Data.Ingredient import Ingredient
+from Server.Data.Meal import Meal
 from Server.Enums.Communication import Communication
 from Server.Enums.CommunicationType import CommunicationType
 from Server.Enums.MessageKey import MessageKey
 from Server.Handlers.Handler import Handler
-
+import json
 
 class AddMealHandler(Handler):
     """
@@ -45,6 +47,13 @@ class AddMealHandler(Handler):
         userPlanner = user.userPlanner if (user is not None) else None
 
         if userPlanner is not None:
-            print(message.get(MessageKey.MEAL))
+            meal = json.loads(message.get(MessageKey.MEAL))
+            timeToAdd = message.get(MessageKey.TIME)
+            ingredients = list()
+            for currIng in meal.get("ingredients"):
+                addedIng = Ingredient(currIng.get("name"), currIng.get("calories"))
+                ingredients.append(addedIng)
+            addedMeal = Meal(ingredients, meal.get("name"), meal.get("description"))
+            userPlanner.addMeal(timeToAdd, addedMeal)
             response[Communication.RESPONSE] = "VALID"
         return response
