@@ -38,6 +38,9 @@ public class Meal {
      * rather than a null list in itself.
      */
     public Meal(List<Ingredient> ingredients, String name, String description) {
+        if (ingredients == null) {
+            ingredients = new ArrayList<>();
+        }
         this.ingredients = new ArrayList<>(ingredients);
         this.name = name;
         this.description = description;

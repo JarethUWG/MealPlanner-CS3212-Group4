@@ -1,6 +1,5 @@
 import unittest
 
-from Server.Data.AuthenticatedUsers import AuthenticatedUsers
 from Server.Data.User import User
 from Server.Enums.Communication import Communication
 from Server.Handlers.LogoutHandler import LogoutHandler

@@ -5,6 +5,7 @@ from Server.Data.AuthenticatedUsers import AuthenticatedUsers
 from Server.Enums.Communication import Communication
 from Server.Handlers import LogoutHandler
 from Server.Enums.MessageKey import MessageKey
+from Server.Handlers.AddMealHandler import AddMealHandler
 from Server.Handlers.CreateAccountHandler import CreateAccountHandler
 from Server.Handlers.Handler import Handler
 from Server.Handlers.LoginHandler import LoginHandler
@@ -62,4 +63,4 @@ class Dispatcher:
 
     @staticmethod
     def _handlerNeedsActiveSessions(handler: Handler):
-        return isinstance(handler, (LoginHandler, LogoutHandler))
+        return isinstance(handler, (LoginHandler, LogoutHandler, AddMealHandler))

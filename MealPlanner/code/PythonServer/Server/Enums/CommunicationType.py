@@ -6,3 +6,4 @@ class CommunicationType(str, Enum):
     GET_USER = "GET USER"
     CREATE_ACCOUNT = "CREATE ACCOUNT"
     GET_PLANNER = "GET PLANNER"
+    ADD_MEAL = "ADD MEAL"

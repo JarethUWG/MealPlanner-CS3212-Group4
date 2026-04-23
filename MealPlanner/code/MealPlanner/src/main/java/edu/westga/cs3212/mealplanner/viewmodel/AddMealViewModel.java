@@ -9,12 +9,15 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.SingleSelectionModel;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Meal adder view model.
@@ -96,7 +99,8 @@ public class AddMealViewModel {
      * Creates a meal using the stored ingredients, and a given name/description, and adds it to the current planner.
      * @param name Name of the new meal (if given)
      * @param desc Description of the new meal (if given)
-     * @return The meal that was created, or null if the meal was failed to be added (no ingredients were provided)
+     * @return The meal that was created, or null if the meal was failed to be added.
+     * Fails on either making a meal with no ingredients, or if an error occurs when passing to the server.
      */
     public Meal addMeal(String name, String desc) {
         if (this.plannedIngredients.isEmpty()) {
@@ -106,16 +110,22 @@ public class AddMealViewModel {
             var selectedMealType = this.selectedMealType.get();
             var mealHour = new ArrayList<MealType>(List.of(MealType.values())).indexOf(selectedMealType);
             var plannedTime = this.currDate.atTime(mealHour, 0);
-            SystemInfo.getLoggedInUser().getUserPlanner().addMeal(plannedTime, toAdd);
+            LocalDateTime truncatedDate = plannedTime.truncatedTo(ChronoUnit.HOURS);
+            long epochHour = truncatedDate.toEpochSecond(ZoneOffset.UTC);
+
             String serializedMeal = toAdd.serialize();
             HashMap<String, Object> message = new HashMap<>();
-            message.put("reqtype", "ADD_MEAL");
+            message.put("reqtype", "ADD MEAL");
             message.put("meal", serializedMeal);
-            message.put("time", plannedTime);
-            message.put("mealtype", selectedMealType);
-            Messenger.request(message);
-            this.resetIngredients();
-            return toAdd;
+            message.put("time", epochHour);
+            message.put("id", SystemInfo.getId());
+            Map<String, Object> response = Messenger.request(message);
+            if (response.get("restype").equals("VALID")) {
+                SystemInfo.getLoggedInUser().getUserPlanner().addMeal(plannedTime, toAdd);
+                this.resetIngredients();
+                return toAdd;
+            }
+            return null;
         }
     }
 
