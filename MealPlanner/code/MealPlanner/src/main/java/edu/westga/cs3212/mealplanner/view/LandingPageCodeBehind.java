@@ -1,11 +1,14 @@
 package edu.westga.cs3212.mealplanner.view;
 
 import edu.westga.cs3212.mealplanner.Main;
+import edu.westga.cs3212.mealplanner.model.Messenger;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+
+import java.util.HashMap;
 
 /**
  * Instantiates a new landing page code behind.
@@ -20,6 +23,10 @@ public class LandingPageCodeBehind {
 
     @FXML
     void handleLogOut(ActionEvent event) {
+        HashMap<String, Object> message = new HashMap<>();
+        message.put("reqtype", "LOGOUT");
+        message.put("id", SystemInfo.getId());
+        Messenger.request(message);
         SystemInfo.setLoggedInUser(null);
         SystemInfo.setId(-1);
         Main.getMainStage().setTitle(Main.LOGIN_TITLE);
