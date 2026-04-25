@@ -85,7 +85,7 @@ public class AddMealCodeBehind {
             this.mealStatus.setTextFill(Color.GREEN);
             this.resetInputFields();
         } else {
-            this.mealStatus.textProperty().set("Failed to add meal with no ingredients.");
+            this.mealStatus.textProperty().set("Failed to add meal to planner.");
             this.mealStatus.setTextFill(Color.RED);
         }
     }
