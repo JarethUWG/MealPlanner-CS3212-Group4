@@ -32,12 +32,6 @@ class LogoutHandler(Handler):
         if MessageKey.ID not in message or not isinstance(message.get(MessageKey.ID), int):
             response[Communication.RESPONSE] = "BAD_INPUT"
             return response
-        if MessageKey.TIME not in message or not isinstance(message.get(MessageKey.TIME), int):
-            response[Communication.RESPONSE] = "BAD_INPUT"
-            return response
-        if MessageKey.MEAL not in message:
-            response[Communication.RESPONSE] = "BAD_INPUT"
-            return response
         userId = message.get(MessageKey.ID)
         sessions = message.get(MessageKey.SESSIONS)
         authUsers = message.get(MessageKey.AUTHENTICATED_USERS)

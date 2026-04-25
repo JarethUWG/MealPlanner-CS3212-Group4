@@ -1,7 +1,9 @@
 import unittest
 
+from Server.Data.AuthenticatedUsers import AuthenticatedUsers
 from Server.Data.User import User
 from Server.Enums.Communication import Communication
+from Server.Enums.MessageKey import MessageKey
 from Server.Handlers.LogoutHandler import LogoutHandler
 
 class TestHandle(unittest.TestCase):
@@ -17,6 +19,8 @@ class TestHandle(unittest.TestCase):
         inputUser = User("username", "password")
         sessions = dict()
         sessions[10] = inputUser
+        message["sessions"] = sessions
+        message[MessageKey.AUTHENTICATED_USERS] = AuthenticatedUsers()
         response = handle.handle(message)
         self.assertEqual("BAD_INPUT", response[Communication.RESPONSE])
 
@@ -47,6 +51,7 @@ class TestHandle(unittest.TestCase):
         sessions = dict()
         sessions[10] = inputUser
         message["sessions"] = sessions
+        message[MessageKey.AUTHENTICATED_USERS] = AuthenticatedUsers()
         response = handle.handle(message)
         self.assertEqual("VALID", response[Communication.RESPONSE])
         self.assertFalse(10 in sessions)

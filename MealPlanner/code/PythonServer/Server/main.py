@@ -37,6 +37,10 @@ def main():
             response = message_dispatcher.dispatch(message)
             json_response = json.dumps(response)
             socket.send_string(json_response)
+            if message.get(Communication.REQUEST) == "exit":
+                socket.close()
+                context.term()
+                return
         else:
             response = dict()
             response[Communication.RESPONSE] = "BAD_INPUT"

@@ -31,16 +31,19 @@ public class MockServer implements Runnable {
             } else if (processedMessage.get("reqtype").equals("login")) {
                 responseMap.put("restype", "login success");
             } else if (processedMessage.get("reqtype").equals("exit")) {
-                socket.close();
-                context.term();
-                return;
+                responseMap.put("restype", "exit");
             } else {
                 responseMap.put("restype", "no handle");
             }
+            this.delay();
             jsonConvert = new JSONObject(responseMap);
             String socketReply = jsonConvert.toString();
             socket.send(socketReply.getBytes(ZMQ.CHARSET), 0);
-            this.delay();
+            if (responseMap.get("restype").equals("exit")) {
+                socket.close();
+                context.term();
+                return;
+            }
         }
 
         socket.close();
