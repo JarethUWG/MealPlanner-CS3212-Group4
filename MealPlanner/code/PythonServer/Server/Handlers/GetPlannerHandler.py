@@ -39,7 +39,7 @@ class GetPlannerHandler(Handler):
         activeSessions: dict[int, object] = message.get(MessageKey.SESSIONS)
         userID = message.get(MessageKey.ID)
         user = activeSessions.get(userID)
-        userPlanner = user.getUserPlanner() if (user is not None) else None
+        userPlanner = user.userPlanner if (user is not None) else None
 
         if userPlanner is not None:
             serializedPlanner = userPlanner.serialize()
