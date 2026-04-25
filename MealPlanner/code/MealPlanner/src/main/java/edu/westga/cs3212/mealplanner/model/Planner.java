@@ -16,23 +16,6 @@ import java.util.*;
 public class Planner {
 
     private TreeMap<Long, ArrayList<Meal>> plannedMeals;
-    private LocalDateTime selectedDate;
-
-    /**
-     * Sets the currently selected date.
-     * @param newDate The new date to set the planner to
-     */
-    public void setSelectedDate(LocalDateTime newDate) {
-        this.selectedDate = newDate;
-    }
-
-    /**
-     * Returns the currently selected date.
-     * @return The current selected date
-     */
-    public LocalDateTime getSelectedDate() {
-        return this.selectedDate;
-    }
 
     /**
      * Initializes a new Planner.
@@ -74,14 +57,15 @@ public class Planner {
      * @return An hour and Meal iterable mapping
      */
     public Map<MealType, Iterable<Meal>> getSelectedDatePlannedMeals() {
-        if (this.selectedDate == null) {
+        var clientSelectedDate = SystemInfo.getSelectedCalendarDate();
+        if (clientSelectedDate == null) {
             return new HashMap<MealType, Iterable<Meal>>();
         }
 
         var mealTypeValues = MealType.values();
         HashMap<MealType, Iterable<Meal>> convertedMap = new HashMap<>();
-        var startOfDate = this.simplifyDateTime(this.selectedDate);
-        var endOfDate = this.simplifyDateTime(this.selectedDate.plusDays(1));
+        var startOfDate = this.simplifyDateTime(clientSelectedDate);
+        var endOfDate = this.simplifyDateTime(clientSelectedDate.plusDays(1));
 
         for (var entry : this.plannedMeals.subMap(startOfDate, endOfDate).entrySet()) {
             LocalDateTime associatedDate = LocalDateTime.ofEpochSecond(entry.getKey(), 0, ZoneOffset.UTC);
@@ -143,14 +127,17 @@ public class Planner {
      * @return The newly instantiated Planner
      * @throws IllegalArgumentException If necessary information is missing from serializedInfo
      */
-    public static Planner deserialize(Map<Long, Object> serializedInfo) {
+    public static Planner deserialize(Map<String, Object> serializedInfo) {
+        System.out.println(serializedInfo);
         var newPlanner = new Planner();
 
         for (var keyVar : serializedInfo.entrySet()) {
-            var timeEpoch = LocalDateTime.ofEpochSecond(keyVar.getKey(), 0, ZoneOffset.UTC);
-            var mealInformation = (Map<String, Object>) keyVar.getValue();
+            var timeEpoch = LocalDateTime.ofEpochSecond(Long.parseLong(keyVar.getKey()), 0, ZoneOffset.UTC);
+            var plannedMealsInfo = (List<Map<String, Object>>) keyVar.getValue();
 
-            newPlanner.addMeal(timeEpoch, Meal.deserialize(mealInformation));
+            for (var mealInfo : plannedMealsInfo) {
+                newPlanner.addMeal(timeEpoch, Meal.deserialize(mealInfo));
+            }
         }
 
         return newPlanner;

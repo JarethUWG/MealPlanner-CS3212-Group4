@@ -14,11 +14,11 @@ class TestDeserialize {
 
     @Test
     void throwsWhenInformationIsMissing() {
-        var plannerInfo = new HashMap<Long, Object>();
+        var plannerInfo = new HashMap<String, Object>();
         var mealInfo = new HashMap<String, Object>();
         mealInfo.put("name", "Valid Name");
         mealInfo.put("description", "Valid Description");
-        long onlyDate = 2;
+        var onlyDate = "2";
         plannerInfo.put(onlyDate, mealInfo);
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -28,7 +28,7 @@ class TestDeserialize {
 
     @Test
     void testWhenNoEntries() {
-        var plannerInfo = new HashMap<Long, Object>();
+        var plannerInfo = new HashMap<String, Object>();
 
         var newPlanner = Planner.deserialize(plannerInfo);
 
@@ -40,12 +40,12 @@ class TestDeserialize {
 
     @Test
     void testWhenOneEntry() {
-        var plannerInfo = new HashMap<Long, Object>();
+        var plannerInfo = new HashMap<String, Object>();
         var mealInfo = new HashMap<String, Object>();
         mealInfo.put("name", "Valid Name");
         mealInfo.put("ingredients", new ArrayList<Object>());
         mealInfo.put("description", "Valid Description");
-        long onlyDate = 2;
+        var onlyDate = "2";
         plannerInfo.put(onlyDate, mealInfo);
 
         var newPlanner = Planner.deserialize(plannerInfo);
