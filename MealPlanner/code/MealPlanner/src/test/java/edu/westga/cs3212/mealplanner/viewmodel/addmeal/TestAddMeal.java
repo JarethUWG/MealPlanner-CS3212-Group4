@@ -31,6 +31,9 @@ class TestAddMeal {
 
     @AfterAll
     static void tearDownSocket() {
+        Map<String, Object> message = new HashMap<String, Object>();
+        message.put("reqtype", "exit");
+        Messenger.request(message);
         socket.close();
         context.term();
     }

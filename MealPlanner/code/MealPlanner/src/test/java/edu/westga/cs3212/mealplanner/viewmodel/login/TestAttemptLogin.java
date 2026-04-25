@@ -1,18 +1,51 @@
 package edu.westga.cs3212.mealplanner.viewmodel.login;
 
+
+import edu.westga.cs3212.mealplanner.model.Messenger;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import edu.westga.cs3212.mealplanner.viewmodel.LoginViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.zeromq.ZMQ;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestAttemptLogin {
+    private static ZMQ.Context context;
+    private static ZMQ.Socket socket;
+    private static Thread thread;
+
     @BeforeEach
-    void setUp() {
+    void setUpEach() {
         SystemInfo.setLoggedInUser(null);
+        SystemInfo.setId(0);
+    }
+
+    @BeforeAll
+    static void setUpAll() {
+
+        MockServer mockServer = new MockServer();
+        thread = new Thread(mockServer);
+        thread.start();
+        context = ZMQ.context(1);
+        socket = context.socket(ZMQ.REQ);
+        socket.connect("tcp://127.0.0.1:5555");
+    }
+
+    @AfterAll
+    static void tearDown() {
+        Map<String, Object> message = new HashMap<String, Object>();
+        message.put("reqtype", "exit");
+        Messenger.request(message);
+        socket.close();
+        context.term();
     }
 
     @Test

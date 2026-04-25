@@ -60,7 +60,7 @@ class TestPasswordReminder {
 
         String actual = testViewModel.passwordReminderProperty().get();
 
-        assertEquals("Must Password must be at least 5 characters", actual);
+        assertEquals("Password must be at least 5 characters", actual);
     }
 
     @Test
@@ -76,7 +76,7 @@ class TestPasswordReminder {
 
         String actual = testViewModel.passwordReminderProperty().get();
 
-        assertEquals("Must Password must be at least 5 characters", actual);
+        assertEquals("Password must be at least 5 characters", actual);
     }
 
     @Test
