@@ -128,7 +128,6 @@ public class Planner {
      * @throws IllegalArgumentException If necessary information is missing from serializedInfo
      */
     public static Planner deserialize(Map<String, Object> serializedInfo) {
-        System.out.println(serializedInfo);
         var newPlanner = new Planner();
 
         for (var keyVar : serializedInfo.entrySet()) {

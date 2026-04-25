@@ -66,6 +66,9 @@ public class PlannedDateCodeBehind {
         new SwitchScene(this.plannedDatePane, Main.PLANNER_FXML);
     }
 
+    /**
+     * Shows the meal adding page.
+     */
     @FXML
     public void showMealAddingPage() {
         new SwitchScene(this.plannedDatePane, Main.ADD_MEAL_FXML, Main.ADD_MEAL_TITLE);
