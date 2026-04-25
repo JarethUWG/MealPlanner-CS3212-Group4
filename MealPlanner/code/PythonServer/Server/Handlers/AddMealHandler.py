@@ -41,20 +41,17 @@ class AddMealHandler(Handler):
         if MessageKey.MEAL not in message:
             response[Communication.RESPONSE] = "BAD_INPUT"
             return response
-        response[Communication.RESPONSE] = "INVALID"
-        activeSessions: dict[int, object] = message.get(MessageKey.SESSIONS)
         userID = message.get(MessageKey.ID)
-        user = activeSessions.get(userID)
-        userPlanner = user.userPlanner if (user is not None) else None
-
-        if userPlanner is not None:
-            meal = json.loads(message.get(MessageKey.MEAL))
-            timeToAdd = message.get(MessageKey.TIME)
-            ingredients = list()
-            for currIng in meal.get("ingredients"):
-                addedIng = Ingredient(currIng.get("name"), currIng.get("calories"))
-                ingredients.append(addedIng)
-            addedMeal = Meal(ingredients, meal.get("name"), meal.get("description"))
-            userPlanner.addMeal(timeToAdd, addedMeal)
-            response[Communication.RESPONSE] = "VALID"
+        if message.get(MessageKey.SESSIONS).get(userID) is None:
+            response[Communication.RESPONSE] = "INVALID"
+            return response
+        meal = json.loads(message.get(MessageKey.MEAL))
+        timeToAdd = message.get(MessageKey.TIME)
+        ingredients = list()
+        for currIng in meal.get("ingredients"):
+            addedIng = Ingredient(currIng.get("name"), currIng.get("calories"))
+            ingredients.append(addedIng)
+        addedMeal = Meal(ingredients, meal.get("name"), meal.get("description"))
+        message.get(MessageKey.SESSIONS).get(userID).userPlanner.addMeal(timeToAdd, addedMeal)
+        response[Communication.RESPONSE] = "VALID"
         return response
