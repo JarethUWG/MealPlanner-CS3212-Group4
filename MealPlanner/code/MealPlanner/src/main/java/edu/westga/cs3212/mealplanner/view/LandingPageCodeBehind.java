@@ -20,7 +20,6 @@ public class LandingPageCodeBehind {
 
     @FXML
     void handleLogOut(ActionEvent event) {
-        SystemInfo.setLoggedInUser(null);
         SystemInfo.setId(-1);
         Main.getMainStage().setTitle(Main.LOGIN_TITLE);
         new SwitchScene(this.landingPane, Main.LOGIN_FXML);

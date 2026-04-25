@@ -13,7 +13,6 @@ public class GroceryListViewModel {
 
     private GroceryList groceryList;
     private ObservableList<String> ingredientNames;
-    private Planner planner;
     private Iterable<Meal> allMeals;
 
     /**
@@ -22,8 +21,6 @@ public class GroceryListViewModel {
     public GroceryListViewModel() {
         this.groceryList = new GroceryList();
         this.ingredientNames = FXCollections.observableArrayList();
-        User user = SystemInfo.getLoggedInUser();
-        this.planner = user.getUserPlanner();
         this.allMeals = new ArrayList<>();
     }
 
@@ -40,7 +37,11 @@ public class GroceryListViewModel {
      * Gets all the meals from the planner object.
      */
     public void loadMeals() {
-        this.allMeals = this.planner.getPlannedMeals();
+        var planner = Messenger.requestPlanner();
+
+        if (planner != null) {
+            this.allMeals = planner.getPlannedMeals();
+        }
     }
 
     /**

@@ -3,6 +3,8 @@ package edu.westga.cs3212.mealplanner.model;
 import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Context;
 import org.zeromq.ZMQ.Socket;
+
+import java.util.HashMap;
 import java.util.Map;
 import org.json.JSONObject;
 
@@ -25,16 +27,36 @@ public class Messenger {
         Context context = ZMQ.context(1);
         Socket socket = context.socket(ZMQ.REQ);
         socket.connect("tcp://127.0.0.1:5555");
-        JSONObject jsonConvert = new JSONObject(message);
-        String socketRequest = jsonConvert.toString();
+        JSONObject convertedMessage = new JSONObject(message);
+        String socketRequest = convertedMessage.toString();
         socket.send(socketRequest.getBytes(ZMQ.CHARSET), 0);
 
         byte[] reply = socket.recv(0);
         String rawResponse = new String(reply, ZMQ.CHARSET);
-        jsonConvert = new JSONObject(rawResponse);
-        Map<String, Object> processedResponse = jsonConvert.toMap();
+        var convertedResponse = new JSONObject(rawResponse);
+        Map<String, Object> processedResponse = convertedResponse.toMap();
         socket.close();
         context.term();
         return processedResponse;
+    }
+
+    /**
+     * Requests planner information from the server and returns a deserialized Planner if successful, otherwise returns null.
+     *
+     * @return Planner or null
+     */
+    public static Planner requestPlanner() {
+        var plannerRequest = new HashMap<String, Object>();
+        plannerRequest.put("reqtype", "GET PLANNER");
+        plannerRequest.put("id", SystemInfo.getId());
+        var receivedInfo = Messenger.request(plannerRequest);
+        Planner planner = null;
+
+        if (receivedInfo.get("restype").equals("VALID")) {
+            var plannerInfo = (Map<String, Object>) receivedInfo.get("planner");
+            planner = Planner.deserialize(plannerInfo);
+        }
+
+        return planner;
     }
 }

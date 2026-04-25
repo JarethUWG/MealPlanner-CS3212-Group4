@@ -119,9 +119,8 @@ public class AddMealViewModel {
             message.put("meal", serializedMeal);
             message.put("time", epochHour);
             message.put("id", SystemInfo.getId());
-            Map<String, Object> response = Messenger.request(message);
+            var response = Messenger.request(message);
             if (response.get("restype").equals("VALID")) {
-                SystemInfo.getLoggedInUser().getUserPlanner().addMeal(plannedTime, toAdd);
                 this.resetIngredients();
                 return toAdd;
             }

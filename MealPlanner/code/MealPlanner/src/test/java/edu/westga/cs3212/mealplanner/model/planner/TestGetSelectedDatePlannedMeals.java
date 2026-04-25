@@ -25,12 +25,10 @@ class TestGetSelectedDatePlannedMeals {
     @BeforeEach
     void setUp() throws Exception {
         this.planner = new Planner();
-        this.planner.setSelectedDate(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).withHour(0));
     }
 
     @Test
     void testWhenSelectedDateIsNull() {
-        this.planner.setSelectedDate(null);
         var expected = new HashMap<MealType, Iterable<Meal>>();
         var actual = this.planner.getSelectedDatePlannedMeals();
 
