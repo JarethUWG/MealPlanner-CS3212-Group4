@@ -137,6 +137,25 @@ public class Planner {
         return mealsInPlannedRange;
     }
 
+    /**
+     * Returns a new Planner object from the given info.
+     * @param serializedInfo The serialized information to deserialize from.
+     * @return The newly instantiated Planner
+     * @throws IllegalArgumentException If necessary information is missing from serializedInfo
+     */
+    public static Planner deserialize(Map<Long, Object> serializedInfo) {
+        var newPlanner = new Planner();
+
+        for (var keyVar : serializedInfo.entrySet()) {
+            var timeEpoch = LocalDateTime.ofEpochSecond(keyVar.getKey(), 0, ZoneOffset.UTC);
+            var mealInformation = (Map<String, Object>) keyVar.getValue();
+
+            newPlanner.addMeal(timeEpoch, Meal.deserialize(mealInformation));
+        }
+
+        return newPlanner;
+    }
+
     private long simplifyDateTime(LocalDateTime dateToSimplify) {
         var truncatedToHour = dateToSimplify.truncatedTo(ChronoUnit.HOURS);
         return truncatedToHour.toEpochSecond(ZoneOffset.UTC);

@@ -3,7 +3,9 @@ package edu.westga.cs3212.mealplanner.model;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Basic class for Meals.
@@ -159,5 +161,38 @@ public class Meal {
 
     public String serialize() {
         return new Gson().toJson(this);
+    }
+
+    /**
+     * Returns a new Meal object from the given info.
+     * @param mealInformation The serialized information to deserialize from.
+     * @return The newly instantiated Meal
+     * @throws IllegalArgumentException If the name, ingredients, or description is null in mealInformation
+     */
+    public static Meal deserialize(Map<String, Object> mealInformation) {
+        var rawName = mealInformation.get("name");
+        var rawIngredients = mealInformation.get("ingredients");
+        var rawDescription = mealInformation.get("description");
+        var mealName = (rawName instanceof String) ? (String) rawName : null;
+        var serializedIngredients = (rawIngredients instanceof Collection) ? (List<Object>) rawIngredients : null;
+        var mealDescription = (rawDescription instanceof String) ? (String) rawDescription : null;
+        var mealIngredients = new ArrayList<Ingredient>();
+
+        if (mealName == null) {
+            throw new IllegalArgumentException("Meal name must be provided as a string");
+        }
+        if (serializedIngredients == null) {
+            throw new IllegalArgumentException("Meal ingredients must be provided as a collection");
+        }
+        if (mealDescription == null) {
+            throw new IllegalArgumentException("Meal description must be provided as a string");
+        }
+        for (var serializedIngredient : serializedIngredients) {
+            if (serializedIngredient instanceof Map) {
+                mealIngredients.add(Ingredient.deserialize((Map<String, Object>) serializedIngredient));
+            }
+        }
+
+        return new Meal(mealIngredients, mealName, mealDescription);
     }
 }

@@ -1,5 +1,6 @@
 package edu.westga.cs3212.mealplanner.model;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -43,6 +44,28 @@ public class Ingredient {
      */
     public double getCalories() {
         return this.calories;
+    }
+
+    /**
+     * Returns a new Ingredient object from the given info.
+     * @param ingredientInfo The serialized information to deserialize from.
+     * @return The newly instantiated Ingredient
+     * @throws IllegalArgumentException If the name or calories is null in ingredientInformation
+     */
+    public static Ingredient deserialize(Map<String, Object> ingredientInfo) {
+        var rawName = ingredientInfo.get("name");
+        var rawCalories = ingredientInfo.get("calories");
+        var ingredientName = (rawName instanceof String) ? (String) rawName : null;
+        var ingredientCalories = (rawCalories instanceof Number) ? (Number) rawCalories : null;
+
+        if (ingredientName == null) {
+            throw new IllegalArgumentException("Ingredient name must be provided as a string");
+        }
+        if (ingredientCalories == null) {
+            throw new IllegalArgumentException("Ingredient calories must be provided as a double");
+        }
+
+        return new Ingredient(ingredientName, ingredientCalories.doubleValue());
     }
 
     @Override
