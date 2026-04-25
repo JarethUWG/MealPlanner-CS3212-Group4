@@ -1,5 +1,7 @@
 package edu.westga.cs3212.mealplanner.model;
 
+import java.time.LocalDateTime;
+
 /**
  * Holds information that needs to be accessed across the system
  * Note: this class will likely be replaced by the server in future
@@ -12,6 +14,27 @@ public class SystemInfo {
     private static User loggedInUser;
     private static Planner currentPlanner;
     private static int id;
+    private static LocalDateTime selectedCalendarDate;
+
+    /**
+     * Gets the current session id.
+     *
+     * @return The id associated with the current user session.
+     */
+    public static LocalDateTime getSelectedCalendarDate() {
+        return SystemInfo.selectedCalendarDate;
+    }
+
+    /**
+     * Sets the selected calendar date for the session.
+     * @param calendarDate The new calendar date
+     */
+    public static void setSelectedCalendarDate(LocalDateTime calendarDate) {
+        if (calendarDate == null) {
+            throw new IllegalArgumentException("calendarDate can't be null");
+        }
+        SystemInfo.selectedCalendarDate = calendarDate;
+    }
 
     /**
      * Gets the currently logged in user.

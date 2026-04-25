@@ -2,6 +2,7 @@ package edu.westga.cs3212.mealplanner.viewmodel;
 
 import edu.westga.cs3212.mealplanner.enums.MealType;
 import edu.westga.cs3212.mealplanner.model.Meal;
+import edu.westga.cs3212.mealplanner.model.Messenger;
 import edu.westga.cs3212.mealplanner.model.SystemInfo;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -83,16 +85,15 @@ public class PlannedDateViewmodel {
     }
 
     private void updateDisplayedDate() {
-        var currentPlanner = SystemInfo.getLoggedInUser().getUserPlanner();
-        var selectedDate = currentPlanner.getSelectedDate();
+        var selectedDate = SystemInfo.getSelectedCalendarDate();
 
         this.dateProperty.set(selectedDate.format(this.dateTimeFormatter));
     }
 
     private void updateDisplayedPlannedMeals() {
         this.clearPlannedMeals();
-        var currentPlanner = SystemInfo.getLoggedInUser().getUserPlanner();
-        var plannedDateMeals = currentPlanner.getSelectedDatePlannedMeals();
+        var currentPlanner = Messenger.requestPlanner();
+        var plannedDateMeals = currentPlanner != null ? currentPlanner.getSelectedDatePlannedMeals() : new HashMap<MealType, ArrayList<Meal>>();
 
         for (var entry : plannedDateMeals.entrySet()) {
             var associatedHour = entry.getKey();

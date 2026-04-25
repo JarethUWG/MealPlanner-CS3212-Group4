@@ -1,6 +1,7 @@
 from enum import Enum
 
 class MessageKey(str, Enum):
+    PLANNER = "planner"
     USERNAME = "username"
     PASSWORD = "password"
     ID = "id"

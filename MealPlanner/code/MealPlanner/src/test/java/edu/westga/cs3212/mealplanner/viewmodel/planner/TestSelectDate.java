@@ -30,13 +30,13 @@ class TestSelectDate {
     void testWhenDateIsInvalid() {
         this.viewModel.selectDate(-1, -1);
 
-        assertNull(SystemInfo.getLoggedInUser().getUserPlanner().getSelectedDate());
+        assertNull(SystemInfo.getSelectedCalendarDate());
     }
 
     @Test
     void testWhenDateIsValid() {
         this.viewModel.selectDate(3, 2);
 
-        assertNotNull(SystemInfo.getLoggedInUser().getUserPlanner().getSelectedDate());
+        assertNotNull(SystemInfo.getSelectedCalendarDate());
     }
 }
