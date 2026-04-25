@@ -11,16 +11,22 @@ from Server.main import main
 class TestMain(unittest.TestCase):
 
     def setUp(self):
-        server_thread = Thread(target=main)
-        server_thread.start()
+        self.server_thread = Thread(target=main)
+        self.server_thread.start()
         time.sleep(1)
         self.context = zmq.Context()
         self._socket = self.context.socket(zmq.REQ)
         self._socket.connect("tcp://127.0.0.1:5555")
+        time.sleep(1)
 
     def tearDown(self):
+        message = dict()
+        message[Communication.REQUEST] = "exit"
+        json_message = json.dumps(message)
+        self._socket.send_string(json_message)
         self._socket.close()
         self.context.term()
+        time.sleep(1)
 
     def test_valid_request(self):
         message = dict()

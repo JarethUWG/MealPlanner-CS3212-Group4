@@ -159,6 +159,10 @@ public class Meal {
         return mealString.toString();
     }
 
+    /**
+     * Serializes a meal object.
+     * @return a json string representing the meal.
+     */
     public String serialize() {
         return new Gson().toJson(this);
     }
