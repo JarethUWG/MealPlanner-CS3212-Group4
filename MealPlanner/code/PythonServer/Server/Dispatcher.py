@@ -60,7 +60,7 @@ class Dispatcher:
 
     @staticmethod
     def _handlerNeedsAuthenticatedUsers(handler: Handler):
-        return isinstance(handler, (LoginHandler, CreateAccountHandler))
+        return isinstance(handler, (LoginHandler, LogoutHandler, CreateAccountHandler))
 
     @staticmethod
     def _handlerNeedsActiveSessions(handler: Handler):

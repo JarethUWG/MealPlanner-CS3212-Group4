@@ -27,11 +27,11 @@ public class GroceryListCodeBehind {
      * initializes the grocerylist codebehind.
      */
     public void initialize() {
-//        this.viewModel = new GroceryListViewModel();
-//        this.groceryListView.setItems(this.viewModel.ingredientNamesProperty());
-//
-//        this.viewModel.loadMeals();
-//        this.loadIngredientList();
+        this.viewModel = new GroceryListViewModel();
+        this.groceryListView.setItems(this.viewModel.ingredientNamesProperty());
+
+        this.viewModel.loadMeals();
+        this.loadIngredientList();
     }
 
     /**
